@@ -1,0 +1,19 @@
+{
+  "name": "zapfood",
+  "version": "1.0.0",
+  "description": "Sistema de Delivery de Comida Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseJaan/ZapFood.git"
+  },
+  "author": "Gabriel Ferreira, Rafael Rezende e José Neto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseJaan/ZapFood/issues"
+  },
+  "homepage": "https://github.com/JoseJaan/ZapFood#readme"
+}
