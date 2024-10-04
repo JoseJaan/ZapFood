@@ -1,3 +1,8 @@
+## :books: Descrição do produto
+
+Um software capaz de realizar CRUDs para clientes, produtos, vendas e empresas. Cada empresa poderá se cadastrar no sistema web e administrar sua loja online. Ela poderá controlar o horário de funcionamento, produtos e gerenciar as vendas. Cada cliente poderá se cadastrar e realizar sua compra selecionando os produtos e fazendo o pedido, no caso a venda. Tanto o cliente, quanto a empresa, quanto o adminstrador do sistema terão autenticação, com login e senha criptografados. Também terá redefinição de senha através de um email enviado ao usuário. A aplicação seguirá um modelo de estruturação MVC, utilizando ejs, express e sequelize e mysql. As imagens dos produtos ficarão armazenadas no cloudinary.
+
+
 ## 💻 Tecnologias utilizadas
 - NodeJS 18
 - Express 5 
