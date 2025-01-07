@@ -13,13 +13,31 @@ O sistema conta com administradores gerais que possuem permissão para visualiza
 - HTML5
 - CSS3
 
-## 🧑‍💻 Regras de código adotadas.
+## 🧑‍💻 Regras de código adotadas
 - Adoção do padrão camelCase.
 - Obrigatoriedade de um comentário explicativo para cada função.
 - Adoção da "Single Responsability" para funções.
 - Limitação de 25 linhas por função.
 - Aplicação do DRY, visando reutilização de código.
 - Validação e tratamento de erros de forma padronizada.
+
+## 🧑‍💻 Regras e padrões de Git adotadas
+- Commits devem ser realizados em português seguindo o padrão de commits semânticos, com base nessa [documentação](https://github.com/iuricode/padroes-de-commits).
+- Adoção da "Single Responsability" para cada commit.
+- A branch `main` deve conter o código mais estável. 
+- As branches `front` e `back` deverão conter os códigos mais atualizados.
+- Para cada nova alteração e modificação no código, deverá ser criada uma nova branch, chamada de `branch de trabalho`, respeitando a seguinte nomenclatura:
+    - **feature/**: Para novas funcionalidades.  
+      Exemplo: `feature/pagina-login`.
+    - **bugfix/**: Para correções de bugs.  
+      Exemplo: `bugfix/fix-login-error`.
+    - **hotfix/**: Para correções urgentes em produção.  
+      Exemplo: `hotfix/login-empresa`.
+    - **refactor/**: Para refatorar uma parte do código.  
+      Exemplo: `refactor/refatorado-login-cliente`.
+ - Após a modificação for concluída em uma `branch de trabalho`, deve ser criado um Pull Request para uma das branches secundárias: `front` ou `back`, a depender da modificação.
+ - A cada 2 dias, as branches `front` e `back` devem ser mergeadas na `main` após haver garantia de que estão funcionais e consistentes. 
+
 
 ## 📁 Estrutura de pastas
 
