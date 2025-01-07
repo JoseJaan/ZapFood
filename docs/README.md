@@ -13,6 +13,14 @@ O sistema conta com administradores gerais que possuem permissão para visualiza
 - HTML5
 - CSS3
 
+## 🧑‍💻 Regras de código adotadas.
+- Adoção do padrão camelCase.
+- Obrigatoriedade de um comentário explicativo para cada função.
+- Adoção da "Single Responsability" para funções.
+- Limitação de 25 linhas por função.
+- Aplicação do DRY, visando reutilização de código.
+- Validação e tratamento de erros de forma padronizada.
+
 ## 📁 Estrutura de pastas
 
 ```
