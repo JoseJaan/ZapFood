@@ -5,6 +5,11 @@ class AuthController{
         return res.render('login');
     }
 
+    static async registroCliente(req,res){
+
+        return res.render('registroCliente');
+    }
+
 
 }
 
