@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/registroCliente.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <title>Registro Cliente</title>
+</head>
+<body>
+        <header>
+            <div class="voltar"><a href="/login" class="voltar">Voltar para o Login</a></div>
+            <img src="/img/logo1.png" alt="logo" class="logo">
+            <div class="voltar"></div>
+        </header>
+
+        <h1>CADASTRO DE CLIENTE</h1>
+
+        <div class="blocoCadastro">
+
+            <div class= "primeiroBloco">
+                <div class= "campo  campoNOME">
+                    <label for="nome">NOME</label><br>
+                    <input type="text" name="nome" id="nome">
+                </div>
+
+                <div class="dataCpf">
+                    <div class= "campo">
+                        <label for="idade">IDADE</label><br>
+                        <input class="dataNascimento" type="number" name="idade" id="idade">
+                    </div>
+
+                <div class= "campo">
+                    <label for="cpf">CPF</label><br>
+                    <input class="cpf" type="text" name="cpf" id="cpf">
+                </div>
+
+                </div>
+
+                <div class= "campo credenciais">
+                    <label for="email">EMAIL</label><br>
+                    <input class="email" type="email" name="email" id="email">
+                </div>
+
+                <div class= "campo credenciais">
+                    <label for="endereco">ENDERECO</label><br>
+                    <input class="endereco" type="endereco" name="endereco" id="endereco">
+                </div>
+
+                <div class= "campo credenciais">
+                    <label for="senha">SENHA</label><br>
+                    <input class="senha" type="password" name="senha" id="senha">
+                </div>
+
+                <div class= "campo credenciais">
+                    <label for="senha">CONFIRMAR SENHA</label><br>
+                    <input class="senha" type="password" name="senha" id="confirmarSenha">
+                </div>
+            </div>
+
+        </div>
+
+        <button class="botao" id="botao">CRIAR CONTA</button>
+        
+        <footer>
+
+        </footer>
+
+        <script src="/js/registroCliente.js"></script>
+    
+</body>
+</html>

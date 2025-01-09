@@ -1,4 +1,4 @@
-const ClienteRepository = require("../database/models/Cliente.js");
+const ClienteRepository = require("../repository/auth.js");
 
 class AuthService {
     static async cadastro(clienteData) {
