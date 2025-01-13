@@ -1,22 +1,23 @@
 const Cliente = require("../database/models/Cliente.js");
 
 class ClienteRepository {
-    static async buscarPorEmail(email) {
+    //'model' é passado como parametro para não precisar criar mais funções que realizem a mesma função de buscar pelo email
+    static async buscarPorEmail(model, email) {
         try {
-            return await Cliente.findOne({ where: { email } });
+            return await model.findOne({ where: { email } });
         } catch (error) {
-            console.error("Erro ao buscar cliente por email:", error);
+            console.error("Erro ao buscar por email:", error);
             throw new Error("Erro no banco de dados");
         }
     }
 
     // Criação de um novo cliente
-    static async criar(clienteData) {
+    static async criar(model, clienteData) {
         try {
-            return await Cliente.create(clienteData);
+            return await model.create(clienteData);
         } catch (error) {
-            console.error("Erro ao criar cliente:", error);
-            throw new Error("Erro ao salvar cliente no banco de dados");
+            console.error("Erro ao criar registro:", error);
+            throw new Error("Erro ao salvar registro no banco de dados");
         }
     }
 }

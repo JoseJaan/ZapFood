@@ -7,5 +7,6 @@ routes.get("/login",AuthController.fazerLogin);
 routes.post("/cadastro",AuthController.cadastro);
 routes.get("/registroCliente",AuthController.registroCliente);
 routes.post('/autenticar', AuthController.autenticar);
+routes.post('/registroEmpresa', AuthController.cadastroEmpresa)
 
 module.exports = routes;

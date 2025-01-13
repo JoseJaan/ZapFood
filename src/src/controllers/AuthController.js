@@ -31,6 +31,24 @@ class AuthController{
         }
     }
 
+    //Registrar nova empresa
+    static async cadastroEmpresa(req, res) {  
+        console.log(req.body);
+        const { email, senha, nome, horarioFuncionamento, cnpj, descricao, endereco } = req.body;
+
+        try {
+            // Chamar o serviço para registrar a empresa
+            const novaEmpresa = await AuthService.cadastroEmpresa({ email, senha, cnpj, idade, nome, horarioFuncionamento, descricao, endereco });
+
+            // Redirecionar ou responder em caso de sucesso
+            return res.redirect("/login"); // Exemplo: redirecionar para a página de login
+        } catch (error) {
+            console.log(error.message);
+            // Tratar erros e retornar mensagens apropriadas
+            return res.status(400).render("registroCliente", { error: error.message });
+        }
+    }
+
     static async autenticar(req, res) {
         const { email, senha } = req.body;
 
