@@ -4,8 +4,8 @@ const routes = express.Router();
 const AuthController = require(path.resolve("src","controllers","AuthController"));
 
 routes.get("/login",AuthController.fazerLogin);
-
 routes.post("/cadastro",AuthController.cadastro);
 routes.get("/registroCliente",AuthController.registroCliente);
+routes.post('/autenticar', AuthController.autenticar);
 
 module.exports = routes;
