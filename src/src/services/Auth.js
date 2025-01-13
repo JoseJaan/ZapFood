@@ -1,44 +1,44 @@
 const ClienteRepository = require("../repository/auth.js");
 const bcrypt = require("bcrypt");
-const MODELCLIENTE = "Cliente";
-const MODELEMPRESA = "Empresa";
+const Cliente = require("../database/models/Cliente.js");
+const Empresa = require("../database/models/Empresa.js");
 class AuthService {
     static async cadastro(clienteData) {
         const { email, senha, endereco, cpf, idade, nome } = clienteData;
-
+        console.log("entrou no services/auth cadastro cliente")
         // Validações básicas
         if (!email || !senha || !endereco || !cpf || !idade || !nome) {
             throw new Error("Todos os campos são obrigatórios");
         }
 
         // Verificar se o cliente já existe no banco
-        const clienteExistente = await ClienteRepository.buscarPorEmail(MODELCLIENTE, email);
+        const clienteExistente = await ClienteRepository.buscarPorEmail(Cliente, email);
         if (clienteExistente) {
             throw new Error("E-mail já está em uso");
         }
 
         // Criar novo cliente no banco
-        const novoCliente = await ClienteRepository.criar(MODELCLIENTE, clienteData);
+        const novoCliente = await ClienteRepository.criar(Cliente, clienteData);
 
         return novoCliente;
     }
 
     static async cadastroEmpresa(empresaData) {
-        const { email, senha, nome, cnpj, horarioFuncionamento, descricao, endereco } = empresaData;
-
+        const { email, senha, nome, cnpj, horarioFuncionamento, descricao } = empresaData;
+        empresaData.endereco = "teste";
         // Validações básicas
-        if (!email || !senha || !nome || !cnpj || !horarioFuncionamento || !descricao || !endereco) {
+        if (!email || !senha || !nome || !cnpj || !horarioFuncionamento || !descricao) {
             throw new Error("Todos os campos são obrigatórios");
         }
 
         // Verificar se o cliente já existe no banco
-        const empresaExistente = await ClienteRepository.buscarPorEmail(MODELEMPRESA, email);
+        const empresaExistente = await ClienteRepository.buscarPorEmail(Empresa, email);
         if (empresaExistente) {
             throw new Error("E-mail já está em uso");
         }
 
         // Criar novo cliente no banco
-        const novaEmpresa = await ClienteRepository.criar(MODELEMPRESA, clienteData);
+        const novaEmpresa = await ClienteRepository.criar(Empresa, empresaData);
 
         return novaEmpresa;
     }

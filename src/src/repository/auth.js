@@ -1,8 +1,11 @@
 const Cliente = require("../database/models/Cliente.js");
+const Empresa = require("../database/models/Empresa.js");
 
 class ClienteRepository {
     //'model' é passado como parametro para não precisar criar mais funções que realizem a mesma função de buscar pelo email
     static async buscarPorEmail(model, email) {
+        console.log('Modelo recebido:', model);
+        console.log('Métodos disponíveis:', Object.keys(model));
         try {
             return await model.findOne({ where: { email } });
         } catch (error) {

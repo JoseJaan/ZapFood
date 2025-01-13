@@ -1,4 +1,6 @@
+const path = require("path");
 const bcrypt = require('bcryptjs');
+const database = require(path.resolve("config", "database.js"));
 const dotenv = require('dotenv');
 const { Sequelize } = require('sequelize');
 dotenv.config();
@@ -7,7 +9,8 @@ const Empresa = database.define('empresa', {
 
     id:{
         type: Sequelize.UUID,
-        primaryKey : true
+        primaryKey : true,
+        defaultValue: Sequelize.UUIDV4
     },
     email:{
         type: Sequelize.STRING,

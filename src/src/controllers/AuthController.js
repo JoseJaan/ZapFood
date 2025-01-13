@@ -13,9 +13,12 @@ class AuthController{
         return res.render('registroCliente');
     }
 
+    static async registroEmpresa(req,res){
+        return res.render('registroEmpresa')
+    }
+
     // Registrar um novo cliente
     static async cadastro(req, res) {  
-        console.log(req.body);
         const { email, senha, endereco, cpf, idade, nome } = req.body;
 
         try {
@@ -32,20 +35,18 @@ class AuthController{
     }
 
     //Registrar nova empresa
-    static async cadastroEmpresa(req, res) {  
-        console.log(req.body);
-        const { email, senha, nome, horarioFuncionamento, cnpj, descricao, endereco } = req.body;
-
+    static async cadastroEmpresa(req, res) {
+        const { email, senha, nome, horarioFuncionamento, cnpj, descricao } = req.body;
         try {
             // Chamar o serviço para registrar a empresa
-            const novaEmpresa = await AuthService.cadastroEmpresa({ email, senha, cnpj, idade, nome, horarioFuncionamento, descricao, endereco });
+            const novaEmpresa = await AuthService.cadastroEmpresa({ email, senha, cnpj, nome, horarioFuncionamento, descricao });
 
             // Redirecionar ou responder em caso de sucesso
             return res.redirect("/login"); // Exemplo: redirecionar para a página de login
         } catch (error) {
             console.log(error.message);
             // Tratar erros e retornar mensagens apropriadas
-            return res.status(400).render("registroCliente", { error: error.message });
+            return res.status(400).render("registroEmpresa", { error: error.message });
         }
     }
 
