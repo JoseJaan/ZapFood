@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const path = require("path");
 const AuthService = require(path.resolve("src", "services", "Auth.js"));
 class AuthController{
@@ -11,7 +12,6 @@ class AuthController{
 
         return res.render('registroCliente');
     }
-
 
     // Registrar um novo cliente
     static async cadastro(req, res) {  
@@ -28,6 +28,34 @@ class AuthController{
             console.log(error.message);
             // Tratar erros e retornar mensagens apropriadas
             return res.status(400).render("registroCliente", { error: error.message });
+        }
+    }
+
+    static async autenticar(req, res) {
+        const { email, senha } = req.body;
+
+        try {
+            // Autenticar o cliente usando o serviço
+            const cliente = await AuthService.autenticar(email, senha);
+
+            // Gerar o token JWT
+            const token = jwt.sign({ id: cliente.id, email: cliente.email }, process.env.JWT_SECRET, {
+                expiresIn: '1h', // Token expira em 1 hora
+            });
+
+            // Configurar o cookie com o token
+            res.cookie('authToken', token, {
+                httpOnly: true, // Impede acesso do JS ao cookie
+                secure: process.env.NODE_ENV === 'production', // Somente HTTPS em produção
+                sameSite: 'strict', // Protege contra CSRF
+                maxAge: 60 * 60 * 1000, // 1 hora
+            });
+
+            // Redirecionar para a página principal ou painel
+            return res.redirect('/registroCliente');
+        } catch (error) {
+            console.error(error.message);
+            return res.status(401).render('login', { error: error.message });
         }
     }
 }
