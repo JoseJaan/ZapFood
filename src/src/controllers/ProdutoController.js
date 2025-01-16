@@ -5,7 +5,7 @@ const produtoService = require(path.resolve("src", "services", "Produto.js"));
 class ProdutoController{
 
     static async cadastrarProduto(req,res){
-        return res.render('cadastrar')
+        return res.render('produto')
     }
 
     //Cadastrar produto

@@ -5,6 +5,7 @@ const produtoController = require(path.resolve("src","controllers","ProdutoContr
 const authMiddleware = require(path.resolve("src","middleware","authMiddleware.js"));
 const upload = require(path.resolve("config","multer"));
 
+router.get("/produto", produtoController.cadastrarProduto);
 router.post("/cadastro", upload.single('foto'), authMiddleware, produtoController.cadastro);
 router.get("/produtos", authMiddleware, produtoController.listarProdutos);
 router.get("/produto/:id", produtoController.obterProduto);
