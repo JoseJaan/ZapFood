@@ -36,7 +36,7 @@ class produtoService{
             throw new Error("Nenhum campo para atualizar foi enviado.");
         }
 
-        const produto = await produtoRepository.buscarPorId(id);
+        const produto = await produtoRepository.buscarPorId({id});
     
         if (!produto || produto.Loja_idLoja !== produtoData.lojaId) {
             return null; // Produto não encontrado ou não pertence à loja
@@ -66,7 +66,7 @@ class produtoService{
     
         if (produtoEmVenda) {
             // Se estiver em uma venda, altera a visibilidade
-            await produtoRepository.alterarVisibilidade(id, 0);
+            await produtoRepository.alterarVisibilidade(id, { visibilidade: 0 });
             return { status: "Produto encontrado em vendas, exclusão não permitida. Visibilidade alterada." };
         } else {
             // Se não estiver, exclui o produto
@@ -92,7 +92,7 @@ class produtoService{
             throw new Error("ID do produto é obrigatório.");
         }
     
-        const produto = await produtoRepository.obterPorIdELoja(id, lojaId);
+        const produto = await produtoRepository.obterPorIdELoja({ id, lojaId, visibilidade: 1 });
     
         if (!produto) {
             return null; 

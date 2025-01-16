@@ -18,7 +18,7 @@ class produtoRepository{
                 return null;
             }
     
-            await produto.update(dadosAtualizados);
+            await produto.update(dadosAtualizados); // Atualiza qualquer campo fornecido
             return produto;
         } catch (error) {
             console.error("Erro ao atualizar produto:", error);
@@ -26,9 +26,14 @@ class produtoRepository{
         }
     }
 
-    static async buscarPorId(id) {
+    static async buscarProduto({ id, lojaId, visibilidade } = {}) {
+        const whereClause = {};
+        if (id) whereClause.id = id;
+        if (lojaId) whereClause.Loja_idLoja = lojaId;
+        if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;
+    
         try {
-            return await Produto.findByPk(id);
+            return await Produto.findOne({ where: whereClause });
         } catch (error) {
             console.error("Erro ao buscar produto:", error);
             throw new Error("Erro ao buscar produto no banco de dados.");
@@ -37,26 +42,12 @@ class produtoRepository{
 
     static async verificarProdutoEmVenda(produtoId) {
         try {
-            const produtoEmVenda = await VendaHasProduto.findOne({
+            return await VendaHasProduto.findOne({
                 where: { Produto_idProduto: produtoId },
-            });
-
-            return !!produtoEmVenda; //Retorna true se o produto estiver em uma venda
+            }) !== null; // Retorna true se encontrado, false caso contrário
         } catch (error) {
             console.error("Erro ao verificar produto em venda:", error);
             throw new Error("Erro ao verificar associação do produto.");
-        }
-    }
-
-    static async alterarVisibilidade(id, visibilidade) {
-        try {
-            const produto = await Produto.findByPk(id);
-            if (produto) {
-                await produto.update({ visibilidade });
-            }
-        } catch (error) {
-            console.error("Erro ao alterar visibilidade:", error);
-            throw new Error("Erro ao alterar visibilidade do produto.");
         }
     }
 
@@ -81,17 +72,6 @@ class produtoRepository{
         }
     }
 
-    static async obterPorIdELoja(id, lojaId) {
-        try {
-            return await Produto.findOne({
-                where: { id, Loja_idLoja: lojaId, visibilidade: 1 }, // Verifica se o produto pertence à loja e está visível
-                attributes: ["id", "nome", "preco", "desconto", "descricao", "categoria"], 
-            });
-        } catch (error) {
-            console.error("Erro ao buscar produto:", error);
-            throw new Error("Erro ao buscar produto no banco de dados.");
-        }
-    }
 }
 
 
