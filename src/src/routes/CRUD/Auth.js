@@ -8,4 +8,7 @@ routes.post("/cadastro",AuthController.cadastro);
 routes.get("/registroCliente",AuthController.registroCliente);
 routes.post('/autenticar', AuthController.autenticar);
 
+routes.get('/registrarEmpresa',AuthController.registroEmpresa)
+routes.post('/registroEmpresa', AuthController.cadastroEmpresa)
+
 module.exports = routes;
