@@ -1,5 +1,5 @@
 const Cliente = require("../database/models/Cliente.js");
-const Empresa = require("../database/models/Loja.js");
+const Loja = require("../database/models/Loja.js");
 
 class ClienteRepository {
     //'model' é passado como parametro para não precisar criar mais funções que realizem a mesma função de buscar pelo email
@@ -7,7 +7,15 @@ class ClienteRepository {
         console.log('Modelo recebido:', model);
         console.log('Métodos disponíveis:', Object.keys(model));
         try {
-            return await model.findOne({ where: { email } });
+            const cliente = Cliente.findOne({ where: { email } });
+            const loja = Loja.findOne({ where: { email } });
+
+            if (cliente != undefined){
+                return cliente
+            }
+            else{
+                return loja
+            }
         } catch (error) {
             console.error("Erro ao buscar por email:", error);
             throw new Error("Erro no banco de dados");

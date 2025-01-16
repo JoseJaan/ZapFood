@@ -10,7 +10,7 @@ class AuthService {
         if (!email || !senha || !endereco || !cpf || !idade || !nome) {
             throw new Error("Todos os campos são obrigatórios");
         }
-
+        
         // Verificar se o cliente já existe no banco
         const clienteExistente = await userRepository.buscarPorEmail(Cliente, email);
         if (clienteExistente) {
