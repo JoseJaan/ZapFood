@@ -29,6 +29,7 @@ class ProdutoController{
 
     static async atualizarProduto(req, res) {
         const { id } = req.params;
+        const lojaId = req.user.id;
         const { nome, preco, desconto, descricao, categoria, visibilidade } = req.body;
     
         if (req.user.tipo !== "loja") {
@@ -43,6 +44,7 @@ class ProdutoController{
                 descricao,
                 categoria,
                 visibilidade,
+                lojaId
             });
     
             if (!produtoAtualizado) {
@@ -77,6 +79,38 @@ class ProdutoController{
                 .render("Erro ao excluir produto", { error: error.message });
         }
     }
+
+    static async listarProdutos(req, res) {
+        const lojaId = req.user.idLoja; 
+    
+        try {
+            const produtos = await produtoService.listarProdutos(lojaId);
+    
+            return res.render("listaProdutos", { produtos }); 
+        } catch (error) {
+            console.error(error.message);
+            return res.status(500).send("Erro ao listar produtos.");
+        }
+    }
+
+    static async obterProduto(req, res) {
+        const { id } = req.params; 
+        const lojaId = req.user.idLoja;
+    
+        try {
+            const produto = await produtoService.obterProduto(id, lojaId);
+    
+            if (!produto) {
+                return res.status(404).send("Produto não encontrado ou acesso negado.");
+            }
+    
+            return res.render("detalhesProduto", { produto });
+        } catch (error) {
+            console.error(error.message);
+            return res.status(500).send("Erro ao buscar produto.");
+        }
+    }
+    
 }
 
 module.exports = ProdutoController

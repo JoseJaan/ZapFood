@@ -32,6 +32,12 @@ class produtoService{
         if (Object.keys(dadosFiltrados).length === 0) {
             throw new Error("Nenhum campo para atualizar foi enviado.");
         }
+
+        const produto = await produtoRepository.buscarPorId(id);
+    
+        if (!produto || produto.Loja_idLoja !== produtoData.lojaId) {
+            return null; // Produto não encontrado ou não pertence à loja
+        }
     
         const produtoAtualizado = await produtoRepository.atualizar(id, dadosFiltrados);
     
@@ -63,6 +69,31 @@ class produtoService{
             return { status: "Produto excluído com sucesso." };
         }
     }
+
+    static async listarProdutos(lojaId) {
+        if (!lojaId) {
+            throw new Error("ID da loja é obrigatório.");
+        }
+    
+        const produtos = await produtoRepository.listarPorLoja(lojaId);
+    
+        return produtos;
+    }
+
+    static async obterProduto(id, lojaId) {
+        if (!id) {
+            throw new Error("ID do produto é obrigatório.");
+        }
+    
+        const produto = await produtoRepository.obterPorIdELoja(id, lojaId);
+    
+        if (!produto) {
+            return null; 
+        }
+    
+        return produto;
+    }
+    
 
 }
 

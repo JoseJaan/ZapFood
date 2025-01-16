@@ -68,6 +68,30 @@ class produtoRepository{
             throw new Error("Erro ao excluir produto do banco de dados.");
         }
     }
+
+    static async listarPorLoja(lojaId) {
+        try {
+            return await Produto.findAll({
+                where: { Loja_idLoja: lojaId, visibilidade: 1 }, // Busca apenas produtos visíveis da loja
+                attributes: ["id", "nome", "preco", "desconto", "descricao", "categoria"],
+            });
+        } catch (error) {
+            console.error("Erro ao listar produtos:", error);
+            throw new Error("Erro ao buscar produtos no banco de dados.");
+        }
+    }
+
+    static async obterPorIdELoja(id, lojaId) {
+        try {
+            return await Produto.findOne({
+                where: { id, Loja_idLoja: lojaId, visibilidade: 1 }, // Verifica se o produto pertence à loja e está visível
+                attributes: ["id", "nome", "preco", "desconto", "descricao", "categoria"], 
+            });
+        } catch (error) {
+            console.error("Erro ao buscar produto:", error);
+            throw new Error("Erro ao buscar produto no banco de dados.");
+        }
+    }
 }
 
 
