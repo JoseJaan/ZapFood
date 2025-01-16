@@ -7,9 +7,11 @@ class ProdutoController{
         return res.render('cadastrar')
     }
 
+    //Cadastrar produto
     static async cadastro(req,res){
         const { nome, preco, desconto, descricao, categoria } = req.body;
         
+        //Verifica se o usuário autenticado é uma loja
         if(req.user.tipo != 'loja'){
             return res.status(403).send('Acesso não autorizado.');
         }
@@ -27,6 +29,8 @@ class ProdutoController{
         }
     }
 
+    //Atualizar produto
+    //Nenhum campo é obrigatório
     static async atualizarProduto(req, res) {
         const { id } = req.params;
         const lojaId = req.user.id;
@@ -60,6 +64,8 @@ class ProdutoController{
         }
     }
 
+    //Excluir produto
+    //Se houver vendas com aquele produto, ele não é efetivamente excluido, e sim desativado
     static async excluirProduto(req, res) {
         const { id } = req.params; // ID do produto a ser excluído
         const lojaId = req.user.id; // ID da loja do usuário autenticado
@@ -80,6 +86,7 @@ class ProdutoController{
         }
     }
 
+    //Lista todos os produtos da loja
     static async listarProdutos(req, res) {
         const lojaId = req.user.idLoja; 
     
@@ -93,6 +100,7 @@ class ProdutoController{
         }
     }
 
+    //Lista apenas 1 produto da loja 
     static async obterProduto(req, res) {
         const { id } = req.params; 
         const lojaId = req.user.idLoja;

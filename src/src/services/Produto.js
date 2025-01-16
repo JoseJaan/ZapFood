@@ -2,6 +2,7 @@ const produtoRepository = require("../database/models/Produto")
 
 class produtoService{
 
+    //Cadastra o produto
     static async cadastrarProduto(produtoData){
         const { nome, preco, desconto, descricao, categoria, Loja_idLoja } = produtoData;
 
@@ -14,6 +15,8 @@ class produtoService{
         return novoProduto;
     }
 
+    //Atualiza o produto
+    //Nenhum campo é obrigatório
     static async atualizarProduto(id, produtoData) {
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
@@ -44,6 +47,8 @@ class produtoService{
         return produtoAtualizado;
     }
 
+    //Excluir produto
+    //Se houver vendas com aquele produto, ele não é efetivamente excluido, e sim desativado
     static async excluirProduto(id, lojaId) {
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
@@ -70,6 +75,7 @@ class produtoService{
         }
     }
 
+    //Lista todos os produtos de uma loja
     static async listarProdutos(lojaId) {
         if (!lojaId) {
             throw new Error("ID da loja é obrigatório.");
@@ -80,6 +86,7 @@ class produtoService{
         return produtos;
     }
 
+    //Lista apenas 1 produto da loja
     static async obterProduto(id, lojaId) {
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
