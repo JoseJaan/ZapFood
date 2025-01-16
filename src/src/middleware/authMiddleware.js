@@ -9,7 +9,7 @@ function autenticarToken(req, res, next) {
 
     try {
         const dados = jwt.verify(token, process.env.JWT_SECRET);
-        req.cliente = dados; // Adiciona os dados do cliente à requisição
+        req.user = dados; // Adiciona os dados do usuario à requisição
         next();
     } catch (error) {
         console.error('Erro de autenticação:', error);

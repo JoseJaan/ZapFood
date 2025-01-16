@@ -50,7 +50,11 @@ const Produto = database.define('produto', {
         validate: {
             len: [10, 60]
         }
-    }
+    },
+    desconto: {
+        type: Sequelize.MEDIUMINT,
+        allowNull: true,
+    },
 });
 
 module.exports = Produto;

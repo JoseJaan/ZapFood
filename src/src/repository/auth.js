@@ -1,5 +1,5 @@
 const Cliente = require("../database/models/Cliente.js");
-const Empresa = require("../database/models/Empresa.js");
+const Empresa = require("../database/models/Loja.js");
 
 class ClienteRepository {
     //'model' é passado como parametro para não precisar criar mais funções que realizem a mesma função de buscar pelo email

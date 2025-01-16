@@ -1,7 +1,7 @@
-const ClienteRepository = require("../repository/auth.js");
+const userRepository = require("../repository/auth.js");
 const bcrypt = require("bcrypt");
 const Cliente = require("../database/models/Cliente.js");
-const Empresa = require("../database/models/Empresa.js");
+const Loja = require("../database/models/Loja.js");
 class AuthService {
     static async cadastro(clienteData) {
         const { email, senha, endereco, cpf, idade, nome } = clienteData;
@@ -12,13 +12,13 @@ class AuthService {
         }
 
         // Verificar se o cliente já existe no banco
-        const clienteExistente = await ClienteRepository.buscarPorEmail(Cliente, email);
+        const clienteExistente = await userRepository.buscarPorEmail(Cliente, email);
         if (clienteExistente) {
             throw new Error("E-mail já está em uso");
         }
 
         // Criar novo cliente no banco
-        const novoCliente = await ClienteRepository.criar(Cliente, clienteData);
+        const novoCliente = await userRepository.criar(Cliente, clienteData);
 
         return novoCliente;
     }
@@ -32,31 +32,40 @@ class AuthService {
         }
 
         // Verificar se o cliente já existe no banco
-        const empresaExistente = await ClienteRepository.buscarPorEmail(Empresa, email);
+        const empresaExistente = await userRepository.buscarPorEmail(Loja, email);
         if (empresaExistente) {
             throw new Error("E-mail já está em uso");
         }
 
         // Criar novo cliente no banco
-        const novaEmpresa = await ClienteRepository.criar(Empresa, empresaData);
+        const novaEmpresa = await userRepository.criar(Loja, empresaData);
 
         return novaEmpresa;
     }
 
     static async autenticar(email, senha) {
-        // Buscar o cliente no banco pelo e-mail
-        const cliente = await ClienteRepository.buscarPorEmail(email);
-        if (!cliente) {
-            throw new Error('E-mail ou senha inválidos');
+        // Buscar o usuário no banco pelo e-mail
+        const user = await userRepository.buscarPorEmail(email);
+
+        //Se o registro tiver um CNPJ, ele é uma loja
+        if(user.cnpj != undefined){
+            user.tipo = 'loja'
+        }
+        else{
+            user.tipo = 'cliente'
+        }
+
+        if (!user) {
+            throw new Error('E-mail ou senha inválidos.');
         }
 
         // Comparar a senha fornecida com o hash armazenado
-        const senhaCorreta = await bcrypt.compare(senha, cliente.senha);
+        const senhaCorreta = await bcrypt.compare(senha, user.senha);
         if (!senhaCorreta) {
-            throw new Error('E-mail ou senha inválidos');
+            throw new Error('E-mail ou senha inválidos.');
         }
 
-        return cliente; // Retorna o cliente autenticado
+        return cliente; // Retorna o usuário autenticado
     }
 }
 
