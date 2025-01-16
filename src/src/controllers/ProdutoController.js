@@ -1,4 +1,5 @@
 const path = require("path");
+const cloudinary = require(path.resolve("config", "cloudinary"));
 const produtoService = require(path.resolve("src", "services", "Produto.js"));
 
 class ProdutoController{
@@ -19,7 +20,16 @@ class ProdutoController{
         const Loja_idLoja = req.user.id;
 
         try{
-            const novoProduto = produtoService.cadastrarProduto({nome,preco,desconto,descricao,categoria,Loja_idLoja})
+            let fotoUrl = null;
+
+            if (req.file) {
+                const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+                    folder: "produtos",
+                });
+                fotoUrl = uploadResult.secure_url; 
+            }
+
+            const novoProduto = produtoService.cadastrarProduto({nome,preco,desconto,descricao,categoria,Loja_idLoja,foto: fotoUrl})
 
             return res.redirect("/cadastrar");
         }
@@ -41,6 +51,16 @@ class ProdutoController{
         }
     
         try {
+
+            let fotoUrl = null;
+
+            if (req.file) {
+                const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+                    folder: "produtos",
+                });
+                fotoUrl = uploadResult.secure_url; 
+            }
+
             const produtoAtualizado = await produtoService.atualizarProduto(id, {
                 nome,
                 preco,
@@ -48,7 +68,8 @@ class ProdutoController{
                 descricao,
                 categoria,
                 visibilidade,
-                lojaId
+                lojaId,
+                foto: fotoUrl
             });
     
             if (!produtoAtualizado) {
