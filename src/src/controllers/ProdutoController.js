@@ -9,19 +9,72 @@ class ProdutoController{
 
     static async cadastro(req,res){
         const { nome, preco, desconto, descricao, categoria } = req.body;
-
+        
         if(req.user.tipo != 'loja'){
             return res.status(403).send('Acesso não autorizado.');
         }
 
+        const Loja_idLoja = req.user.id;
+
         try{
-            const novoProduto = produtoService.cadastrarProduto({nome,preco,desconto,descricao,categoria})
+            const novoProduto = produtoService.cadastrarProduto({nome,preco,desconto,descricao,categoria,Loja_idLoja})
 
             return res.redirect("/cadastrar");
         }
         catch{
             console.log(error.message);
             return res.status(400).render("Erro ao cadastrar produto", { error: error.message });
+        }
+    }
+
+    static async atualizarProduto(req, res) {
+        const { id } = req.params;
+        const { nome, preco, desconto, descricao, categoria, visibilidade } = req.body;
+    
+        if (req.user.tipo !== "loja") {
+            return res.status(403).send("Acesso não autorizado.");
+        }
+    
+        try {
+            const produtoAtualizado = await produtoService.atualizarProduto(id, {
+                nome,
+                preco,
+                desconto,
+                descricao,
+                categoria,
+                visibilidade,
+            });
+    
+            if (!produtoAtualizado) {
+                return res.status(204).send("Produto não encontrado.");
+            }
+    
+            return res.redirect(`/produto/${id}`);
+        } catch (error) {
+            console.log(error.message);
+            return res
+                .status(400)
+                .render("Erro ao atualizar produto", { error: error.message });
+        }
+    }
+
+    static async excluirProduto(req, res) {
+        const { id } = req.params; // ID do produto a ser excluído
+        const lojaId = req.user.id; // ID da loja do usuário autenticado
+    
+        try {
+            const resultado = await produtoService.excluirProduto(id, lojaId);
+    
+            if (!resultado) {
+                return res.status(403).send("Acesso negado ou produto não encontrado.");
+            }
+    
+            return res.redirect("/produtos"); 
+        } catch (error) {
+            console.error(error.message);
+            return res
+                .status(400)
+                .render("Erro ao excluir produto", { error: error.message });
         }
     }
 }

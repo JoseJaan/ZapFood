@@ -32,8 +32,8 @@ const Produto = database.define('produto', {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-            model: 'loja', //referencia a tabela loja
-            key: 'idLoja'
+            model: 'lojas', //referencia a tabela loja
+            key: 'id'
         }
     },
     visibilidade: {
