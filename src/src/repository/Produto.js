@@ -64,7 +64,7 @@ class produtoRepository{
         try {
             return await Produto.findAll({
                 where: { Loja_idLoja: lojaId, visibilidade: 1 }, // Busca apenas produtos visíveis da loja
-                attributes: ["id", "nome", "preco", "desconto", "descricao", "categoria"],
+                attributes: ["id", "nome", "preco", "desconto", "descricao", "categoria", "foto"],
             });
         } catch (error) {
             console.error("Erro ao listar produtos:", error);
