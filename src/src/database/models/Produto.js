@@ -25,7 +25,7 @@ const Produto = database.define('produto', {
         type: Sequelize.STRING(60),
         allowNull: false,
         validate: {
-            len: [10, 60]
+            len: [1, 60]
         }
     },
     Loja_idLoja: {

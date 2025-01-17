@@ -12,9 +12,6 @@ class ProdutoController{
     static async cadastro(req,res){
         const { nomeProduto, precoProduto, desconto, descricaoProduto } = req.body;
 
-        console.log(`Nome do produto no controller ${nomeProduto}`)
-
-        
         //Verifica se o usuário autenticado é uma loja
         if(req.user.tipo != 'loja'){
             return res.status(403).send('Acesso não autorizado.');
@@ -34,7 +31,7 @@ class ProdutoController{
 
             const novoProduto = produtoService.cadastrarProduto({nomeProduto,precoProduto,desconto,descricaoProduto,Loja_idLoja,foto: fotoUrl})
 
-            return res.redirect("/cadastrar");
+            return res.redirect("/produto");
         }
         catch(error){
             console.error(error.message);
@@ -112,12 +109,12 @@ class ProdutoController{
 
     //Lista todos os produtos da loja
     static async listarProdutos(req, res) {
-        const lojaId = req.user.idLoja; 
+        const lojaId = req.user.id; 
     
         try {
             const produtos = await produtoService.listarProdutos(lojaId);
     
-            return res.render("listaProdutos", { produtos }); 
+            return res.send({ produtos }); 
         } catch (error) {
             console.error(error.message);
             return res.status(500).send("Erro ao listar produtos.");

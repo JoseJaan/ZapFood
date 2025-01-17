@@ -61,9 +61,6 @@ document.getElementById('botao').addEventListener('click',()=>{
 
         document.body.removeChildChild(formulario);
 
-        
-
-
     }
     else{
         alert("Senhas não conferem");
