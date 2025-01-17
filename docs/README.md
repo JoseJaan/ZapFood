@@ -38,6 +38,12 @@ O sistema conta com administradores gerais que possuem permissão para visualiza
  - Após a modificação for concluída em uma `branch de trabalho`, deve ser criado um Pull Request para uma das branches secundárias: `front` ou `back`, a depender da modificação.
  - A cada 2 dias, as branches `front` e `back` devem ser mergeadas na `main` após haver garantia de que estão funcionais e consistentes. 
 
+## 🔐 Arquivo .env
+- São utlizadas diferentes variáveis de ambiente que são necessárias para o funcionamento do código, sendo elas:
+  - `DB_USER`= Seu usuário do banco de dados
+  - `DB_PASSWORD` = Sua senha do banco de dados
+  - `JWT_SECRET` = Chave utilizada para criação de tokens JWT. A chave utilizada é ```IceWcH`LhiH"9GvRc<F*OGYti^B74{;<fj]Y:Y$Qkt9C6OaHUp:`MOTpMZD3^M@```
+
 
 ## 📁 Estrutura de pastas
 
