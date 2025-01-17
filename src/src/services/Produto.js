@@ -1,16 +1,16 @@
-const produtoRepository = require("../database/models/Produto")
+const produtoRepository = require("../repository/Produto")
 
 class produtoService{
 
     //Cadastra o produto
     static async cadastrarProduto(produtoData){
-        const { nome, preco, desconto, descricao, categoria, Loja_idLoja, foto } = produtoData;
+        const { nomeProduto, precoProduto, desconto, descricaoProduto, categoria, Loja_idLoja, foto } = produtoData;
 
-        if (!preco || !desconto || !descricao || !categoria || !nome) {
+        if (!precoProduto || !desconto || !descricaoProduto || !nomeProduto) {
             throw new Error("Todos os campos são obrigatórios");
         }
 
-        const novoProduto = await produtoRepository.cadastrarProduto(produtoData);
+        const novoProduto = await produtoRepository.cadastrar(produtoData);
 
         return novoProduto;
     }
@@ -92,7 +92,7 @@ class produtoService{
             throw new Error("ID do produto é obrigatório.");
         }
     
-        const produto = await produtoRepository.obterPorIdELoja({ id, lojaId, visibilidade: 1 });
+        const produto = await produtoRepository.buscarProduto({ id, lojaId, visibilidade: 1 });
     
         if (!produto) {
             return null; 

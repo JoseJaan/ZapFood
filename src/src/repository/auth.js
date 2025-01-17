@@ -3,14 +3,12 @@ const Loja = require("../database/models/Loja.js");
 
 class ClienteRepository {
     //'model' é passado como parametro para não precisar criar mais funções que realizem a mesma função de buscar pelo email
-    static async buscarPorEmail(model, email) {
-        console.log('Modelo recebido:', model);
-        console.log('Métodos disponíveis:', Object.keys(model));
+    static async buscarPorEmail( email) { 
         try {
-            const cliente = Cliente.findOne({ where: { email } });
-            const loja = Loja.findOne({ where: { email } });
+            const cliente = await Cliente.findOne({ where: { email } });
+            const loja = await Loja.findOne({ where: { email } });
 
-            if (cliente != undefined){
+            if (cliente !== null){
                 return cliente
             }
             else{

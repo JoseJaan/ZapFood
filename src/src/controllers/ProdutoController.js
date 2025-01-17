@@ -10,7 +10,10 @@ class ProdutoController{
 
     //Cadastrar produto
     static async cadastro(req,res){
-        const { nome, preco, desconto, descricao, categoria } = req.body;
+        const { nomeProduto, precoProduto, desconto, descricaoProduto } = req.body;
+
+        console.log(`Nome do produto no controller ${nomeProduto}`)
+
         
         //Verifica se o usuário autenticado é uma loja
         if(req.user.tipo != 'loja'){
@@ -29,12 +32,12 @@ class ProdutoController{
                 fotoUrl = uploadResult.secure_url; 
             }
 
-            const novoProduto = produtoService.cadastrarProduto({nome,preco,desconto,descricao,categoria,Loja_idLoja,foto: fotoUrl})
+            const novoProduto = produtoService.cadastrarProduto({nomeProduto,precoProduto,desconto,descricaoProduto,Loja_idLoja,foto: fotoUrl})
 
             return res.redirect("/cadastrar");
         }
-        catch{
-            console.log(error.message);
+        catch(error){
+            console.error(error.message);
             return res.status(400).render("Erro ao cadastrar produto", { error: error.message });
         }
     }
@@ -124,7 +127,7 @@ class ProdutoController{
     //Lista apenas 1 produto da loja 
     static async obterProduto(req, res) {
         const { id } = req.params; 
-        const lojaId = req.user.idLoja;
+        const lojaId = req.user.id;
     
         try {
             const produto = await produtoService.obterProduto(id, lojaId);

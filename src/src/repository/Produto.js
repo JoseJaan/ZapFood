@@ -28,7 +28,7 @@ class produtoRepository{
 
     static async buscarProduto({ id, lojaId, visibilidade } = {}) {
         const whereClause = {};
-        if (id) whereClause.id = id;
+        if (id) whereClause.idProduto = id;
         if (lojaId) whereClause.Loja_idLoja = lojaId;
         if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;
     

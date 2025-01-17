@@ -52,13 +52,13 @@ class AuthController{
 
     static async autenticar(req, res) {
         const { email, senha } = req.body;
-
+        console.log(senha)
         try {
             // Autenticar o usuario usando o serviço
             const user = await AuthService.autenticar(email, senha);
-
+            console.log(`tipo no controller autenticar: ${user.tipo}`)
             // Gerar o token JWT
-            const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
+            const token = jwt.sign({ id: user.id, email: user.email, tipo: user.tipo }, process.env.JWT_SECRET, {
                 expiresIn: '1h', // Token expira em 1 hora
             });
 

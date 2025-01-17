@@ -46,10 +46,11 @@ const Produto = database.define('produto', {
     },
     categoriaProduto: {
         type: Sequelize.STRING(60),
-        allowNull: false,
+        allowNull: true,
         validate: {
             len: [10, 60]
-        }
+        },
+        defaultValue: "12345678901234567878",
     },
     desconto: {
         type: Sequelize.MEDIUMINT,
@@ -60,7 +61,8 @@ const Produto = database.define('produto', {
         allowNull: true,
         validate: {
             len: [15, 300]
-        }
+        },
+        defaultValue: "12345678901234567878",
     },
 });
 

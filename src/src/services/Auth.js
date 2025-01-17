@@ -12,7 +12,7 @@ class AuthService {
         }
         
         // Verificar se o cliente já existe no banco
-        const clienteExistente = await userRepository.buscarPorEmail(Cliente, email);
+        const clienteExistente = await userRepository.buscarPorEmail( email);
         if (clienteExistente) {
             throw new Error("E-mail já está em uso");
         }
@@ -32,7 +32,7 @@ class AuthService {
         }
 
         // Verificar se o cliente já existe no banco
-        const empresaExistente = await userRepository.buscarPorEmail(Loja, email);
+        const empresaExistente = await userRepository.buscarPorEmail( email);
         if (empresaExistente) {
             throw new Error("E-mail já está em uso");
         }
@@ -47,6 +47,10 @@ class AuthService {
         // Buscar o usuário no banco pelo e-mail
         const user = await userRepository.buscarPorEmail(email);
 
+        if (!user) {
+            throw new Error('E-mail ou senha inválidos.');
+        }
+
         //Se o registro tiver um CNPJ, ele é uma loja
         if(user.cnpj != undefined){
             user.tipo = 'loja'
@@ -55,9 +59,7 @@ class AuthService {
             user.tipo = 'cliente'
         }
 
-        if (!user) {
-            throw new Error('E-mail ou senha inválidos.');
-        }
+        console.log(`tipo no service autenticar: ${user.tipo}`)
 
         // Comparar a senha fornecida com o hash armazenado
         const senhaCorreta = await bcrypt.compare(senha, user.senha);
@@ -65,7 +67,7 @@ class AuthService {
             throw new Error('E-mail ou senha inválidos.');
         }
 
-        return cliente; // Retorna o usuário autenticado
+        return user; // Retorna o usuário autenticado
     }
 }
 
