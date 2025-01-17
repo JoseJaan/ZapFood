@@ -3,7 +3,7 @@ const lojaRepository = require("../repository/Loja")
 class LojaService{
 
     static async obterLoja(lojaId) {
-        if (!id) {
+        if (!lojaId) {
             throw new Error("ID do produto é obrigatório.");
         }
     

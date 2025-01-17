@@ -71,7 +71,12 @@ class AuthController{
             });
 
             // Redirecionar para a página principal ou painel
-            return res.redirect('/registroCliente');
+            if(user.tipo == 'loja'){
+                return res.redirect('/produto');
+            }
+            else{
+                return res.redirect('/registroCliente');
+            }
         } catch (error) {
             console.error(error.message);
             return res.status(401).render('login', { error: error.message });

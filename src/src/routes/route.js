@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const Auth = require(path.resolve("src","routes","CRUD","Auth"));
 const Produto = require(path.resolve("src","routes","CRUD","Produto"));
+const Loja = require(path.resolve("src","routes","CRUD","Loja"));
 
 
 
@@ -18,7 +19,9 @@ const routes = (app) => {
 
     app.use(Auth);
 
-    app.use(Produto)
+    app.use(Loja);
+
+    app.use(Produto);
 
 
 };

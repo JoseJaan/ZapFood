@@ -103,7 +103,7 @@ class ProdutoController{
             console.error(error.message);
             return res
                 .status(400)
-                .render("Erro ao excluir produto", { error: error.message });
+                .send("Erro ao excluir produto");
         }
     }
 

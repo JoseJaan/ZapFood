@@ -1,6 +1,5 @@
 const path = require("path");
-const lojaService = require("../services/Loja")
-
+const lojaService = require(path.resolve("src", "services", "Loja.js"));
 class LojaController{
 
     static async detalharLoja(req,res){
@@ -11,13 +10,13 @@ class LojaController{
         const lojaId = req.user.id;
 
         try{
-            const lojaData = lojaService.obterLoja(lojaId);
+            const lojaData = await lojaService.obterLoja(lojaId);
 
             return res.send({lojaData});
         }
         catch(error){
             console.error(error.message);
-            return res.status(400).render("Erro ao cadastrar loja", { error: error.message });
+            return res.status(400).send("Erro ao obter loja");
         }
     }
 }
