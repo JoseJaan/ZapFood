@@ -8,7 +8,6 @@ class LojaService{
         }
     
         const loja = await lojaRepository.buscarLoja(lojaId);
-    
         if (!loja) {
             return null; 
         }

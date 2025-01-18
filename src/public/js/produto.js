@@ -107,11 +107,11 @@ botoesExcluir.forEach(element => {
     })
 });
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     const produtosContainer = document.getElementById('produtosContainer');
     const botaoEditarProduto = document.getElementById('botaoEditar');
+    const nomeLojaElement = document.querySelector('.nomeLoja');
+    const logoElement = document.querySelector('.logo');
     
     async function carregarProdutos() {
         try {
@@ -133,6 +133,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
+    async function carregarDadosLoja() {
+        try {
+            const response = await fetch('/loja/detalhar');
+            if (!response.ok) {
+                throw new Error('Erro ao buscar dados da loja');
+            }
+            const loja = await response.json();
+
+            // Atualiza o nome da loja e a imagem da logo
+            nomeLojaElement.textContent = loja.nome || 'Nome da Loja Indisponível';
+            logoElement.src = loja.logo || 'img/logo.png'; // Fallback para uma logo padrão
+        } catch (error) {
+            console.error('Erro ao carregar dados da loja:', error);
+        }
+    }
+    
     // Função para criar o elemento HTML de um produto
     function criarProdutoElemento(produto) {
         const divProduto = document.createElement('div');
@@ -307,4 +323,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   
     await carregarProdutos();
+    await carregarDadosLoja();
 });

@@ -2,10 +2,9 @@ const Loja = require("../database/models/Loja.js");
 
 class LojaRepository{
 
-    static async buscarLoja(lojaId) {
-
+    static async buscarLoja(id) {
         try {
-            return await Loja.findOne({ id: lojaId });
+            return await Loja.findOne({ where: { id } });
         } catch (error) {
             console.error("Erro ao buscar loja:", error);
             throw new Error("Erro ao buscar loja no banco de dados.");

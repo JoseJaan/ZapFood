@@ -11,8 +11,7 @@ class LojaController{
 
         try{
             const lojaData = await lojaService.obterLoja(lojaId);
-
-            return res.send({lojaData});
+            return res.status(200).send(lojaData);
         }
         catch(error){
             console.error(error.message);
