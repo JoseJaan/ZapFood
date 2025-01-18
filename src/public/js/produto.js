@@ -10,18 +10,10 @@ document.querySelector('.botaoAdicionar').addEventListener('click', (event) => {
 
     // Verifica se os campos obrigatórios foram preenchidos
     if (!nomeProduto || !precoProduto || !descricaoProduto) {
-        alert(`Por favor, preencha todos os campos obrigatórios! ${console.log(precoProduto)}`);
+        alert(`Por favor, preencha todos os campos obrigatórios!`);
         return;
     }
-
-    console.log({
-        nomeProduto,
-        precoProduto,
-        desconto,
-        descricaoProduto,
-    });
     
-
     // Cria um formulário para enviar os dados
     const form = document.createElement('form');
     form.method = 'POST';
@@ -118,7 +110,150 @@ botoesExcluir.forEach(element => {
 const botoesVisualizar = document.querySelectorAll('.iconeVisualizar');
 
 botoesVisualizar.forEach(element => {
-    element.addEventListener('click',()=>{
-        modalVisualizar.style.display = 'flex';
-    })
+    element.addEventListener('click', async (event) => {
+        const produtoId = event.target.getAttribute('data-id');
+        console.log("entrou")
+        try {
+            // Faz uma requisição à rota para obter os detalhes do produto
+            const response = await fetch(`/produto/detalhar/${produtoId}`);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar produto');
+            }
+            const produto = await response.json();
+
+            // Preenche o modal com os dados do produto
+            document.querySelector('.fotoVisualizar').innerHTML = produto.foto 
+                ? `<img src="${produto.imagem}" alt="${produto.nomeProduto}">` 
+                : `<p>Imagem não disponível</p>`;
+            document.querySelector('.lojaVisualizar').textContent = produto.loja || 'Loja não especificada';
+            document.querySelector('.tituloProdutoVisualizar').textContent = produto.nomeProduto;
+            document.querySelector('.precoProdutoVisualizar').textContent = `R$ ${produto.precoProduto.toFixed(2)}`;
+            document.querySelector('.ingredientes').textContent = produto.descricaoProduto;
+
+            // Exibe o modal
+            modalVisualizar.style.display = 'flex';
+        } catch (error) {
+            console.error('Erro ao carregar informações do produto:', error);
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const produtosContainer = document.getElementById('produtosContainer');
+
+    async function carregarProdutos() {
+        try {
+            const response = await fetch('/produtos'); 
+            if (!response.ok) {
+                throw new Error('Erro ao buscar produtos');
+            }
+            const produtos = await response.json(); 
+
+            produtosContainer.innerHTML = '';
+
+            //Itera sobre os produtos e os adiciona ao contêiner
+            produtos.forEach(produto => {
+                const produtoElement = criarProdutoElemento(produto);
+                produtosContainer.appendChild(produtoElement);
+            });
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+        }
+    }
+
+    // Função para criar o elemento HTML de um produto
+    function criarProdutoElemento(produto) {
+        const divProduto = document.createElement('div');
+        divProduto.className = 'produto';
+
+        divProduto.innerHTML = `
+            <div class="visualizar">
+                <div class="iconeVisualizar" data-id="${produto.idProduto}"></div>
+                <p class="titulodoProduto">${produto.nomeProduto}</p>
+            </div>
+            <div class="opcoesProduto">
+                <img class="opcoesEditar" src="img/Edit.png" alt="editar" data-id="${produto.idProduto}">
+                <img class="opcoesExcluir" src="img/Trash.png" alt="excluir" data-id="${produto.idProduto}">
+            </div>
+        `;
+        // Adiciona eventos aos botões de edição e exclusão
+        divProduto.querySelector('.opcoesEditar').addEventListener('click', () => {
+            modalEditar.style.display = 'flex';
+            // Você pode implementar lógica adicional para preencher o modal com os dados do produto
+        });
+
+        divProduto.querySelector('.opcoesExcluir').addEventListener('click', (event) => {
+            const produtoId = event.target.getAttribute('data-id'); 
+            modalExcluir.style.display = 'flex';
+        
+            const botaoConfirmar = document.querySelector('.persistir');
+            const botaoCancelar = document.querySelector('.desistir');
+        
+            botaoConfirmar.replaceWith(botaoConfirmar.cloneNode(true));
+            botaoCancelar.replaceWith(botaoCancelar.cloneNode(true));
+        
+            document.querySelector('.persistir').addEventListener('click', async () => {
+                try {
+                    const response = await fetch(`/produto/remover/${produtoId}`, {
+                        method: 'DELETE',
+                    });
+        
+                    if (!response.ok) {
+                        throw new Error('Erro ao excluir o produto');
+                    }
+        
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('Produto excluído com sucesso!');
+                        modalExcluir.style.display = 'none';
+        
+                        const produtoElemento = event.target.closest('.produto');
+                        if (produtoElemento) produtoElemento.remove();
+                    } else {
+                        alert(result.message || 'Erro desconhecido ao excluir o produto.');
+                    }
+                } catch (error) {
+                    console.error('Erro ao excluir o produto:', error);
+                    alert('Erro ao excluir o produto. Tente novamente.');
+                }
+            });
+        
+            // Evento para cancelar a exclusão e fechar o modal
+            document.querySelector('.desistir').addEventListener('click', () => {
+                modalExcluir.style.display = 'none';
+            });
+        });
+
+        divProduto.querySelector('.iconeVisualizar').addEventListener('click', async (event) => {
+            const produtoId = event.target.getAttribute('data-id');
+            console.log("entrou")
+            try {
+                // Faz uma requisição à rota para obter os detalhes do produto
+                const response = await fetch(`/produto/detalhar/${produtoId}`);
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar produto');
+                }
+                const produto = await response.json();
+        
+                // Preenche o modal com os dados do produto
+                document.querySelector('.fotoVisualizar').innerHTML = produto.foto 
+                    ? `<img src="${produto.imagem}" alt="${produto.nomeProduto}">` 
+                    : `<p>Imagem não disponível</p>`;
+                document.querySelector('.lojaVisualizar').textContent = produto.loja || 'Loja não especificada';
+                document.querySelector('.tituloProdutoVisualizar').textContent = produto.nomeProduto;
+                document.querySelector('.precoProdutoVisualizar').textContent = `R$ ${produto.precoProduto.toFixed(2)}`;
+                document.querySelector('.ingredientes').textContent = produto.descricaoProduto;
+        
+                // Exibe o modal
+                modalVisualizar.style.display = 'flex';
+            } catch (error) {
+                console.error('Erro ao carregar informações do produto:', error);
+            }
+        });
+
+        return divProduto;
+    }
+
+    
+    await carregarProdutos();
 });

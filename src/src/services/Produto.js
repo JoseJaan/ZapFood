@@ -55,7 +55,7 @@ class produtoService{
         }
     
         // Busca o produto pelo ID e valida se ele pertence à loja
-        const produto = await produtoRepository.buscarPorId(id);
+        const produto = await produtoRepository.buscarProduto(id,lojaId);
     
         if (!produto || produto.Loja_idLoja !== lojaId) {
             return null; // Produto não encontrado ou não pertence à loja
@@ -64,15 +64,15 @@ class produtoService{
         // Verifica se o produto está associado a uma venda
         //const produtoEmVenda = await produtoRepository.verificarProdutoEmVenda(id);
     
-        if (produtoEmVenda) {
+        //if (produtoEmVenda) {
             // Se estiver em uma venda, altera a visibilidade
-            await produtoRepository.alterarVisibilidade(id, { visibilidade: 0 });
-            return { status: "Produto encontrado em vendas, exclusão não permitida. Visibilidade alterada." };
-        } else {
+            //await produtoRepository.alterarVisibilidade(id, { visibilidade: 0 });
+            //return { status: "Produto encontrado em vendas, exclusão não permitida. Visibilidade alterada." };
+        //} else {
             // Se não estiver, exclui o produto
             await produtoRepository.excluir(id);
             return { status: "Produto excluído com sucesso." };
-        }
+        //}
     }
 
     //Lista todos os produtos de uma loja

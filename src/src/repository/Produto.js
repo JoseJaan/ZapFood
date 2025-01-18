@@ -51,9 +51,9 @@ class produtoRepository{
         }
     }
 
-    static async excluir(id) {
+    static async excluir(idProduto) {
         try {
-            await Produto.destroy({ where: { id } });
+            await Produto.destroy({ where: { idProduto } });
         } catch (error) {
             console.error("Erro ao excluir produto:", error);
             throw new Error("Erro ao excluir produto do banco de dados.");

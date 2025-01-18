@@ -98,7 +98,7 @@ class ProdutoController{
                 return res.status(403).send("Acesso negado ou produto não encontrado.");
             }
     
-            return res.redirect("/produtos"); 
+            return res.status(200); 
         } catch (error) {
             console.error(error.message);
             return res
@@ -114,7 +114,7 @@ class ProdutoController{
         try {
             const produtos = await produtoService.listarProdutos(lojaId);
     
-            return res.send({ produtos }); 
+            return res.send( produtos ); 
         } catch (error) {
             console.error(error.message);
             return res.status(500).send("Erro ao listar produtos.");
@@ -133,7 +133,7 @@ class ProdutoController{
                 return res.status(404).send("Produto não encontrado ou acesso negado.");
             }
     
-            return res.render("detalhesProduto", { produto });
+            return res.send( produto );
         } catch (error) {
             console.error(error.message);
             return res.status(500).send("Erro ao buscar produto.");
