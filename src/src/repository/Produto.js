@@ -10,15 +10,16 @@ class produtoRepository{
         }
     }
 
-    static async atualizar(id, dadosAtualizados) {
+    static async atualizar(idProduto, dadosAtualizados) {
         try {
-            const produto = await Produto.findByPk(id);
-    
+            console.log(`Chegou no repository com id`,idProduto)
+            const produto = await Produto.findByPk(idProduto);
             if (!produto) {
                 return null;
             }
-    
+            console.log(dadosAtualizados)
             await produto.update(dadosAtualizados); // Atualiza qualquer campo fornecido
+            console.log(`produto apos atualizacao ${produto.nomeProduto}`)
             return produto;
         } catch (error) {
             console.error("Erro ao atualizar produto:", error);
@@ -27,6 +28,8 @@ class produtoRepository{
     }
 
     static async buscarProduto({ id, lojaId, visibilidade } = {}) {
+        console.log(`id no repository ${id}`)
+        console.log(`lojaId no repository ${lojaId}`)
         const whereClause = {};
         if (id) whereClause.idProduto = id;
         if (lojaId) whereClause.Loja_idLoja = lojaId;

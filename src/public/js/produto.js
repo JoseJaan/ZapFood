@@ -107,40 +107,12 @@ botoesExcluir.forEach(element => {
     })
 });
 
-const botoesVisualizar = document.querySelectorAll('.iconeVisualizar');
 
-botoesVisualizar.forEach(element => {
-    element.addEventListener('click', async (event) => {
-        const produtoId = event.target.getAttribute('data-id');
-        console.log("entrou")
-        try {
-            // Faz uma requisição à rota para obter os detalhes do produto
-            const response = await fetch(`/produto/detalhar/${produtoId}`);
-            if (!response.ok) {
-                throw new Error('Erro ao buscar produto');
-            }
-            const produto = await response.json();
-
-            // Preenche o modal com os dados do produto
-            document.querySelector('.fotoVisualizar').innerHTML = produto.foto 
-                ? `<img src="${produto.imagem}" alt="${produto.nomeProduto}">` 
-                : `<p>Imagem não disponível</p>`;
-            document.querySelector('.lojaVisualizar').textContent = produto.loja || 'Loja não especificada';
-            document.querySelector('.tituloProdutoVisualizar').textContent = produto.nomeProduto;
-            document.querySelector('.precoProdutoVisualizar').textContent = `R$ ${produto.precoProduto.toFixed(2)}`;
-            document.querySelector('.ingredientes').textContent = produto.descricaoProduto;
-
-            // Exibe o modal
-            modalVisualizar.style.display = 'flex';
-        } catch (error) {
-            console.error('Erro ao carregar informações do produto:', error);
-        }
-    });
-});
 
 document.addEventListener('DOMContentLoaded', async () => {
     const produtosContainer = document.getElementById('produtosContainer');
-
+    const botaoEditarProduto = document.getElementById('botaoEditar');
+    
     async function carregarProdutos() {
         try {
             const response = await fetch('/produtos'); 
@@ -177,9 +149,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
         `;
         // Adiciona eventos aos botões de edição e exclusão
-        divProduto.querySelector('.opcoesEditar').addEventListener('click', () => {
+        divProduto.querySelector('.opcoesEditar').addEventListener('click', async () => {
             modalEditar.style.display = 'flex';
-            // Você pode implementar lógica adicional para preencher o modal com os dados do produto
+
+            try {
+                const response = await fetch(`/produto/detalhar/${produto.idProduto}`);
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar detalhes do produto');
+                }
+                const produtoDetalhes = await response.json();
+
+                // Preenche os campos do modal
+                document.getElementById('nomeCadastrarEditar').value = produtoDetalhes.nomeProduto;
+                document.getElementById('precoCadastrarEditar').value = produtoDetalhes.precoProduto;
+                document.getElementById('descontoCadastrarEditar').value = produtoDetalhes.desconto || 0;
+                document.getElementById('disponivelEditarEditar').checked = produtoDetalhes.disponivel;
+                document.getElementById('descricaoCadastrarEditar').value = produtoDetalhes.descricaoProduto;
+
+                // Adiciona o ID do produto ao botão de edição
+                botaoEditarProduto.setAttribute('data-id', produto.idProduto);
+            } catch (error) {
+                console.error('Erro ao carregar informações do produto para edição:', error);
+                alert('Erro ao carregar informações do produto.');
+            }
         });
 
         divProduto.querySelector('.opcoesExcluir').addEventListener('click', (event) => {
@@ -197,7 +189,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const response = await fetch(`/produto/remover/${produtoId}`, {
                         method: 'DELETE',
                     });
-        
+                    console.log(response.json)
+                    console.log(response.status)
+                    console.log(response.ok)
                     if (!response.ok) {
                         throw new Error('Erro ao excluir o produto');
                     }
@@ -254,6 +248,63 @@ document.addEventListener('DOMContentLoaded', async () => {
         return divProduto;
     }
 
-    
+    botaoEditarProduto.addEventListener('click', async () => {
+        const produtoId = botaoEditarProduto.getAttribute('data-id');
+        const nome = document.getElementById('nomeCadastrarEditar').value;
+        const preco = parseFloat(document.getElementById('precoCadastrarEditar').value);
+        const desconto = parseFloat(document.getElementById('descontoCadastrarEditar').value) || 0;
+        const disponivel = document.getElementById('disponivelEditarEditar').checked;
+        const descricao = document.getElementById('descricaoCadastrarEditar').value;
+        console.log(desconto)
+        console.log(descricao)
+        console.log(disponivel)
+        try {
+            console.log('Payload:', {
+                nomeProduto: nome,
+                precoProduto: preco,
+                desconto,
+                disponivel,
+                descricaoProduto: descricao,
+            });
+            console.log('Endpoint:', `/produto/atualizar/${produtoId}`);
+            
+            const response = await fetch(`/produto/atualizar/${produtoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nomeProduto: nome,
+                    precoProduto: preco,
+                    desconto,
+                    disponivel,
+                    descricaoProduto: descricao,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorResponse = await response.json();
+                throw new Error(errorResponse.message || 'Erro ao atualizar o produto');
+            }
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Produto atualizado com sucesso!');
+                modalEditar.style.display = 'none';
+                await carregarProdutos(); // Recarrega a lista de produtos
+            } else {
+                alert(result.message || 'Erro desconhecido ao atualizar o produto.');
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar o produto:', error);
+            alert('Erro ao atualizar o produto. Tente novamente.');
+        }
+    });
+
+    // Fecha o modal ao clicar no botão de fechar
+    document.querySelector('.fecharModalEditar').addEventListener('click', () => {
+        modalEditar.style.display = 'none';
+    });
+  
     await carregarProdutos();
 });

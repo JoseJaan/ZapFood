@@ -42,14 +42,12 @@ class ProdutoController{
     //Atualizar produto
     //Nenhum campo é obrigatório
     static async atualizarProduto(req, res) {
-        const { id } = req.params;
+        const {id} = req.params;
         const lojaId = req.user.id;
-        const { nome, preco, desconto, descricao, categoria, visibilidade } = req.body;
-    
+        const { nomeProduto, precoProduto, descricaoProduto, categoria, visibilidade, desconto } = req.body;
         if (req.user.tipo !== "loja") {
             return res.status(403).send("Acesso não autorizado.");
         }
-    
         try {
 
             let fotoUrl = null;
@@ -62,10 +60,10 @@ class ProdutoController{
             }
 
             const produtoAtualizado = await produtoService.atualizarProduto(id, {
-                nome,
-                preco,
+                nomeProduto,
+                precoProduto,
                 desconto,
-                descricao,
+                descricaoProduto,
                 categoria,
                 visibilidade,
                 lojaId,
@@ -76,12 +74,12 @@ class ProdutoController{
                 return res.status(204).send("Produto não encontrado.");
             }
     
-            return res.redirect(`/produto/${id}`);
+            return res.status(200).json({ success: true, message: "Produto atualizado com sucesso.", produto: produtoAtualizado });
         } catch (error) {
             console.log(error.message);
             return res
                 .status(400)
-                .render("Erro ao atualizar produto", { error: error.message });
+                .send("Erro ao atualizar produto");
         }
     }
 
@@ -92,6 +90,8 @@ class ProdutoController{
         const lojaId = req.user.id; // ID da loja do usuário autenticado
     
         try {
+            console.log(id)
+            console.log(lojaId)
             const resultado = await produtoService.excluirProduto(id, lojaId);
     
             if (!resultado) {

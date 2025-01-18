@@ -16,6 +16,7 @@ const routes = (app) => {
     app.set('views', path.resolve('src','views')); 
 
     app.use(express.urlencoded({ extended: true })); 
+    app.use(express.json());
 
     app.use(Auth);
 

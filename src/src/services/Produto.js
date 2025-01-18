@@ -22,7 +22,7 @@ class produtoService{
             throw new Error("ID do produto é obrigatório.");
         }
     
-        const camposValidos = ["nome", "preco", "desconto", "descricao", "categoria","visibilidade","foto"];
+        const camposValidos = ["nomeProduto", "precoProduto", "desconto", "descricaoProduto", "categoria","visibilidade","foto"];
         const dadosFiltrados = {};
     
         //Seleciona apenas os campos enviados
@@ -35,9 +35,9 @@ class produtoService{
         if (Object.keys(dadosFiltrados).length === 0) {
             throw new Error("Nenhum campo para atualizar foi enviado.");
         }
+        const lojaId = produtoData.lojaId;
+        const produto = await produtoRepository.buscarProduto({ id, lojaId, visibilidade: 1 });
 
-        const produto = await produtoRepository.buscarPorId({id});
-    
         if (!produto || produto.Loja_idLoja !== produtoData.lojaId) {
             return null; // Produto não encontrado ou não pertence à loja
         }
@@ -50,13 +50,15 @@ class produtoService{
     //Excluir produto
     //Se houver vendas com aquele produto, ele não é efetivamente excluido, e sim desativado
     static async excluirProduto(id, lojaId) {
+        console.log(`id no service ${id}`)
+        console.log(`lojaId no service ${lojaId}`)
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
         }
     
         // Busca o produto pelo ID e valida se ele pertence à loja
-        const produto = await produtoRepository.buscarProduto(id,lojaId);
-    
+        const produto = await produtoRepository.buscarProduto({ id, lojaId, visibilidade: 1 });
+        console.log(`produto encontrado no service ${produto.nomeProduto}`)
         if (!produto || produto.Loja_idLoja !== lojaId) {
             return null; // Produto não encontrado ou não pertence à loja
         }
