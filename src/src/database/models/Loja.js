@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const { Sequelize } = require('sequelize');
 dotenv.config();
 
-const Empresa = database.define('empresa', {
+const Loja = database.define('loja', {
 
     id:{
         type: Sequelize.UUID,
@@ -44,10 +44,10 @@ const Empresa = database.define('empresa', {
 
 }, {
     hooks: {
-            beforeCreate: async (Empresa) => {
+            beforeCreate: async (Loja) => {
             try {
-                const hashedPassword = await bcrypt.hash(Empresa.senha, 10);
-                Empresa.senha = hashedPassword;
+                const hashedPassword = await bcrypt.hash(Loja.senha, 10);
+                Loja.senha = hashedPassword;
             }
                 catch (error) {
                 console.error('Erro ao criar usuário:', error);
@@ -57,4 +57,4 @@ const Empresa = database.define('empresa', {
     })
 
 
-module.exports = Empresa;
+module.exports = Loja;

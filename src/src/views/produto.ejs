@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <title>Cárdapio</title>
+    <link rel="stylesheet" href="/css/produto.css">
+
+</head>
+<body>
+
+    <div class="modal" id="modalAdicionar">
+        <div class="modalConteudo">
+            <img src="/img/Close.png" class="fecharModalVisualizar" alt="">
+            <p class="tituloCadastrarProduto">CADASTRAR NOVO PRODUTO</p>
+            <div class="imagemVisualizarCadastrar"></div>
+            <label for="imagemCadastro" class="escolherImagemCadastrar">Escolher Imagem</label>
+            <input name="arquivo" class="fileImagem" id="imagemCadastro" type="file">
+
+            <label class="campoLabel"for="nomeCadastrar">NOME</label>
+            <input class="campoNome campo" type="text" name="nome" id="nomeCadastrarAdicionar">
+
+            <div class="precos">
+
+                <div class="camposPrecos">
+                    <label class="campoLabel" for="precoCadastrar">PREÇO(R$)</label>
+                    <input class="campoPreco campo" type="text" name="nome" id="precoCadastrarAdicionar">
+                </div>
+
+                <div class="camposPrecos">
+                    <label class="campoLabel" for="descontoCadastrar">DESCONTO(%)</label>
+                    <input class="campoDesconto campo" type="text" name="nome" id="descontoCadastrarAdicionar">
+                </div>
+
+            </div>
+            
+            <label class="campoLabel" for="descricaoCadastrar">DESCRIÇÃO/INGREDIENTES</label>
+            <textarea class="campoDescricao campo" type="textarea" id="descricaoCadastrarAdicionar"></textarea>
+
+            <button class="botaoAdicionar">ADICIONAR PRODUTO</button>
+        </div>    
+    </div>
+
+    <div class="modal" id="modalEditar">
+        <div class="modalConteudo">
+            <img src="/img/Close.png" class="fecharModalEditar" alt="">
+            <p class="tituloCadastrarProduto">EDITAR PRODUTO</p>
+            <div class="imagemVisualizarCadastrar"></div>
+            <label for="imagemCadastro" class="escolherImagemCadastrar">Escolher Imagem</label>
+            <input name="arquivo" class="fileImagem" id="imagemCadastroEditar" type="file">
+
+            <label class="campoLabel"for="nomeCadastrarEditar">NOME</label>
+            <input class="campoNome campo" type="text" name="nome" id="nomeCadastrarEditar">
+
+            <div class="precos">
+
+                <div class="camposPrecos">
+                    <label class="campoLabel" for="precoCadastrarEditar">PREÇO(R$)</label>
+                    <input class="campoPreco campo" type="text" name="nome" id="precoCadastrarEditar">
+                </div>
+
+                <div class="camposPrecos">
+                    <label class="campoLabel" for="descontoCadastrarEditar">DESCONTO(%)</label>
+                    <input class="campoDesconto campo" type="text" name="nome" id="descontoCadastrarEditar">
+                </div>
+
+                <div class="camposPrecos">
+                    <label class="campoLabel" for="disponivelEditarEditar">DISPONIVEL</label>
+                    <input class="campoDesconto campo" type="checkbox" name="disponivel" id="disponivelEditarEditar">
+                </div>
+
+        </div>
+            
+            <label class="campoLabel" for="descricaoCadastrarEditar">DESCRIÇÃO/INGREDIENTES</label>
+            <textarea class="campoDescricao campo" type="textarea" id="descricaoCadastrarEditar"></textarea>
+
+            <button class="botaoAdicionar" id="botaoEditar">EDITAR PRODUTO</button>
+        </div>
+
+    </div>
+
+    <div class="modal" id="modalVisualizar">
+        <div class="modalVisualizar modalConteudo">
+            <img src="/img/Close.png" class="fecharModalEditar" alt="">
+
+            <div class="fotoVisualizar">
+            </div>
+            <p class="lojaVisualizar"></p>
+
+            <p class="tituloProdutoVisualizar"></p>
+
+            <p class="precoProdutoVisualizar"></p>
+
+            <div class="ingredientes"></div>
+    
+        </div>
+    </div>
+
+    <div class="modal" id="modalExcluir">
+        <div class="modalExcluir modalConteudo">
+            <img src="/img/Close.png" class="fecharModalEditar" alt="">
+            <p class="mensagemConfirmacao">TEM CERTEZA QUE DESEJA EXCLUIR O PRODUTO?</p>
+            <p class="observacao">OBS: Se ele estiver associado a uma venda, não poderá ser excluído</p>
+            <div class="botoesOpcao">
+                <button class="desistir">NÃO</button>
+                <button class="persistir">SIM, DESEJO!</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <img class="logo" src="img/logo.png" alt="logo">
+        <a href="" class="logout">
+            <p class="voltar">VOLTAR AO MENU</p>
+            <img src="img/Logout.png" alt="Voltar">
+        </a>
+    </header>
+
+    <div class="fotoPerfil"></div>
+    <p class="nomeLoja"></p>
+    <p class="tituloCardapio">SEU CARDÁPIO</p>
+
+    <input class="pesquisar" type="text" placeholder="Pesquisar...">
+
+    <div id="botaoAdicionar" class="adicionar"></div>
+
+    <div class="produtos" id="produtosContainer"></div>
+
+    <script src="/js/produto.js"></script>
+    
+</body>
+</html>

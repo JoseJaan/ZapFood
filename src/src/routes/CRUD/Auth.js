@@ -1,14 +1,14 @@
 const express = require('express');
 const path = require("path");
-const routes = express.Router();
+const router = express.Router();
 const AuthController = require(path.resolve("src","controllers","AuthController"));
 
-routes.get("/login",AuthController.fazerLogin);
-routes.post("/cadastro",AuthController.cadastro);
-routes.get("/registroCliente",AuthController.registroCliente);
-routes.post('/autenticar', AuthController.autenticar);
+router.get("/login",AuthController.fazerLogin);
+router.post("/cadastro",AuthController.cadastro);
+router.get("/registroCliente",AuthController.registroCliente);
+router.post('/autenticar', AuthController.autenticar);
 
-routes.get('/registrarEmpresa',AuthController.registroEmpresa)
-routes.post('/registroEmpresa', AuthController.cadastroEmpresa)
+router.get('/registrarEmpresa',AuthController.registroEmpresa)
+router.post('/registroEmpresa', AuthController.cadastroEmpresa)
 
-module.exports = routes;
+module.exports = router;

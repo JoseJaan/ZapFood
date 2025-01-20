@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const Auth = require(path.resolve("src","routes","CRUD","Auth"));
+const Produto = require(path.resolve("src","routes","CRUD","Produto"));
+const Loja = require(path.resolve("src","routes","CRUD","Loja"));
 
 
 
@@ -14,8 +16,13 @@ const routes = (app) => {
     app.set('views', path.resolve('src','views')); 
 
     app.use(express.urlencoded({ extended: true })); 
+    app.use(express.json());
 
     app.use(Auth);
+
+    app.use(Loja);
+
+    app.use(Produto);
 
 
 };

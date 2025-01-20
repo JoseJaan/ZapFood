@@ -52,13 +52,13 @@ class AuthController{
 
     static async autenticar(req, res) {
         const { email, senha } = req.body;
-
+        console.log(senha)
         try {
-            // Autenticar o cliente usando o serviço
-            const cliente = await AuthService.autenticar(email, senha);
-
+            // Autenticar o usuario usando o serviço
+            const user = await AuthService.autenticar(email, senha);
+            console.log(`tipo no controller autenticar: ${user.tipo}`)
             // Gerar o token JWT
-            const token = jwt.sign({ id: cliente.id, email: cliente.email }, process.env.JWT_SECRET, {
+            const token = jwt.sign({ id: user.id, email: user.email, tipo: user.tipo }, process.env.JWT_SECRET, {
                 expiresIn: '1h', // Token expira em 1 hora
             });
 
@@ -71,7 +71,12 @@ class AuthController{
             });
 
             // Redirecionar para a página principal ou painel
-            return res.redirect('/registroCliente');
+            if(user.tipo == 'loja'){
+                return res.redirect('/produto');
+            }
+            else{
+                return res.redirect('/registroCliente');
+            }
         } catch (error) {
             console.error(error.message);
             return res.status(401).render('login', { error: error.message });
