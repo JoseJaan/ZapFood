@@ -5,7 +5,7 @@ class EnderecoService{
     //Cadastra o endereco
     static async cadastrarEndereco(enderecoData){
         const { rua, numero, CEP, complemento, cidade, idCliente, nome} = enderecoData;
-        console.log("nome no service",nome)
+        
         if (!rua || !numero || !CEP || !complemento || !cidade || !idCliente || !nome) {
             throw new Error("Todos os campos são obrigatórios");
         }
@@ -17,20 +17,21 @@ class EnderecoService{
 
     //Atualiza o produto
     //Nenhum campo é obrigatório
-    static async atualizarProduto(idEndereco, enderecoData) {
+    static async atualizarEndereco(idEndereco, enderecoData) {
         if (!idEndereco) {
             throw new Error("ID do endereco é obrigatório.");
         }
     
-        const camposValidos = ["rua", "CEP", "numero", "cidade", "complemento"];
+        const camposValidos = ["rua", "CEP", "numero", "cidade", "complemento", "nome"];
         const dadosFiltrados = {};
-    
         //Seleciona apenas os campos enviados
         camposValidos.forEach((campo) => {
-            if (produtoData[campo] !== undefined) {
-                dadosFiltrados[campo] = produtoData[campo];
+            if (enderecoData[campo] !== undefined) {
+                dadosFiltrados[campo] = enderecoData[campo];
             }
         });
+
+        console.log(dadosFiltrados)
     
         if (Object.keys(dadosFiltrados).length === 0) {
             throw new Error("Nenhum campo para atualizar foi enviado.");
@@ -42,20 +43,20 @@ class EnderecoService{
             return null; // Endereci não encontrado ou não pertence à loja
         }
     
-        const enderecoAtualizado = await enderecoRepository.atualizarEndereco(id, dadosFiltrados);
+        const enderecoAtualizado = await enderecoRepository.atualizarEndereco(idEndereco, dadosFiltrados);
     
         return enderecoAtualizado;
     }
 
     //Excluir endereco
     //Se houver vendas com aquele endereco, ele não é efetivamente excluido, e sim desativado
-    static async excluirProduto(idEndereco, idCliente) {
+    static async excluirEndereco(idEndereco, idCliente) {
         if (!idEndereco) {
             throw new Error("ID do endereco é obrigatório.");
         }
     
         // Busca o endereco pelo ID e valida se ele pertence ao cliente
-        const endereco = await enderecoRepository.buscarProduto({ idEndereco, idCliente, visibilidade: 1 });
+        const endereco = await enderecoRepository.buscarEndereco({ idEndereco, idCliente, visibilidade: 1 });
 
         if (!endereco || endereco.idCliente !== idCliente) {
             return null; // Endereco não encontrado ou não pertence ao cliente

@@ -10,7 +10,7 @@ class EnderecoController{
     //Cadastrar endereco
     static async cadastro(req,res){
         const { cidade, CEP, rua, numero, complemento, nome } = req.body;
-        console.log("nome no controller",nome)
+        
         //Verifica se o usuário autenticado é um cliente
         if(req.user.tipo != 'cliente'){
             return res.status(403).send('Acesso não autorizado.');
@@ -20,7 +20,7 @@ class EnderecoController{
         try{
             const novoEndereco = enderecoService.cadastrarEndereco({cidade, CEP, rua, numero, complemento, idCliente, nome})
 
-            return res.status(200).message("Endereco cadastrado com sucesso")
+            return res.status(200);
         }
         catch(error){
             console.error(error.message);
@@ -33,21 +33,22 @@ class EnderecoController{
     static async atualizarEndereco(req, res) {
         const {idEndereco} = req.params;
         const idCliente = req.user.id;
-        const { cidade, CEP, rua, numero, complemento } = req.body;
-
+        const { cidade, CEP, rua, numero, complemento, nome } = req.body;
+        
         if (req.user.tipo !== "cliente") {
             return res.status(204).send("Acesso não autorizado.");
         }
         try {
 
-            const enderecoAtualizado = await enderecoService.atualizarEndereco(id, {
+            const enderecoAtualizado = await enderecoService.atualizarEndereco(idEndereco, {
                 cidade,
                 CEP,
                 rua,
                 numero,
                 complemento,
                 idCliente,
-                idEndereco
+                idEndereco,
+                nome
             });
     
             if (!enderecoAtualizado) {
@@ -91,7 +92,7 @@ class EnderecoController{
         const cliente = await enderecoService.obterUsuario(idCliente);
         try {
             const enderecos = await enderecoService.listarEnderecos(idCliente);
-            console.log(enderecos)
+            
             return res.render('endereco',{enderecos: enderecos,cliente:cliente});
         } catch (error) {
             console.error(error.message);

@@ -58,35 +58,35 @@
             <div class="camposModalAdicionar">
             <div class="campo campoNome">
                 <label for="nome">NOME</label>
-                <input type="text" name="" id="nome">
+                <input type="text" name="" id="nomeAtualizar">
             </div>
 
             <div class="campo campoCidade">
                 <label for="cidade">CIDADE</label>
-                <input type="text" name="" id="cidade">
+                <input type="text" name="" id="cidadeAtualizar">
             </div>
 
             <div class="campo campoCEP">
                 <label for="cep">CEP</label>
-                <input type="text" name="" id="cep">
+                <input type="text" name="" id="cepAtualizar">
             </div>
 
             <div class="campo campoRua">
                 <label for="rua">RUA</label>
-                <input type="text" name="" id="rua">
+                <input type="text" name="" id="ruaAtualizar">
             </div>
 
             <div class="campo campoN">
                 <label for="numero">Nº</label>
-                <input type="number" name="" id="numero">
+                <input type="number" name="" id="numeroAtualizar">
             </div>
 
             <div class="campo">
                 <label for="complemento">COMPLEMENTO</label>
-                <input type="number" name="" id="complemento">
+                <input type="text" name="" id="complementoAtualizar">
             </div>
         </div>
-            <button class="botaoAdicionarModal">EDITAR</button>
+            <button class="botaoAdicionarModal" id="botaoEditar">EDITAR</button>
         </div>
         
     </div> 
@@ -98,32 +98,32 @@
 
             <div class="campo campoNome">
                 <label for="nome">NOME</label>
-                <input tabindex="-1" type="text" name="" id="nome">
+                <input tabindex="-1" type="text" name="" id="nomeVisualizar">
             </div>
 
             <div class="campo campoCidade">
                 <label for="cidade">CIDADE</label>
-                <input tabindex="-1" type="text" name="" id="cidade">
+                <input tabindex="-1" type="text" name="" id="cidadeVisualizar">
             </div>
 
             <div class="campo campoCEP">
                 <label for="cep">CEP</label>
-                <input tabindex="-1" type="text" name="" id="cep">
+                <input tabindex="-1" type="text" name="" id="cepVisualizar">
             </div>
 
             <div class="campo campoRua">
                 <label for="rua">RUA</label>
-                <input tabindex="-1" type="text" name="" id="rua">
+                <input tabindex="-1" type="text" name="" id="ruaVisualizar">
             </div>
 
             <div class="campo campoN">
                 <label for="numero">Nº</label>
-                <input tabindex="-1" type="number" name="" id="numero">
+                <input tabindex="-1" type="number" name="" id="numeroVisualizar">
             </div>
 
             <div class="campo complementoVisualizar">
                 <label for="complemento">COMPLEMENTO</label>
-                <input tabindex="-1" type="number" name="" id="complemento">
+                <input tabindex="-1" type="text" name="" id="complementoVisualizar">
             </div>
         </div>
         </div>
@@ -176,32 +176,31 @@
             <input class="campoInputDN" type="date" id="cpf">
         </div>
     </div>
-
+    <script>
+        const enderecos = <%- JSON.stringify(enderecos) %>;
+    </script>
     <div class="enderecos">
-
-
-        <p class="tituloEnderecos">ENDEREÇOS</p>
-        <img class="iconeAdicionar" id="botaoAdicionar" src="img/Add.png" alt="">
-        <div class="osEnderecos">
-
-            <% for (let i = 0; i < enderecos.length; i++) { %>
-            <div class="endereco">
-                <div class="nomeEVisualizar">
-                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
-                    <p class="nomeEndereco"><%= enderecos[i].nome %></p>
-                </div>
-
-                <div class="editarEexcluir">
-                    <img class="iconeEditar" src="img/Edit.png" alt="">
-                    <img class="icone" src="img/Trash.png" alt="">
-                </div>
+    <p class="tituloEnderecos">ENDEREÇOS</p>
+    <img class="iconeAdicionar" id="botaoAdicionar" src="img/Add.png" alt="">
+    <div class="osEnderecos">
+        <% for (let i = 0; i < enderecos.length; i++) { %>
+        <div class="endereco">
+            <div class="nomeEVisualizar">
+                <img class="iconeVisualizar" data-index="<%= i %>" src="img/Eye.png" alt="">
+                <p class="nomeEndereco"><%= enderecos[i].nome %></p>
             </div>
-            <% } %>
-
-
+            <div class="editarEexcluir">
+                <img class="iconeEditar" data-id="<%= enderecos[i].idEndereco %>" src="img/Edit.png" alt="">
+                <img class="icone" data-id="<%= enderecos[i].idEndereco %>" src="img/Trash.png" alt="">
+            </div>
         </div>
+        <% } %>
     </div>
+</div>
+
     
     <script src="/js/endereco.js"></script>
+    
+    
 </body>
 </html>

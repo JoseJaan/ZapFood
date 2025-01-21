@@ -6,6 +6,10 @@ const modalVisualizar = document.getElementById("modalVisualizar");
 const botoesVisualizar = document.querySelectorAll(".iconeVisualizar")
 const modalExcluir = document.getElementById("modalExcluir");
 const botoesExcluir = document.querySelectorAll(".icone")
+const botaoDesistir = document.querySelector('.desistir'); 
+const botaoPersistir = document.querySelector('.persistir'); 
+const botaoEditar = document.getElementById("botaoEditar");
+const listaEnderecos = document.querySelector(".osEnderecos"); 
 
 botaoAdicionar.addEventListener('click',()=>{
     modalAdicionar.style.display = 'flex';
@@ -73,11 +77,22 @@ document.querySelector('.botaoAdicionarModal').addEventListener('click', (event)
     formulario.appendChild(inputNumero);
     formulario.appendChild(inputComplemento);
 
-    // Adiciona o formulário ao body e o submete
+    
     document.body.appendChild(formulario);
     formulario.submit();
 
-    // Remove o formulário do DOM após o envio
+    document.getElementById('nome').value = '';
+    document.getElementById('cidade').value = '';
+    document.getElementById('cep').value = '';
+    document.getElementById('rua').value = '';
+    document.getElementById('numero').value = '';
+    document.getElementById('complementoAdicionar').value = '';
+
+    alert("Endereço cadastrado com sucesso!")
+
+    document.getElementById('modalAdicionar').style.display = 'none';
+
+    
     document.body.removeChild(formulario);
 });
 
@@ -101,22 +116,149 @@ window.onclick = function (event) {
   };
 
 
-  botoesEditar.forEach(element => {
-    element.addEventListener('click',()=>{
-        modalEditar.style.display = "flex";
-    });
-  });
+botoesEditar.forEach(element => {
+element.addEventListener('click',()=>{
+    modalEditar.style.display = "flex";
+});
+});
 
-  botoesVisualizar.forEach(element => {
-    element.addEventListener('click',()=>{
-        modalVisualizar.style.display = "flex";
+// Função para preencher o modal com os dados do endereço
+function preencherModalVisualizar(endereco) {
+    document.getElementById('nomeVisualizar').value = endereco.nome;
+    document.getElementById('cidadeVisualizar').value = endereco.cidade;
+    document.getElementById('cepVisualizar').value = endereco.cep;
+    document.getElementById('ruaVisualizar').value = endereco.rua;
+    document.getElementById('numeroVisualizar').value = endereco.numero;
+    document.getElementById('complementoVisualizar').value = endereco.complemento || '';
+}
+
+// Adiciona evento a todos os botões de visualização
+botoesVisualizar.forEach((element) => {
+    element.addEventListener('click', () => {
+        console.log("Entrou no log")
+        const index = element.getAttribute('data-index'); // Obtém o índice do endereço
+        const endereco = enderecos[index]; // Obtém o endereço correspondente
+        console.log(endereco)
+        preencherModalVisualizar(endereco); // Preenche o modal com os dados
+        modalVisualizar.style.display = "flex"; // Exibe o modal
     });
-  });
+});
   
+let enderecoIdParaExcluir = null; 
 
-  botoesExcluir.forEach(element => {
-    element.addEventListener('click',()=>{
+botoesExcluir.forEach((element) => {
+    element.addEventListener('click', () => {
+        enderecoIdParaExcluir = element.getAttribute('data-id'); 
         modalExcluir.style.display = "flex";
     });
-  });
-  
+});
+//Fecha o modal de exclusão
+botaoDesistir.addEventListener('click', () => {
+    modalExcluir.style.display = "none";
+    enderecoIdParaExcluir = null;
+});
+
+//Exclui endereço
+botaoPersistir.addEventListener("click", () => {
+    if (enderecoIdParaExcluir) {
+        fetch(`/endereco/excluir/${enderecoIdParaExcluir}`, {
+            method: "DELETE",
+        })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Endereço excluído com sucesso!");
+                    modalExcluir.style.display = "none";
+
+                    // Remover o endereço da lista na interface
+                    const enderecoElemento = document.querySelector(
+                        `.icone[data-id="${enderecoIdParaExcluir}"]`
+                    ).closest(".endereco");
+                    if (enderecoElemento) {
+                        enderecoElemento.remove();
+                    }
+                } else {
+                    alert("Erro ao excluir o endereço. Verifique se ele está associado a uma venda.");
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao excluir:", error);
+                alert("Ocorreu um erro ao tentar excluir o endereço.");
+            })
+            .finally(() => {
+                enderecoIdParaExcluir = null; // Limpar o ID do endereço
+            });
+    }
+});
+
+const campoNome = document.getElementById("nomeAtualizar");
+const campoCidade = document.getElementById("cidadeAtualizar");
+const campoCEP = document.getElementById("cepAtualizar");
+const campoRua = document.getElementById("ruaAtualizar");
+const campoNumero = document.getElementById("numeroAtualizar");
+const campoComplemento = document.getElementById("complementoAtualizar");
+let enderecoIdParaEditar = null;
+
+// Abrir o modal de edição com os dados do endereço
+botoesEditar.forEach((element) => {
+    element.addEventListener("click", () => {
+        enderecoIdParaEditar = element.getAttribute("data-id");
+
+        // Obter os dados do endereço
+        const endereco = enderecos.find((e) => e.idEndereco == enderecoIdParaEditar);
+        // Preencher os campos do modal com os dados do endereço
+        if (endereco) {
+            campoNome.value = endereco.nome || "";
+            campoCidade.value = endereco.cidade || "";
+            campoCEP.value = endereco.CEP || "";
+            campoRua.value = endereco.rua || "";
+            campoNumero.value = endereco.numero || "";
+            campoComplemento.value = endereco.complemento || "";
+        }
+
+        // Exibir o modal
+        modalEditar.style.display = "flex";
+    });
+});
+
+// Enviar os dados atualizados ao backend
+botaoEditar.addEventListener("click", () => {
+    if (enderecoIdParaEditar) {
+        const dadosAtualizados = {
+            nome: campoNome.value,
+            cidade: campoCidade.value,
+            CEP: campoCEP.value,
+            rua: campoRua.value,
+            numero: campoNumero.value,
+            complemento: campoComplemento.value,
+        };
+
+        fetch(`/endereco/editar/${enderecoIdParaEditar}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dadosAtualizados),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    alert("Endereço atualizado com sucesso!");
+                    modalEditar.style.display = "none";
+
+                    // Atualizar a interface com o novo nome (opcional)
+                    const enderecoElemento = document.querySelector(`.iconeEditar[data-id="${enderecoIdParaEditar}"]`);
+                    if (enderecoElemento) {
+                        enderecoElemento.closest(".endereco").querySelector(".nomeEndereco").textContent = dadosAtualizados.nome;
+                    }
+                } else {
+                    alert("Erro ao atualizar o endereço.");
+                }
+            })
+            .catch((error) => {
+                console.error("Erro:", error);
+                alert("Ocorreu um erro ao tentar atualizar o endereço.");
+            })
+            .finally(() => {
+                enderecoIdParaEditar = null; // Limpar o ID do endereço
+            });
+    }
+});
