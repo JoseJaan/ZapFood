@@ -31,7 +31,7 @@ class EnderecoController{
 
     //Atualizar produto
     //Nenhum campo é obrigatório
-    static async atualizarProduto(req, res) {
+    static async atualizarEndereco(req, res) {
         const {idEndereco} = req.params;
         const idCliente = req.user.id;
         const { cidade, CEP, rua, numero, complemento } = req.body;

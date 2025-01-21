@@ -98,7 +98,7 @@ class ProdutoController{
                 return res.status(403).send("Acesso negado ou produto não encontrado.");
             }
     
-            return res.status(200); 
+            return res.status(200).send("Produto excluido com sucesso"); 
         } catch (error) {
             console.error(error.message);
             return res

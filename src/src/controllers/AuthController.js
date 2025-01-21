@@ -1,6 +1,10 @@
 const jwt = require('jsonwebtoken');
 const path = require("path");
 const AuthService = require(path.resolve("src", "services", "Auth.js"));
+const dotenv = require('dotenv');
+dotenv.config();
+
+
 class AuthController{
 
     static async fazerLogin(req,res){

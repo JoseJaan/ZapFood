@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/endereco.css">
+    <title>Meu Perfil</title>
+</head>
+<body>
+
+    <div class="modal" id="modalAdicionar">
+        <div class="modalConteudo">
+            <p class="tituloModalAdicionar">ADICIONAR ENDEREÇO</p>
+            <div class="camposModalAdicionar">
+            <div class="campo campoCidade">
+                <label for="cidade">CIDADE</label>
+                <input type="text" name="" id="cidade">
+            </div>
+
+            <div class="campo campoCEP">
+                <label for="cep">CEP</label>
+                <input type="text" name="" id="cep">
+            </div>
+
+            <div class="campo campoRua">
+                <label for="rua">RUA</label>
+                <input type="text" name="" id="rua">
+            </div>
+
+            <div class="campo campoN">
+                <label for="numero">Nº</label>
+                <input type="number" name="" id="numero">
+            </div>
+
+            <div class="campo">
+                <label for="complemento">COMPLEMENTO</label>
+                <input type="number" name="" id="complemento">
+            </div>
+        </div>
+            <button class="botaoAdicionarModal">ADICIONAR</button>
+        </div>
+        
+    </div>
+
+
+    <div class="modal" id="modalEditar">
+        <div class="modalConteudo">
+            <p class="tituloModalAdicionar">EDITAR ENDEREÇO</p>
+            <div class="camposModalAdicionar">
+            <div class="campo campoCidade">
+                <label for="cidade">CIDADE</label>
+                <input type="text" name="" id="cidade">
+            </div>
+
+            <div class="campo campoCEP">
+                <label for="cep">CEP</label>
+                <input type="text" name="" id="cep">
+            </div>
+
+            <div class="campo campoRua">
+                <label for="rua">RUA</label>
+                <input type="text" name="" id="rua">
+            </div>
+
+            <div class="campo campoN">
+                <label for="numero">Nº</label>
+                <input type="number" name="" id="numero">
+            </div>
+
+            <div class="campo">
+                <label for="complemento">COMPLEMENTO</label>
+                <input type="number" name="" id="complemento">
+            </div>
+        </div>
+            <button class="botaoAdicionarModal">EDITAR</button>
+        </div>
+        
+    </div> 
+
+    <div class="modal" id="modalVisualizar">
+        <div class="modalConteudo">
+            <p class="tituloModalAdicionar">ENDEREÇO</p>
+            <div class="camposModalAdicionar">
+            <div class="campo campoCidade">
+                <label for="cidade">CIDADE</label>
+                <input tabindex="-1" type="text" name="" id="cidade">
+            </div>
+
+            <div class="campo campoCEP">
+                <label for="cep">CEP</label>
+                <input tabindex="-1" type="text" name="" id="cep">
+            </div>
+
+            <div class="campo campoRua">
+                <label for="rua">RUA</label>
+                <input tabindex="-1" type="text" name="" id="rua">
+            </div>
+
+            <div class="campo campoN">
+                <label for="numero">Nº</label>
+                <input tabindex="-1" type="number" name="" id="numero">
+            </div>
+
+            <div class="campo complementoVisualizar">
+                <label for="complemento">COMPLEMENTO</label>
+                <input tabindex="-1" type="number" name="" id="complemento">
+            </div>
+        </div>
+        </div>
+    </div> 
+
+    <div class="modal" id="modalExcluir">
+        <div class="modalExcluir modalConteudo">
+            <p class="mensagemConfirmacao">TEM CERTEZA QUE DESEJA EXCLUIR O ENDEREÇO?</p>
+            <p class="observacao">OBS: Se ele estiver associado a uma venda, não poderá ser excluído</p>
+            <div class="botoesOpcao">
+                <button class="desistir">NÃO</button>
+                <button class="persistir">SIM, DESEJO!</button>
+            </div>
+        </div>
+    </div> 
+
+
+    <header>
+        <img src="img/logo.png" alt="">
+        <div class="opcoesHeader">
+            <div class="camposHeader">
+                <p class="tituloCamposHeader" >VOLTAR PARA O MENU</p>
+                <img src="img/Logout.png" alt="">
+            </div>
+            <div class="camposHeader">
+                <p class="tituloCamposHeader" >MEU CARRINHO</p>
+                <img src="img/carrinho.png" alt="">
+            </div>
+        </div>
+    </header>
+
+    <div class="fotoPerfilUsuario"></div>
+
+    <p class="tituloPerfilUsuario">GABRIEL FERREIRA DE CASTRO</p>
+
+    <div class="dadosUsuario">
+        <p class="tituloDadosUsuario">DADOS PESSOAIS</p>
+        <div class="primeirosDados">
+            <div class="campo">
+                <label for="nome">NOME</label>
+                <input class="campoInputNome" type="text" id="nome">
+            </div>
+            <div class="campo">
+                <label for="cpf">CPF</label>
+                <input class="campoInputCPF" type="text" id="cpf">
+            </div>
+        </div>
+        <div class="campo">
+            <label for="cpf">DATA DE NASCIMENTO</label>
+            <input class="campoInputDN" type="date" id="cpf">
+        </div>
+    </div>
+
+    <div class="enderecos">
+        <p class="tituloEnderecos">ENDEREÇOS</p>
+        <img class="iconeAdicionar" id="botaoAdicionar" src="img/Add.png" alt="">
+        <div class="osEnderecos">
+            <div class="endereco">
+                <div class="nomeEVisualizar">
+                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
+                    <p class="nomeEndereco">CASA</p>
+                </div>
+
+                <div class="editarEexcluir">
+                    <img class="iconeEditar" src="img/Edit.png" alt="">
+                    <img class="icone" src="img/Trash.png" alt="">
+                </div>
+            </div>
+
+            <div class="endereco">
+                <div class="nomeEVisualizar">
+                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
+                    <p class="nomeEndereco">CASA</p>
+                </div>
+
+                <div class="editarEexcluir">
+                    <img class="iconeEditar" src="img/Edit.png" alt="">
+                    <img class="icone" src="img/Trash.png" alt="">
+                </div>
+            </div>
+            
+            <div class="endereco">
+                <div class="nomeEVisualizar">
+                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
+                    <p class="nomeEndereco">CASA</p>
+                </div>
+
+                <div class="editarEexcluir">
+                    <img class="iconeEditar" src="img/Edit.png" alt="">
+                    <img class="icone" src="img/Trash.png" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="endereco.js"></script>
+</body>
+</html>

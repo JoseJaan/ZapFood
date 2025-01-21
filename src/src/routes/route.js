@@ -3,6 +3,7 @@ const express = require('express');
 const Auth = require(path.resolve("src","routes","CRUD","Auth"));
 const Produto = require(path.resolve("src","routes","CRUD","Produto"));
 const Loja = require(path.resolve("src","routes","CRUD","Loja"));
+const Endereco = require(path.resolve("src","routes","CRUD","Endereco"));
 
 
 
@@ -23,6 +24,8 @@ const routes = (app) => {
     app.use(Loja);
 
     app.use(Produto);
+
+    app.use(Endereco);
 
 
 };

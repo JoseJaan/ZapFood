@@ -1,0 +1,386 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+header{
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 10px solid orange;
+}
+
+
+.camposHeader{
+    display: flex;
+    justify-content: end;
+    width: 300px;
+    gap: 10px;
+    align-items: center;
+    height: 80px;
+}
+
+.camposHeader:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.tituloCamposHeader{
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.opcoesHeader{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: center;
+}
+
+.fotoPerfilUsuario{
+    align-self: center;
+    width: 197px;
+    height: 189px;
+    border-radius: 197px;
+    border: 6px solid #FF9500;
+    background: url(img/user.png) lightgray 50% / cover no-repeat;
+    margin-top: 70px;
+}
+
+.tituloPerfilUsuario{
+    color: #303030;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-self: center;
+    margin-bottom: 50px;
+}
+
+.dadosUsuario{
+    width: 60%;
+    height: 338px;
+    border-radius: 20px;
+    border: 8px solid #F89100;
+    background: #FFF;
+}
+
+.dadosUsuario{
+    display: flex;
+    padding: 15px;
+    align-self: center;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+
+.tituloDadosUsuario{
+    margin-top: 0px;
+    color: #303030;
+    font-family: Lalezar;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-self: flex-start;
+}
+
+.campo{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.primeirosDados{
+    width: 100%;
+    gap:100px;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.campoInputNome{
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #3B3B3B;
+    background: #FFF;
+}
+
+.campoInputCPF{
+    width: 70%;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #3B3B3B;
+    background: #FFF;
+}
+
+.dadosUsuario label{
+    color: #353535;
+    font-family: Lalezar;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.campoInputDN{
+    width: 30%;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #3B3B3B;
+    background: #FFF;
+}
+
+.enderecos{
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    width: 60%;
+    align-self: center;
+    height: auto;
+    border-radius: 20px;
+    border: 8px solid #F89100;
+    background: #FFF;
+    margin-bottom: 40px;
+}
+
+
+.tituloEnderecos{
+    margin-top: 0px;
+    color: #3B3B3B;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.osEnderecos{
+
+
+}
+
+.iconeAdicionar{
+    margin-top: -25px;
+    align-self: center;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 30px;
+}
+
+.iconeAdicionar:hover{
+    cursor: pointer;
+}
+
+.osEnderecos{
+    align-items: center;
+}
+
+.endereco{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    height: auto;
+    border-radius: 10px;
+    border: 4px solid #585858;
+    background: #FFF;
+}
+
+.nomeEVisualizar{
+    display: flex;
+    height: 40px;
+    align-items: center;
+    gap: 10px;
+}
+
+.nomeEndereco{
+    color: #3E3E3E;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.icone:hover,.iconeEditar:hover,.iconeVisualizar:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.modal{
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    justify-content: center;
+    align-items: center;
+}
+
+.modalConteudo{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 771px;
+    height: auto;
+    border-radius: 20px;
+    border: 8px solid #FF7F00;
+    opacity: 0.99;
+    background: #FFF;
+}
+
+.tituloModalAdicionar{
+    margin: 0px;
+    color: #3B3B3B;
+    font-family: Lalezar;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#modalAdicionar label,#modalEditar label,#modalVisualizar label{
+    color: #000;
+    font-family: Lalezar;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#modalAdicionar input, #modalEditar input, #modalVisualizar input{
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #ACACAC;
+    background: #E5E5E5;
+}
+
+#modalVisualizar input{
+    pointer-events: none;
+    
+}
+
+.camposModalAdicionar{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.campoCidade{
+    margin-right: 50px;
+    width: 400px;
+}
+
+.campoCEP{
+    width: 200px;
+}
+
+.campoRua{
+    margin-bottom: 20px;
+    margin-right: 50px;
+    margin-top: 20px;
+    width: 400px;
+}
+
+.campoN{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100px;
+}
+
+.botaoAdicionarModal{
+    align-self: center;
+    color: #FFF;
+    font-family: Lalezar;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 70px;
+    width: 239px;
+    height: 66px;
+    border-radius: 8px;
+    background: #009A1C;
+}
+
+.botaoAdicionarModal:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.complementoVisualizar{
+    margin-bottom: 25px;
+}
+
+.modalExcluir{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 561px;
+    height: 304px;
+}
+
+.mensagemConfirmacao{
+    margin-top: 0px;
+    text-wrap: wrap;
+    color: #3B3B3B;
+    text-align: center;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.observacao{
+    font-family: Lalezar;
+    margin-top: -15px;
+    color: rgb(174, 0, 0);
+}
+
+.botoesOpcao{
+    margin-top: 30px;
+    justify-content: space-around;
+    width: 500px;
+    height: 50px;
+    display: flex;
+}
+
+.desistir{
+    font-size: 20px;
+    width: 100px;
+    border-radius: 10px;
+    border: 0px;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    font-family: 'Lalezar';
+    font-weight: 500;
+}
+
+.persistir{
+    font-size: 20px;
+    width: 200px;
+    border-radius: 10px;
+    border: 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 163, 52);
+    font-family: 'Lalezar';
+    font-weight: 500;
+}
+
+.persistir:hover,.desistir:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
