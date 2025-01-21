@@ -51,7 +51,7 @@ header{
     height: 189px;
     border-radius: 197px;
     border: 6px solid #FF9500;
-    background: url(img/user.png) lightgray 50% / cover no-repeat;
+    background: url(/img/user.png) lightgray 50% / cover no-repeat;
     margin-top: 70px;
 }
 
