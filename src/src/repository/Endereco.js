@@ -1,5 +1,6 @@
 const Endereco = require("../database/models/Endereco");
 const Venda = require("../database/models/Venda");
+const Cliente = require("../database/models/Cliente");
 class EnderecoRepository{
 
     static async cadastrarEndereco(enderecoData) {
@@ -70,6 +71,12 @@ class EnderecoRepository{
             console.error("Erro ao excluir endereco:", error);
             throw new Error("Erro ao excluir endereco do banco de dados.");
         }
+    }
+
+    static async buscarUsuario(id){
+
+        return Cliente.findByPk(id);
+
     }
 }
 

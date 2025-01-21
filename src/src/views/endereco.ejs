@@ -12,6 +12,12 @@
         <div class="modalConteudo">
             <p class="tituloModalAdicionar">ADICIONAR ENDEREÇO</p>
             <div class="camposModalAdicionar">
+            <div class="campo campoNome">
+                <label for="nome">NOME</label>
+                <input type="text" name="" id="nome">
+            </div>
+
+
             <div class="campo campoCidade">
                 <label for="cidade">CIDADE</label>
                 <input type="text" name="" id="cidade">
@@ -47,6 +53,11 @@
         <div class="modalConteudo">
             <p class="tituloModalAdicionar">EDITAR ENDEREÇO</p>
             <div class="camposModalAdicionar">
+            <div class="campo campoNome">
+                <label for="nome">NOME</label>
+                <input type="text" name="" id="nome">
+            </div>
+
             <div class="campo campoCidade">
                 <label for="cidade">CIDADE</label>
                 <input type="text" name="" id="cidade">
@@ -81,6 +92,12 @@
         <div class="modalConteudo">
             <p class="tituloModalAdicionar">ENDEREÇO</p>
             <div class="camposModalAdicionar">
+
+            <div class="campo campoNome">
+                <label for="nome">NOME</label>
+                <input tabindex="-1" type="text" name="" id="nome">
+            </div>
+
             <div class="campo campoCidade">
                 <label for="cidade">CIDADE</label>
                 <input tabindex="-1" type="text" name="" id="cidade">
@@ -137,18 +154,18 @@
 
     <div class="fotoPerfilUsuario"></div>
 
-    <p class="tituloPerfilUsuario">GABRIEL FERREIRA DE CASTRO</p>
+    <p class="tituloPerfilUsuario"><%= cliente.nome %></p>
 
     <div class="dadosUsuario">
         <p class="tituloDadosUsuario">DADOS PESSOAIS</p>
         <div class="primeirosDados">
             <div class="campo">
                 <label for="nome">NOME</label>
-                <input class="campoInputNome" type="text" id="nome">
+                <input value="<%= cliente.nome %>" class="campoInputNome" type="text" id="nome">
             </div>
             <div class="campo">
                 <label for="cpf">CPF</label>
-                <input class="campoInputCPF" type="text" id="cpf">
+                <input value="<%= cliente.cpf %>" class="campoInputCPF" type="text" id="cpf">
             </div>
         </div>
         <div class="campo">
@@ -158,13 +175,17 @@
     </div>
 
     <div class="enderecos">
+
+
         <p class="tituloEnderecos">ENDEREÇOS</p>
         <img class="iconeAdicionar" id="botaoAdicionar" src="img/Add.png" alt="">
         <div class="osEnderecos">
+
+            <% for (let i = 0; i < enderecos.length; i++) { %>
             <div class="endereco">
                 <div class="nomeEVisualizar">
                     <img class="iconeVisualizar" src="img/Eye.png" alt="">
-                    <p class="nomeEndereco">CASA</p>
+                    <p class="nomeEndereco"><%= enderecos[i].nome %></p>
                 </div>
 
                 <div class="editarEexcluir">
@@ -172,34 +193,12 @@
                     <img class="icone" src="img/Trash.png" alt="">
                 </div>
             </div>
+            <% } %>
 
-            <div class="endereco">
-                <div class="nomeEVisualizar">
-                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
-                    <p class="nomeEndereco">CASA</p>
-                </div>
-
-                <div class="editarEexcluir">
-                    <img class="iconeEditar" src="img/Edit.png" alt="">
-                    <img class="icone" src="img/Trash.png" alt="">
-                </div>
-            </div>
-            
-            <div class="endereco">
-                <div class="nomeEVisualizar">
-                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
-                    <p class="nomeEndereco">CASA</p>
-                </div>
-
-                <div class="editarEexcluir">
-                    <img class="iconeEditar" src="img/Edit.png" alt="">
-                    <img class="icone" src="img/Trash.png" alt="">
-                </div>
-            </div>
 
         </div>
     </div>
     
-    <script src="endereco.js"></script>
+    <script src="js/endereco.js"></script>
 </body>
 </html>

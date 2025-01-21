@@ -283,6 +283,11 @@ header{
     width: 400px;
 }
 
+.campoNome{
+    width: 400px;
+    margin-bottom: 20px;
+}
+
 .campoCEP{
     width: 200px;
 }

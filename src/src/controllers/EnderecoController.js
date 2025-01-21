@@ -89,11 +89,10 @@ class EnderecoController{
     //Lista todos os enderecos do cliente
     static async listarEnderecos(req, res) {
         const idCliente = req.user.id; 
-    
+        const cliente = await enderecoService.obterUsuario(idCliente);
         try {
             const enderecos = await enderecoService.listarEnderecos(idCliente);
-    
-            return res.render('enderecos',{enderecos: enderecos})
+            return res.render('endereco',{enderecos: enderecos,cliente:cliente});
         } catch (error) {
             console.error(error.message);
             return res.status(500).send("Erro ao listar enderecos.");

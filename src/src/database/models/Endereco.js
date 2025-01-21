@@ -19,13 +19,9 @@ const Endereco = database.define('endereco', {
             key: 'id'
         }
     },
-    idEndereco:{
-        type: Sequelize.UUID,
-        primaryKey : true,
-        references: {
-            model: 'enderecos', //referencia a tabela enderecos
-            key: 'idEndereco'
-        }
+    nome:{
+        type: Sequelize.STRING,
+        allowNull: false,
     },
     cidade:{
         type: Sequelize.STRING,

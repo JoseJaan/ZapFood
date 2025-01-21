@@ -100,6 +100,16 @@ class EnderecoService{
     
         return endereco;
     }
+
+    static async obterUsuario(idEndereco) {
+
+        const usuario = await enderecoRepository.buscarUsuario(idEndereco);
+
+        if(usuario){
+            return usuario;
+        }
+        return null;
+    }
     
 
 }
