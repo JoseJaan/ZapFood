@@ -126,7 +126,7 @@ element.addEventListener('click',()=>{
 function preencherModalVisualizar(endereco) {
     document.getElementById('nomeVisualizar').value = endereco.nome;
     document.getElementById('cidadeVisualizar').value = endereco.cidade;
-    document.getElementById('cepVisualizar').value = endereco.cep;
+    document.getElementById('cepVisualizar').value = endereco.CEP;
     document.getElementById('ruaVisualizar').value = endereco.rua;
     document.getElementById('numeroVisualizar').value = endereco.numero;
     document.getElementById('complementoVisualizar').value = endereco.complemento || '';
