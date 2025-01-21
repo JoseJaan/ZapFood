@@ -4,9 +4,9 @@ class EnderecoService{
 
     //Cadastra o endereco
     static async cadastrarEndereco(enderecoData){
-        const { rua, numero, CEP, complemento, cidade, idCliente} = enderecoData;
-
-        if (!rua || !numero || !CEP || !complemento || !cidade || !idCliente) {
+        const { rua, numero, CEP, complemento, cidade, idCliente, nome} = enderecoData;
+        console.log("nome no service",nome)
+        if (!rua || !numero || !CEP || !complemento || !cidade || !idCliente || !nome) {
             throw new Error("Todos os campos são obrigatórios");
         }
 

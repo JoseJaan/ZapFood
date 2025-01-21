@@ -45,7 +45,7 @@ class EnderecoRepository{
         try {
             return await Endereco.findAll({
                 where: { idCliente: idCliente, visibilidade: 1 }, 
-                attributes: ["idEndereco", "idCliente", "cidade", "CEP", "rua", "numero", "complemento", "visibilidade"],
+                attributes: ["idEndereco", "idCliente", "cidade", "CEP", "rua", "numero", "complemento", "visibilidade", "nome"],
             });
         } catch (error) {
             console.error("Erro ao listar enderecos:", error);

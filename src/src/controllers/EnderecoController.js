@@ -9,27 +9,26 @@ class EnderecoController{
 
     //Cadastrar endereco
     static async cadastro(req,res){
-        const { cidade, CEP, rua, numero, complemento } = req.body;
-
+        const { cidade, CEP, rua, numero, complemento, nome } = req.body;
+        console.log("nome no controller",nome)
         //Verifica se o usuário autenticado é um cliente
         if(req.user.tipo != 'cliente'){
             return res.status(403).send('Acesso não autorizado.');
         }
 
         const idCliente = req.user.id;
-
         try{
-            const novoEndereco = produtoService.cadastrarEndereco({cidade, CEP, rua, numero, complemento, idCliente})
+            const novoEndereco = enderecoService.cadastrarEndereco({cidade, CEP, rua, numero, complemento, idCliente, nome})
 
-            return res.status(200).json({message: "Endereco cadastrado com sucesso", Endereco: novoEndereco})
+            return res.status(200).message("Endereco cadastrado com sucesso")
         }
         catch(error){
             console.error(error.message);
-            return res.status(400).render("Erro ao cadastrar endereco", { error: error.message });
+            return res.status(400).render("endereco", { error: error.message });
         }
     }
 
-    //Atualizar produto
+    //Atualizar endereco
     //Nenhum campo é obrigatório
     static async atualizarEndereco(req, res) {
         const {idEndereco} = req.params;
@@ -67,7 +66,7 @@ class EnderecoController{
     //Excluir endereco
     //Se houver vendas com aquele endereco, ele não é efetivamente excluido, e sim desativado
     static async excluirEndereco(req, res) {
-        const { idEndereco } = req.params; // ID do produto a ser excluído
+        const { idEndereco } = req.params; // ID do endereco a ser excluído
         const idCliente = req.user.id; // ID da loja do usuário autenticado
     
         try {
@@ -92,6 +91,7 @@ class EnderecoController{
         const cliente = await enderecoService.obterUsuario(idCliente);
         try {
             const enderecos = await enderecoService.listarEnderecos(idCliente);
+            console.log(enderecos)
             return res.render('endereco',{enderecos: enderecos,cliente:cliente});
         } catch (error) {
             console.error(error.message);
