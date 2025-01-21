@@ -12,6 +12,14 @@ const Venda = database.define('venda', {
         primaryKey : true,
         defaultValue: Sequelize.UUIDV4
     },
+    idEndereco:{
+        type: Sequelize.UUID,
+        primaryKey : true,
+        references: {
+            model: 'enderecos', //referencia a tabela loja
+            key: 'idEndereco'
+        }
+    },
     data:{
         type: Sequelize.DATE,
         allowNull: false,

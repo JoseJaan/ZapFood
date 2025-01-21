@@ -9,5 +9,6 @@ router.post("/endereco/cadastrar",authMiddleware,LojaController.obterLoja);
 router.put("/endereco/editar/:idEndereco",authMiddleware,LojaController.obterLoja);
 router.delete("/endereco/excluir/:idEndereco",authMiddleware,LojaController.obterLoja);
 router.get("/endereco/listar",authMiddleware,LojaController.obterLoja);
+router.get("/endereco/detalhar/:idEndereco",authMiddleware,LojaController.obterLoja);
 
 module.exports = router;

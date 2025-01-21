@@ -1,5 +1,5 @@
 const Endereco = require("../database/models/Endereco");
-
+const Venda = require("../database/models/Venda");
 class EnderecoRepository{
 
     static async cadastrarEndereco(enderecoData) {
@@ -27,10 +27,9 @@ class EnderecoRepository{
         }
     }
 
-    static async buscarEndereco({ idEndereco, idCliente, visibilidade } = {}) {
+    static async buscarEndereco({ idEndereco, visibilidade } = {}) {
         const whereClause = {};
         if (idEndereco) whereClause.idEndereco = idEndereco;
-        if (clienteId) whereClause.idCliente = idCliente;
         if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;
     
         try {
@@ -55,7 +54,7 @@ class EnderecoRepository{
 
     static async verificarEnderecoEmVenda(idEndereco) {
         try {
-            return await VendaHasProduto.findOne({
+            return await Venda.findOne({
                 where: { idEndereco: idEndereco },
             }) !== null; // Retorna true se encontrado, false caso contrário
         } catch (error) {
@@ -64,6 +63,14 @@ class EnderecoRepository{
         }
     }
 
+    static async excluir(idEndereco) {
+        try {
+            await Endereco.destroy({ where: { idEndereco } });
+        } catch (error) {
+            console.error("Erro ao excluir endereco:", error);
+            throw new Error("Erro ao excluir endereco do banco de dados.");
+        }
+    }
 }
 
 module.exports = EnderecoRepository;
