@@ -34,62 +34,30 @@
     <div class="restaurantesPopulares">
         <p class="tituloRestaurantesPopulares">RESTAURANTES POPULARES</p>
         <div class="restaurantesQuadradoPopulares">
-            <a href="/paginaDaEmpresa" class="restaurante">
-                <div class="fotoRestaurante"></div>
-                <p class="nomeRestaurante">BURGUER KING</p>
-            </a>
-
-            <a href="/paginaDaEmpresa" class="restaurante">
-                <div class="fotoRestaurante"></div>
-                <p class="nomeRestaurante">BURGUER KING</p>
-            </a>
-
-
+            <% lojas.forEach(item => { %>
+                <a href="/paginaDaEmpresa" class="restaurante">
+                    <div class="fotoRestaurante"></div>
+                    <p class="nomeRestaurante"><%= item.nome %></p>
+                </a>
+            <% }) %>
         </div>
     </div>
 
     <div class="produtosEmPromocao">
         <p class="tituloRestaurantesPopulares">PROMOÇÃO</p>
         <div class="produtosQuadradoPromocao">
+            <% produtos.forEach(item => { %>
             <a href="/produtoVer" class="produto">
                 <div class="promocaoIcone">
                     <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
+                    <p class="textoDesconto"><%= item.desconto %>%</p>
                 </div>
                 <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
+                <p class="nomeProduto"><%= item.nomeProduto %></p>
+                <p class="precoProduto">R$ <%= item.precoProduto %></p>
             </a>
-
-            <a href="/produtoVer" class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </a>
-
-            <a href="/produtoVer" class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </a>
-
-            <a href="/produtoVer" class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </a>
+            <% }) %>
+            
 
 
         </div>
