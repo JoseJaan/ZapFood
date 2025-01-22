@@ -106,12 +106,14 @@ class AuthService {
         try {
           // Verifica e decodifica o token
           const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      
+          const email = decoded.email;
           // Gera o hash da nova senha
           const hashedPassword = await bcrypt.hash(newPassword, 10);
 
+          userRepository.redefinirSenha(hashedPassword,email)
         } catch (error) {
-          throw error; // Erro será tratado no controlador
+            console.error('Erro ao processar redefinição de senha.', error);
+            reject(new Error('Erro ao resetar senha'));
         }
     };
 };

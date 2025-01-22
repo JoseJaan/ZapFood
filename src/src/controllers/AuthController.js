@@ -117,7 +117,7 @@ class AuthController{
       
         try {
           const senha = await AuthService.forgotPasswordService(email); // Chama o serviço responsável
-          res.status(200).json({ message: 'Email enviado com sucesso!' });
+          res.status(200).send('Email enviado com sucesso!');
         } catch (error) {
           console.error('Erro na forgot-password.', error);
           res.status(500).json({ message: 'Erro interno no servidor.'});
@@ -125,17 +125,15 @@ class AuthController{
     };
 
     static async resetPassword (req, res) {
-        const { senha } = req.body;
-        const token = req.query.token;
-        console.log(req.query)
-        console.log(senha, token)
+        const { senha, token } = req.body;
+
         if (!token || !senha) {
           return res.status(400).json({ message: 'Token ou nova senha não fornecidos.' });
         }
       
         try {
-          await resetPasswordService(token, senha); // Chama o serviço responsável
-          res.status(200).json({ message: 'Senha redefinida com sucesso!' });
+          await AuthService.resetPasswordService(token, senha); // Chama o serviço responsável
+          return res.redirect('/login');
         } catch (error) {
           console.error('Erro na reset-password.', error);
       
