@@ -1,10 +1,10 @@
 const path = require("path");
 const clienteService = require(path.resolve("src", "services", "Cliente.js"));
+const produtoService = require(path.resolve("src", "services", "Produto.js"));
 
 class ClienteController{
 
     static async paginaPrincipal(req,res){
-
         const produtos = await clienteService.maioresPromocoes();
         const lojasPopulares = await clienteService.lojasPopulares();
 
@@ -24,7 +24,9 @@ class ClienteController{
     }
 
     static async verProduto(req,res){
-        res.render('produtoVer');
+        const produto = await produtoService.obterProduto(req.params.id);
+        
+        res.render('produtoVer',{produto:produto});
     }
 
 

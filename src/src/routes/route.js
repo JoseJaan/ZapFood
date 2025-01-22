@@ -5,6 +5,7 @@ const Produto = require(path.resolve("src","routes","CRUD","Produto"));
 const Loja = require(path.resolve("src","routes","CRUD","Loja"));
 const Endereco = require(path.resolve("src","routes","CRUD","Endereco"));
 const Cliente = require(path.resolve("src","routes","CRUD","Cliente"));
+const Carrinho = require(path.resolve("src","routes","CRUD","Carrinho"));
 
 
 const routes = (app) => {
@@ -28,6 +29,8 @@ const routes = (app) => {
     app.use(Endereco);
 
     app.use(Cliente);
+
+    app.use(Carrinho);
 
 
 };

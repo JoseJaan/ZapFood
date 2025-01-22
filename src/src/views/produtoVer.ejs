@@ -3,31 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/produtoVer.css">
+    <link rel="stylesheet" href="/css/produtoVer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
     <title>Produto</title>
 </head>
 <body>
     <header>
-        <img class="logo" src="img/logo.png" alt="">
+        <img class="logo" src="/img/logo.png" alt="">
         <a href="/paginaPrincipalCliente" class="voltarAoMenu">
             <p>VOLTAR AO MENU</p>
-            <img src="img/Logout.png" alt="">
+            <img src="/img/Logout.png" alt="">
         </a>
     </header>
 
     <div class="fotoProduto"></div>
     <p class="nomeLoja">ACERBINHO LANCHES</p>
      
-    <p class="nomeLanche">Hamburguer Carne Caseira</p>
+    <p class="nomeLanche"><%= produto.nomeProduto %></p>
 
-    <p class="precoProduto">R$ 12,99</p>
+    <p class="precoProduto">R$ <%= produto.precoProduto %></p>
 
-    <div class="descricaoProduto">Pão , carne de frango empanada, alface, tomate, queijo e molho especial</div>
+    <div class="descricaoProduto"><%= produto.descricaoProduto %></div>
 
+    <input type="hidden" name="id" id="idProduto" value="<%= produto.idProduto %>" >
 
-    <button class="botaoAdicionarAoCarrinho">ADICIONAR AO CARRINHO</button>
+    <button id="botaoAdicionaraoCarrinho" class="botaoAdicionarAoCarrinho">ADICIONAR AO CARRINHO</button>
 
     <footer></footer>
     
+    <script src="/js/produtoVer.js"></script>
 </body>
 </html>
