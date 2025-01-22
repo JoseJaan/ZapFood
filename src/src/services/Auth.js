@@ -2,6 +2,11 @@ const userRepository = require("../repository/auth.js");
 const bcrypt = require("bcrypt");
 const Cliente = require("../database/models/Cliente.js");
 const Loja = require("../database/models/Loja.js");
+const JWT_EXPIRATION = '1h';
+const path = require("path");
+const jwt = require('jsonwebtoken');
+const fs = require('fs/promises');
+const mailTransport = require('../modules/email/mailTransport.js');
 class AuthService {
     static async cadastro(clienteData) {
         const { email, senha, endereco, cpf, idade, nome } = clienteData;
@@ -70,6 +75,47 @@ class AuthService {
 
         return user; // Retorna o usuário autenticado
     }
-}
+
+    static async forgotPasswordService (userEmail) {
+        return new Promise(async (resolve, reject) => {
+            try {
+              const token = jwt.sign({ email: userEmail }, process.env.JWT_SECRET, { expiresIn: JWT_EXPIRATION });
+      
+              const emailTemplatePath = path.resolve(__dirname, '../modules/email/template/resetPassword.html');
+              const templateResetPassword = await fs.readFile(emailTemplatePath, 'utf8');
+      
+              const resetPasswordLink = `http://localhost:3003/resSenha?token=${token}`;
+              const HTMLTemplate = templateResetPassword.replace('{resetPasswordLink}', resetPasswordLink);
+      
+              const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: userEmail,
+                subject: 'Redefinição de senha',
+                html: HTMLTemplate,
+              };
+      
+              await mailTransport.sendMail(mailOptions);
+              resolve();
+            } catch (error) {
+              console.error('Erro ao processar o email de redefinição de senha.', error);
+              reject(new Error('Erro ao enviar email.'));
+            }
+          });
+      };
+      static async resetPasswordService  (token, newPassword) {
+        try {
+          // Verifica e decodifica o token
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      
+          // Gera o hash da nova senha
+          const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        } catch (error) {
+          throw error; // Erro será tratado no controlador
+        }
+    };
+};
+
+
 
 module.exports = AuthService;
