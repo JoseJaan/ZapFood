@@ -40,7 +40,7 @@
         <p class="tituloRestaurantesPopulares">RESTAURANTES POPULARES</p>
         <div class="restaurantesQuadradoPopulares">
             <% lojas.forEach(item => { %>
-                <a href="/paginaDaEmpresa" class="restaurante">
+                <a href="/empresa/<%=item.id%>" class="restaurante">
                     <div class="fotoRestaurante"></div>
                     <p class="nomeRestaurante"><%= item.nome %></p>
                 </a>
@@ -71,6 +71,5 @@
     </div>
 
     <footer></footer>
-    
 </body>
 </html>

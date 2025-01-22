@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/paginaDaEmpresa.css">
+    <link rel="stylesheet" type="text/css" href="/css/paginaDaEmpresa.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
@@ -13,102 +13,64 @@
     <header>
         <div class="sairEperfil">
             <a href="/logout" class="separarHeader">
-                <img class="icone" src="img/sair.png" alt="">
+                <img class="icone" src="/img/sair.png" alt="">
                 <p class="sair">SAIR</p>
             </a>
-            </div>
+            
             <a href="/enderecos" class="separarHeader">
-                <img class="icone" src="img/usuario.png" alt="">
+                <img class="icone" src="/img/usuario.png" alt="">
                 <p class="meuPerfil">MEU PERFIL</p>
             </a>
         </div>
-        <img class="logo" src="img/Logo.png" alt="logo">
+        <img class="logo" src="/img/Logo.png" alt="logo">
         <div class="sairEperfil carrinho">
             <a href="/verCarrinho" class="separarHeader">
-                <img class="icone" src="img/carrinho.png" alt="">
+                <img class="icone" src="/img/carrinho.png" alt="">
                 <p class="meuPerfil">MEU CARRINHO</p>
             </a>
         </div>
     </header>
-    <div class="borda">
-    </div>
 
+    <div class="borda"></div>
     <div class="fotoLoja"></div>
-    <p class="nomeLoja">ACERBINHO LANCHES</p>
-
+    <p class="nomeLoja"><%= loja.nome %></p>
+    
     <div class="promocao">
         <p class="tituloPromocao">PRODUTOS EM PROMOÇÃO</p>
-
         <div class="produtosPromocao">
-            <div class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
-
-            <div class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
-
-            <div class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
+            <% produtosEmPromocao.forEach(produto => { %>
+                <a href="/produtoVer/<%= produto.idProduto %>" class="produto">
+                    <div class="promocaoIcone">
+                        <img src="/img/Discount.png" alt="">
+                        <p class="textoDesconto">-<%= produto.desconto %>%</p>
+                    </div>
+                    <div class="fotoProduto"></div>
+                    <p class="nomeProduto"><%= produto.nome %></p>
+                    <p class="precoProduto">R$ <%= produto.precoProduto %></p>
+                </a>
+            <% }) %>
         </div>
     </div>
 
     <div class="todosProdutos">
         <p class="tituloTodosProdutos">TODOS OS PRODUTOS</p>
         <div class="produtosTodos">
-            <div class="produto">
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
-
-            <div class="produto">
-                <div class="promocaoIcone">
-                    <img src="img/Discount.png" alt="">
-                    <p class="textoDesconto">-27%</p>
-                </div>
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
-
-            <div class="produto">
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
-
-            <div class="produto">
-                <div class="fotoProduto"></div>
-                <p class="nomeProduto">BIG MAC</p>
-                <p class="precoProduto">R$ 12,99</p>
-            </div>
+            <% todosProdutos.forEach(produto => { %>
+                <a href="/produtoVer/<%= produto.idProduto %>" class="produto">
+                    <% if (produto.desconto > 0) { %>
+                        <div class="promocaoIcone">
+                            <img src="/img/Discount.png" alt="">
+                            <p class="textoDesconto">-<%= produto.desconto %>%</p>
+                        </div>
+                    <% } %>
+                    <div class="fotoProduto"></div>
+                    <p class="nomeProduto"><%= produto.nome %></p>
+                    <p class="precoProduto">R$ <%= produto.precoProduto %></p>
+                    </a>
+            <% }) %>
         </div>
-
     </div>
-    
-    <footer>
 
-    </footer>
-
+    <footer></footer>
 </body>
 </html>
