@@ -18,6 +18,8 @@ class LojaController{
             return res.status(400).send("Erro ao obter loja");
         }
     }
+
+    //DELETAR ENDERECO === SE ESTIVER EM UMA VENDA, ALTERAR VISIBILIDADE PARA 0
 }
 
 module.exports = LojaController

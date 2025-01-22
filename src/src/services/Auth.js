@@ -46,6 +46,7 @@ class AuthService {
     static async autenticar(email, senha) {
         // Buscar o usuário no banco pelo e-mail
         const user = await userRepository.buscarPorEmail(email);
+        console.log(user);
 
         if (!user) {
             throw new Error('E-mail ou senha inválidos.');
