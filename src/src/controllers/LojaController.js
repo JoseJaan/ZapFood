@@ -24,9 +24,7 @@ class LojaController{
         const lojaId = req.params.idLoja;
 
         const loja = await lojaService.obterLoja(lojaId);
-        console.log("loja no controller",loja)
         const produtos = await produtoService.listarProdutos(lojaId); 
-        console.log("produtos no controller", produtos)
         const produtosEmPromocao = produtos.filter(produto => produto.desconto > 0);
         res.render('paginaDaEmpresa', {
             loja: loja,

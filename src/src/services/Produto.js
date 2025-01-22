@@ -50,15 +50,12 @@ class produtoService{
     //Excluir produto
     //Se houver vendas com aquele produto, ele não é efetivamente excluido, e sim desativado
     static async excluirProduto(id, lojaId) {
-        console.log(`id no service ${id}`)
-        console.log(`lojaId no service ${lojaId}`)
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
         }
     
         // Busca o produto pelo ID e valida se ele pertence à loja
         const produto = await produtoRepository.buscarProduto({ id, lojaId, visibilidade: 1 });
-        console.log(`produto encontrado no service ${produto.nomeProduto}`)
         if (!produto || produto.Loja_idLoja !== lojaId) {
             return null; // Produto não encontrado ou não pertence à loja
         }

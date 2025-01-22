@@ -7,7 +7,6 @@ class ClienteRepository {
         try {
             const cliente = await Cliente.findOne({ where: { email } });
             const loja = await Loja.findOne({ where: { email } });
-            console.log(cliente);
             if (cliente !== null){
                 return cliente
             }
