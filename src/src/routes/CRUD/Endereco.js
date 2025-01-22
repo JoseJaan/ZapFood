@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require("path");
 const router = express.Router();
-const authMiddleware = require(path.resolve("src","middleware","authMiddleware.js"));
+const authMiddleware = require(path.resolve("src","middleware","clienteMiddleware.js"));
 const EnderecoController = require(path.resolve("src","controllers","EnderecoController.js"));
 
 

@@ -56,7 +56,6 @@ class AuthController{
 
     static async autenticar(req, res) {
         const { email, senha } = req.body;
-        console.log(senha)
         try {
             // Autenticar o usuario usando o serviço
             const user = await AuthService.autenticar(email, senha);
