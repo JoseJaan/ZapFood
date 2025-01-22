@@ -12,6 +12,16 @@ class AuthController{
         return res.render('login');
     }
 
+    static async redefinirSenha(req,res){
+
+        return res.render('redefinirSenha');
+    }
+
+    static async resetarSenha(req,res){
+
+        return res.render('resetarSenha');
+    }
+
     static async registroCliente(req,res){
 
         return res.render('registroCliente');
@@ -85,6 +95,57 @@ class AuthController{
             return res.status(401).render('login', { error: error.message });
         }
     }
+    
+    static async logout(req, res) {
+        try {
+            // Limpa o cookie do token
+            res.clearCookie('authToken');
+            // Redireciona para a página de login
+            return res.redirect('/login');
+        } catch (error) {
+            console.error('Erro ao fazer logout:', error);
+            return res.status(500).send('Erro ao fazer logout');
+        }
+    }
+
+    static async forgotPassword (req, res) {
+        const { email } = req.body;
+      
+        if (!email) {
+          return res.status(400).json({ message: 'Nenhum email inserido.' });
+        }
+      
+        try {
+          const senha = await AuthService.forgotPasswordService(email); // Chama o serviço responsável
+          res.status(200).send('Email enviado com sucesso!');
+        } catch (error) {
+          console.error('Erro na forgot-password.', error);
+          res.status(500).json({ message: 'Erro interno no servidor.'});
+        }
+    };
+
+    static async resetPassword (req, res) {
+        const { senha, token } = req.body;
+
+        if (!token || !senha) {
+          return res.status(400).json({ message: 'Token ou nova senha não fornecidos.' });
+        }
+      
+        try {
+          await AuthService.resetPasswordService(token, senha); // Chama o serviço responsável
+          return res.redirect('/login');
+        } catch (error) {
+          console.error('Erro na reset-password.', error);
+      
+          if (error.name === 'TokenExpiredError') {
+            res.status(400).json({ message: 'Token de recuperação expirado. Requisite uma nova redefinição de senha.' });
+          } else if (error.name === 'JsonWebTokenError') {
+            res.status(400).json({ message: 'Token de recuperação inválido. Requisite uma nova redefinição de senha.' });
+          } else {
+            res.status(500).json({ message: 'Erro interno no servidor.' });
+            }
+        }
+    };
 }
 
 
