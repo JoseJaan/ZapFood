@@ -25,7 +25,7 @@ const vendaProd = database.define('venda_has_prod', {
         defaultValue: 1,        // Visibilidade 3 = visível para cliente
     },
     produtoId:{
-        type: Sequelize.DATE,
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
             model: 'produtos', //referencia a tabela loja

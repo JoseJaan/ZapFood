@@ -8,7 +8,7 @@ router.get("/paginaPrincipalCliente",authMiddleware,ClienteController.paginaPrin
 router.get("/carrinho",authMiddleware,ClienteController.verCarrinho);
 router.get("/finalizarCompra",authMiddleware,ClienteController.finalizarCompra);
 router.get("/paginaDaEmpresa",authMiddleware,ClienteController.paginaEmpresa);
-router.get("/produtoVer",authMiddleware,ClienteController.verProduto);
+router.get("/produtoVer/:id",authMiddleware,ClienteController.verProduto);
 
 
 module.exports = router;

@@ -89,12 +89,12 @@ class produtoService{
     }
 
     //Lista apenas 1 produto da loja
-    static async obterProduto(id, lojaId) {
+    static async obterProduto(id) {
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
         }
     
-        const produto = await produtoRepository.buscarProduto({ id, lojaId, visibilidade: 1 });
+        const produto = await produtoRepository.buscarProduto({ id, visibilidade: 1 });
     
         if (!produto) {
             return null; 

@@ -27,12 +27,10 @@ class produtoRepository{
         }
     }
 
-    static async buscarProduto({ id, lojaId, visibilidade } = {}) {
+    static async buscarProduto({ id, visibilidade } = {}) {
         console.log(`id no repository ${id}`)
-        console.log(`lojaId no repository ${lojaId}`)
         const whereClause = {};
         if (id) whereClause.idProduto = id;
-        if (lojaId) whereClause.Loja_idLoja = lojaId;
         if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;
     
         try {

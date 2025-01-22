@@ -23,33 +23,23 @@
 
     <div class="produtos">
 
+        <% produtos.forEach(item => { %>
         <div class="produto">
             <div class="imagemProduto"></div>
             <div class="textoProduto">
-                <p class="tituloProduto">Pizza Margerita</p>
-                <p class="descricaoProduto">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's  standard dummy text ever since the 1500s </p>
+                <p class="tituloProduto"><%= item.nomeProduto %></p>
+                <p class="descricaoProduto"><%= item.descricaoProduto %></p>
             </div>
             <div class="precoProduto">
                 <p class="textoValor">VALOR</p>
-                <p class="textoValorEscrito">R$ 29,99</p>
+                <p class="textoValorEscrito">R$ <%= item.precoProduto %></p>
 
-                <img class="lixeiraIcone" src="img/Trash.png" alt="">
+                <img data-id="<%= item.idProduto %>" class="lixeiraIcone" src="img/Trash.png" alt="">
             </div>
         </div>
+        <% }) %>
 
-        <div class="produto">
-            <div class="imagemProduto"></div>
-            <div class="textoProduto">
-                <p class="tituloProduto">Pizza Margerita</p>
-                <p class="descricaoProduto">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's  standard dummy text ever since the 1500s </p>
-            </div>
-            <div class="precoProduto">
-                <p class="textoValor">VALOR</p>
-                <p class="textoValorEscrito">R$ 29,99</p>
-
-                <img class="lixeiraIcone" src="img/Trash.png" alt="">
-            </div>
-        </div>
+        
     </div>
 
     <p class="valorTotalCarrinho">TOTAL: R$ 71,97</p>
@@ -60,5 +50,7 @@
     </div>
 
     <footer></footer>
+
+    <script src="/js/carrinho.js"></script>
 </body>
 </html>
