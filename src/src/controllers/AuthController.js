@@ -85,6 +85,18 @@ class AuthController{
             return res.status(401).render('login', { error: error.message });
         }
     }
+    
+    static async logout(req, res) {
+        try {
+            // Limpa o cookie do token
+            res.clearCookie('authToken');
+            // Redireciona para a página de login
+            return res.redirect('/login');
+        } catch (error) {
+            console.error('Erro ao fazer logout:', error);
+            return res.status(500).send('Erro ao fazer logout');
+        }
+    }
 }
 
 

@@ -10,5 +10,6 @@ router.post('/autenticar', AuthController.autenticar);
 
 router.get('/registrarEmpresa',AuthController.registroEmpresa)
 router.post('/registroEmpresa', AuthController.cadastroEmpresa)
+router.get('/logout', AuthController.logout);
 
 module.exports = router;
