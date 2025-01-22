@@ -15,7 +15,7 @@ botaoAdicionar.addEventListener('click',()=>{
     modalAdicionar.style.display = 'flex';
 })
 
-document.querySelector('.botaoAdicionarModal').addEventListener('click', (event) => {
+document.querySelector('.botaoAdicionarModal').addEventListener('click', async (event) => {
     event.preventDefault();
 
     // Captura os valores dos campos do modal
@@ -79,7 +79,7 @@ document.querySelector('.botaoAdicionarModal').addEventListener('click', (event)
 
     
     document.body.appendChild(formulario);
-    formulario.submit();
+    await formulario.submit();
 
     document.getElementById('nome').value = '';
     document.getElementById('cidade').value = '';
@@ -93,7 +93,9 @@ document.querySelector('.botaoAdicionarModal').addEventListener('click', (event)
     document.getElementById('modalAdicionar').style.display = 'none';
 
     
-    document.body.removeChild(formulario);
+    await document.body.removeChild(formulario);
+
+
 });
 
 
@@ -179,6 +181,7 @@ botaoPersistir.addEventListener("click", () => {
                 } else {
                     alert("Erro ao excluir o endereço. Verifique se ele está associado a uma venda.");
                 }
+                location.reload()
             })
             .catch((error) => {
                 console.error("Erro ao excluir:", error);
@@ -252,6 +255,7 @@ botaoEditar.addEventListener("click", () => {
                 } else {
                     alert("Erro ao atualizar o endereço.");
                 }
+                location.reload()
             })
             .catch((error) => {
                 console.error("Erro:", error);

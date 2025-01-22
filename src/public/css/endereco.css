@@ -22,6 +22,11 @@ header{
     gap: 10px;
     align-items: center;
     height: 80px;
+    text-decoration: none;
+}
+
+.camposHeader img{
+    height: 60px;
 }
 
 .camposHeader:hover{

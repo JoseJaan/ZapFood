@@ -1,0 +1,183 @@
+body{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+
+header{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 10px solid orange;
+}
+
+
+.imagemEmpresa{
+    width: 65px;
+    height: 65px;
+    border-radius: 65px;
+    border: 1px solid #000;
+    background: url(/img/loja.png) lightgray 50% / cover no-repeat;
+}
+
+.minhaEmpresa{
+    width: 250px;
+    margin-right: 40px;
+    display: flex;
+    gap:15px;
+    align-items: center;
+}
+
+.minhaEmpresa:hover, .sair:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+
+}
+
+.sair{
+    width: 250px;
+    margin-left: 40px;
+    display: flex;
+    gap:15px;
+    align-items: center;
+
+}
+
+.textoEmpresa{
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.sairTexto{
+    color: #E80048;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.nomeDaLojaTitulo{
+    align-self: center;
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.opcoes{
+    display: flex;
+    gap:150px;
+    justify-content: center;
+}
+
+.quadrado{
+    display: flex;
+    justify-content: center;
+    width: 450px;
+    height: 298px;
+    border-radius: 15px;
+    background: #F89100;
+}
+
+
+.escrito{
+    display: flex;
+    align-self: end;
+    position: absolute;
+    z-index: 10;
+    width: 450px;
+    height: 108px;
+    background: #3C3C3C;
+    color: #FFF;
+    font-family: Lalezar;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-items: center;
+    justify-content: center;
+}
+
+.quadradoCardapio:hover img{
+        transform: scale(1.4);
+
+}
+
+.quadradoVendas:hover img{
+    margin-bottom: 50px;
+    transform: scale(1.4);
+}
+
+.tituloProdutosMais{
+    height: 80px;
+    margin-top: 130px;
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    align-items: center;
+}
+
+.tituloProdutosTitulo{
+    color: #3B3B3B;
+    font-family: Lalezar;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.produtosMais{
+    overflow-x: hidden;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap:40px;
+    padding: 30px;
+    align-self: center;
+    margin-top: 40px;
+    width: 70%;
+    height: 370px;
+    border-radius: 20px;
+    border: 5px solid #F89100;
+    background: #383838;
+    margin-bottom: 100px;
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    background-color: orange;
+}
+
+.produto{
+    display: flex;
+    flex-direction: column;
+}
+
+.imagemProduto{
+    width: 303px;
+    height: 262px;
+    border-radius: 3px;
+    border: 4px solid #F89100;
+    background: url(/img/pastel.png) lightgray 50% / cover no-repeat;
+}
+
+.nomeProduto{
+    margin: 0px;
+    color: #FFF;
+    text-align: center;
+    font-family: Lalezar;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

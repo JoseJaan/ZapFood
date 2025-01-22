@@ -6,5 +6,6 @@ const LojaController = require(path.resolve("src","controllers","LojaController.
 
 router.get("/loja", LojaController.detalharLoja);
 router.get("/loja/detalhar",authMiddleware,LojaController.obterLoja);
+router.get("/paginaPrincipalLoja",authMiddleware,LojaController.paginaPrincipal);
 
 module.exports = router;

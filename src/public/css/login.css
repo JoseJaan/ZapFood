@@ -124,3 +124,11 @@ a{
     text-underline-position: from-font;
 }
 
+.registros{
+    display: flex;
+    justify-content: space-between;
+}
+
+.registros a{
+    width: 140px;
+}

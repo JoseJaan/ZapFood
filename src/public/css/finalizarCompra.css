@@ -1,0 +1,172 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    border-bottom: 10px solid orange;
+}
+
+.voltarAoMenu{
+    text-decoration: none;
+    margin-right: 15px;
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    height: 150px;
+}
+
+.voltarAoMenu:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.logo{
+    margin-left: 15px;
+    height: 150px;
+}
+
+.tituloFinalizarCompra{
+    margin-top: 70px;
+    align-self: center;
+    color: #303030;
+    font-family: Lalezar;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.corpo{
+    margin: 30px 10%;
+}
+
+.enderecoExiste{
+    color: #363636;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 80px;
+}
+
+#enderecoExiste{
+    margin-bottom: 40px;
+}
+
+.checkboxEndereco{
+    color: #000;
+    font-family: Lalezar;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.enderecos{
+    display: flex;
+    margin-left: 100px;
+}
+
+.checkbox,.checkboxx{
+    margin-right: 30px;
+}
+
+.primeiraParte{
+    margin-bottom: 70px;
+}
+
+.novoEndereco{
+    padding: 15px;
+    width: 630px;
+    height: 377px;
+    border-radius: 10px;
+    border: 4px solid #F89100;
+    background: rgba(248, 145, 0, 0.00);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.novoEndereco label{
+    color: #000;
+    font-family: Lalezar;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+
+.campos{
+    width: 372px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #ACACAC;
+    background: #E5E5E5;
+}
+
+
+.campoNome{
+    margin-right: 45px;
+}
+
+.campoNumero input{
+    width: 40%;
+}
+
+.campoNumero{
+    margin-left: 45px;
+}
+
+.campoCEP input{
+    width: 100%;
+}
+
+.botaoFinalizarPedido{
+    margin-top: 50px;
+    align-self: center;
+    width: 250px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #009A1C;
+    color: #FFF;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.botaoFinalizarPedido:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+footer{
+    background-color: #F89100;
+    margin-top: 150px;
+    width: 100%;
+    height: 100px;
+}

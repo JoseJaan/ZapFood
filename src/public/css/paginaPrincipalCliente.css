@@ -1,0 +1,252 @@
+body{
+    box-sizing: border-box;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    height: 180px;
+    margin: 15px 30px;
+    margin-bottom: -5px;
+}
+
+.borda{
+    background-color:#F89100;
+    height: 5px;
+    width: 100%;
+}
+
+.sairEperfil{
+    margin: 0px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.carrinho{
+    align-items: end;
+}
+
+.sair{
+    color: #E80048;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.meuPerfil{
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.separarHeader{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.separarHeader:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.icone{
+    margin-right: 10px;
+    height: 41px;
+    width: 41px;
+}
+
+.pesquisar{
+    padding: 10px;
+    margin-top: 100px;
+    align-self: center; 
+    width: 967px;
+    height: 51px;
+    border-radius: 15px;
+    border: 2px solid #000;
+    background: #E6E6E6;
+    color: #565656;
+    font-family: Lalezar;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+.restaurantesPopulares{
+    margin-top: 70px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.tituloRestaurantesPopulares{
+    color: #313131;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+}
+
+.restaurantesQuadradoPopulares{
+    display: flex;
+    gap: 80px;
+    padding: 15px;
+    padding-left: 25px;
+    margin-top: -30px;
+    width: auto;
+    min-width: 400px;
+    height: 360px;
+    border-radius: 10px;
+    border: 3px solid #000;
+    background: linear-gradient(180deg, #FFC26B 0%, #FF9500 100%);
+    box-shadow: 10px 7px 10px 0px rgba(0, 0, 0, 0.33);
+}
+
+
+
+.produtosEmPromocao{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 70px;
+    margin-bottom: 120px;
+}
+
+.produtosQuadradoPromocao{
+    gap:30px;
+    overflow-x: hidden;
+    display: flex;
+    padding: 15px;
+    margin-top: -30px;
+    width: auto;
+    min-width: 700px;
+    height: 348px;
+    border-radius: 15px;
+    border: 8px solid #FF7F00;
+    background: #FFF;
+    box-shadow: 8px 15px 10px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    background-color: #FF9500;
+}
+
+.produto{
+    text-decoration: none;
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.produto:hover{
+    transform: scale(1.05);
+}
+
+.fotoProduto{
+    width: 257px;
+    height: 230px;
+    border-radius: 20px;
+    border: 8px solid #F89100;
+    background: url(/img/hamburguer.png) rgb(243, 243, 243) 50% / cover no-repeat;
+    box-shadow: 9px 7px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+
+.precoProduto{
+    margin-top: -40px;
+    color: #359800;
+    font-family: Lalezar;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 0px;
+}
+
+.nomeProduto{
+    margin-top: 10px;
+    color: #000;
+    font-family: Lalezar;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.promocaoIcone{
+    align-self: flex-end;
+    padding: 5px;
+    align-items: center;
+    gap: 5px;
+    display: flex;
+    z-index: 4;
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    background-color: #1f1f1f;
+    border-radius: 60px;
+}
+
+.textoDesconto{
+    width: 50px;
+    height: 33px;
+    color: #FFF;
+    font-family: Lalezar;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.restaurante{
+    text-decoration: none;
+}
+
+.restaurante:hover{
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurante:hover{
+    transform: scale(1.05);
+}
+
+.fotoRestaurante{
+    width: 284px;
+    height: 255px;
+    border-radius: 10px;
+    border: 5px solid #000;
+    background: url(/img/bk.png) lightgray 50% / cover no-repeat;
+    box-shadow: 7px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.nomeRestaurante{
+    text-align: center;
+    margin-top: 15px;
+    align-self: center;
+    color: #FFF;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

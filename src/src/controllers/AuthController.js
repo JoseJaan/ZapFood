@@ -76,10 +76,10 @@ class AuthController{
 
             // Redirecionar para a página principal ou painel
             if(user.tipo == 'loja'){
-                return res.redirect('/produto');
+                return res.redirect('/paginaPrincipalLoja');
             }
             else{
-                return res.redirect('/registroCliente');
+                return res.redirect('/paginaPrincipalCliente');
             }
         } catch (error) {
             console.error(error.message);

@@ -19,6 +19,10 @@ class LojaController{
         }
     }
 
+    static async paginaPrincipal(req,res){
+        res.render('paginaPrincipalLoja');
+    }
+
     //DELETAR ENDERECO === SE ESTIVER EM UMA VENDA, ALTERAR VISIBILIDADE PARA 0
 }
 
