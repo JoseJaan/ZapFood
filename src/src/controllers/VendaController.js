@@ -87,6 +87,27 @@ class VendaController{
                 .send("Erro ao a excluir venda");
         }
     }
+
+    static async atualizarVenda(req, res) {
+        const {idVenda, idVendaProduto} = req.params;
+        const lojaId = req.user.id;
+        if (req.user.tipo !== "loja") {
+            return res.status(403).send("Acesso não autorizado.");
+        }
+        try {
+
+            const vendaAtualizada = await vendaService.atualizarVenda(idVenda,idVendaProduto,lojaId);
+    
+            if (!vendaAtualizada) {
+                return res.status(204).send("Venda não encontrado.");
+            }
+    
+            return res.status(200).json({ success: true, message: "Venda atualizado com sucesso.", venda: vendaAtualizada });
+        } catch (error) {
+            console.log(error.message);
+            return res.status(400).send("Erro ao atualizar venda");
+        }
+    }
     
 }
 

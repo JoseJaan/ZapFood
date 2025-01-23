@@ -92,6 +92,21 @@ class VendaService{
         }
     }
 
+    static async atualizarVenda(idVenda,idVendaProduto,lojaId){
+        if (!idVenda || !idVendaProduto ) {
+            throw new Error("IDs são obrigatórios");
+        }
+    
+        const venda = await vendaRepository.buscarVenda(idVenda);
+
+        if (!venda || venda.idLoja !== lojaId) {
+            return null; // Produto não encontrado ou não pertence à loja
+        }
+    
+        await vendaRepository.atualizar(idVendaProduto);
+    
+        return true;
+    }
 }
 
 module.exports = VendaService

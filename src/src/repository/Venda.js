@@ -165,6 +165,15 @@ class VendaRepository{
         }
     }
 
+    static async atualizarProdutoVenda(vendaId){
+        try {
+            await VendaProduto.destroy({ where: { vendaId } });
+        } catch (error) {
+            console.error("Erro ao atualizar venda:", error);
+            throw new Error("Erro ao atualizar venda do banco de dados.");
+        }
+    }
+
 }
     
 
