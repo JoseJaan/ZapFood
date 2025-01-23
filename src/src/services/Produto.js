@@ -22,7 +22,7 @@ class produtoService{
             throw new Error("ID do produto é obrigatório.");
         }
     
-        const camposValidos = ["nomeProduto", "precoProduto", "desconto", "descricaoProduto", "categoria","visibilidade","foto"];
+        const camposValidos = ["nomeProduto", "precoProduto", "desconto", "descricaoProduto", "categoria","visibilidade","img","public_id"];
         const dadosFiltrados = {};
     
         //Seleciona apenas os campos enviados

@@ -9,6 +9,7 @@ router.get("/empresa/:idLoja",clienteMiddleware, LojaController.buscarLoja);
 router.get("/loja", lojaMiddleware, LojaController.detalharLoja);
 router.get("/loja/detalhar", clienteMiddleware, LojaController.obterLoja);
 router.get("/paginaPrincipalLoja", lojaMiddleware, LojaController.paginaPrincipal);
+router.post("/mudarImagemLoja",upload.single('image'),lojaMiddleware,LojaController.mudarImagem);
 
 
 module.exports = router;

@@ -56,12 +56,15 @@ class ProdutoController{
         try {
 
             let fotoUrl = null;
-
+            let img;
+            let public_id
             if (req.file) {
                 const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-                    folder: "produtos",
+                    folder: "uploads",
                 });
-                fotoUrl = uploadResult.secure_url; 
+                
+                img = uploadResult.url;
+                public_id = uploadResult.public_id;
             }
 
             const produtoAtualizado = await produtoService.atualizarProduto(id, {
@@ -72,7 +75,8 @@ class ProdutoController{
                 categoria,
                 visibilidade,
                 lojaId,
-                foto: fotoUrl
+                img,
+                public_id
             });
     
             if (!produtoAtualizado) {
