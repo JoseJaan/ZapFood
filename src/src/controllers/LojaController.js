@@ -34,9 +34,26 @@ class LojaController{
 
     }
 
-    static async paginaPrincipal(req,res){
-        res.render('paginaPrincipalLoja');
+    static async paginaPrincipal(req, res) {
+        const lojaId = req.user.id;
+        try {
+            const loja = await lojaService.obterLoja(lojaId);
+            const produtos = await produtoService.listarProdutosMaisVendidos(lojaId); // Usa o método atualizado
+            res.render("paginaPrincipalLoja", {
+                loja: loja,
+                produtos: produtos.map(produto => ({
+                    nome: produto.nomeProduto,
+                    totalVendidos: produto.quantidadeVendida,
+                    preco: produto.precoProduto,
+                    foto: produto.foto,
+                })),
+            });
+        } catch (error) {
+            console.error("Erro ao carregar a página principal:", error);
+            res.status(500).send("Erro ao carregar a página principal.");
+        }
     }
+    
 
     static async excluirConta(req,res){
         const idLoja = req.user.id;

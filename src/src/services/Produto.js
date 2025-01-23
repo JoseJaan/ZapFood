@@ -99,6 +99,16 @@ class produtoService{
     
         return produto;
     }
+
+    static async listarProdutosMaisVendidos(lojaId){
+        if (!lojaId) {
+            throw new Error("ID da loja é obrigatório.");
+        }
+
+        const produtos = await produtoRepository.listarMaisVendidosPorLoja(lojaId);
+    
+        return produtos;
+    }
     
 
 }

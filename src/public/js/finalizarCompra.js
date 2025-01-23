@@ -41,6 +41,7 @@ botaoFinalizar.addEventListener("click", async ()=>{
     let valorSelecionado = null;
     for (const radio of radios) {
       if (radio.checked) {
+        console.log("Entrou no if")
         valorSelecionado = radio.value;
         break;
       }
