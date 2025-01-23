@@ -49,11 +49,13 @@
                             src="img/Eye.png" 
                             alt="" 
                             data-id="<%= item.id %>" 
-                            data-idcliente="<%= item.idCliente %>"
+                            data-idcliente="<%= item.cliente.dataValues.nome %>"
                             data-produtos='<%= JSON.stringify(item.produtos) %>'
                             data-createdat="<%= item.createdAt %>"
                         >
-                        <p class="tituloVenda"> <%= item.id %> </p>
+                        <p class="tituloVenda"> 
+                            <%= `${item.cliente.dataValues.nome} - ${new Date(item.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })} - ${new Date(item.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}` %> 
+                        </p>
                     </div>
                     <div class="editarExcluir">
                         <img class="icone" src="img/Edit.png" alt="">
@@ -61,8 +63,6 @@
                     </div>
                 </div>
                 <% }) %>
-                
-
         </div>
     </div>
 

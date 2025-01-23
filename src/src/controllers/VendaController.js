@@ -19,7 +19,6 @@ class VendaController{
                 return total + totalVenda;
             }, 0);
     
-            console.log("Vendas", vendas);
             return res.render('vendas', { loja, vendas, totalVendas });
         } catch (error) {
             console.error(error);

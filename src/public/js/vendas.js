@@ -17,34 +17,34 @@ function formatarData(dataISO) {
 }
 
 botaoVisualizar.forEach((element) => {
-    element.addEventListener('click', () => {
-        // Pega os atributos data-* do botão
-        const id = element.getAttribute('data-id');
-        const idCliente = element.getAttribute('data-idcliente');
-        const produtos = JSON.parse(element.getAttribute('data-produtos'));
-        const createdAt = element.getAttribute('data-createdat');
+  element.addEventListener('click', () => {
+      // Pega os atributos data-* do botão
+      const id = element.getAttribute('data-id');
+      const nomeCliente = element.getAttribute('data-idcliente'); // Agora pega o nome do cliente
+      const produtos = JSON.parse(element.getAttribute('data-produtos'));
+      const createdAt = element.getAttribute('data-createdat');
 
-        // Atualiza o conteúdo do modal
-        document.querySelector('.nomePerfilModalVisualizar').textContent = `Cliente: ${idCliente}`;
-        const produtosContainer = document.querySelector('.tituloProdutosModalVisualizar');
-        produtosContainer.innerHTML = ''; // Limpa os produtos antigos
+      // Atualiza o conteúdo do modal
+      document.querySelector('.nomePerfilModalVisualizar').textContent = `Cliente: ${nomeCliente}`;
+      const produtosContainer = document.querySelector('.tituloProdutosModalVisualizar');
+      produtosContainer.innerHTML = ''; // Limpa os produtos antigos
 
-        // Adiciona os produtos no modal
-        produtos.forEach((produto) => {
-            const produtoElement = document.createElement('p');
-            produtoElement.classList.add('produtoModalVisualizar');
-            produtoElement.textContent = `${produto.nomeProduto} ${formatarPreco(produto.precoProduto)}`;
-            produtosContainer.appendChild(produtoElement);
-        });
+      // Adiciona os produtos no modal
+      produtos.forEach((produto) => {
+          const produtoElement = document.createElement('p');
+          produtoElement.classList.add('produtoModalVisualizar');
+          produtoElement.textContent = `${produto.nomeProduto} ${formatarPreco(produto.precoProduto)}`;
+          produtosContainer.appendChild(produtoElement);
+      });
 
-        // Atualiza a data e o total
-        document.querySelector('.dataProdutoModalVisualizar').textContent = `DATA: ${formatarData(createdAt)}`;
-        const totalVenda = produtos.reduce((total, produto) => total + produto.precoProduto, 0);
-        document.querySelector('.totalVendaModalVisualizar').textContent = `TOTAL: ${formatarPreco(totalVenda)}`;
+      // Atualiza a data e o total
+      document.querySelector('.dataProdutoModalVisualizar').textContent = `DATA: ${formatarData(createdAt)}`;
+      const totalVenda = produtos.reduce((total, produto) => total + produto.precoProduto, 0);
+      document.querySelector('.totalVendaModalVisualizar').textContent = `TOTAL: ${formatarPreco(totalVenda)}`;
 
-        // Exibe o modal
-        modalVisualizar.style.display = 'flex';
-    });
+      // Exibe o modal
+      modalVisualizar.style.display = 'flex';
+  });
 });
 
 // Fecha o modal ao clicar fora dele
