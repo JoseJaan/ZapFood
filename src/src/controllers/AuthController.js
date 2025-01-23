@@ -33,11 +33,11 @@ class AuthController{
 
     // Registrar um novo cliente
     static async cadastro(req, res) {  
-        const { email, senha, endereco, cpf, idade, nome } = req.body;
+        const { email, senha, cpf, idade, nome } = req.body;
 
         try {
             // Chamar o serviço para registrar o cliente
-            const novoCliente = await AuthService.cadastro({ email, senha, endereco, cpf, idade, nome });
+            const novoCliente = await AuthService.cadastro({ email, senha, cpf, idade, nome });
 
             // Redirecionar ou responder em caso de sucesso
             return res.redirect("/login"); // Exemplo: redirecionar para a página de login

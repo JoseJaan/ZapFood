@@ -26,20 +26,18 @@
             <label class="enderecoExiste" for="enderecoExiste">ESCOLHER ENDEREÇO</label>
             <input type="radio" name="endereco" id="enderecoExiste">    
             <div class="enderecos">
-                <label class="checkboxEndereco" for="endereco1">Endereço 1</label>
-                <input class="checkbox" name="endereco1" type="checkbox" name="qualEndereco">
 
-                <label class="checkboxEndereco" for="endereco2">Endereço 2</label>
-                <input class="checkbox" name="endereco2" type="checkbox" name="qualEndereco">
+                <% enderecos.forEach(item => { %>
+                    <label class="checkboxEndereco" for="<%= item.idEndereco %>" > <%= item.nome %> (<%= item.rua %>)</label>
+                    <input class="checkbox" type="radio" value="<%= item.idEndereco %>" id= "<%= item.idEndereco %>"  name="enderecoExiste">
+                <% }) %>
 
-                <label class="checkboxEndereco" for="endereco3">Endereço 3</label>
-                <input class="checkbox" name="endereco3" type="checkbox" name="qualEndereco">
             </div>
         </div>
 
         <div>
-            <label class="enderecoExiste" for="enderecoExiste">ADICIONAR ENDEREÇO</label>
-            <input type="radio" name="endereco" id="enderecoExiste">
+            <label class="enderecoExiste" for="enderecoNaoExiste">ADICIONAR ENDEREÇO</label>
+            <input type="radio" name="endereco" id="enderecoNaoExiste">
 
             <div class="novoEndereco">
 
@@ -80,18 +78,18 @@
 
         <div class="enderecos">
             <label class="checkboxEndereco" for="credito">CREDITO</label>
-            <input class="checkboxx" name="credito" type="checkbox" name="qualfp">
+            <input class="checkboxx" value="credito" name="formaPagamento" type="radio">
 
             <label class="checkboxEndereco" for="debito">DEBITO</label>
-            <input class="checkboxx" name="debito" type="checkbox" name="qualfp">
+            <input class="checkboxx" value="debito" name="formaPagamento" type="radio" >
 
             <label class="checkboxEndereco" for="dinheiro">DINHEIRO</label>
-            <input class="checkboxx" name="dinheiro" type="checkbox" name="qualfp">
+            <input class="checkboxx" value="dinheiro" name="formaPagamento" type="radio">
         </div>
 
     </div>
 
-    <button class="botaoFinalizarPedido">FINALIZAR COMPRA</button>
+    <button id="botaoFinalizarPedido" class="botaoFinalizarPedido">FINALIZAR COMPRA</button>
     
     <footer></footer>
 

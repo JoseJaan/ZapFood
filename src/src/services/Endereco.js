@@ -10,9 +10,9 @@ class EnderecoService{
             throw new Error("Todos os campos são obrigatórios");
         }
 
-        const novoProduto = await enderecoRepository.cadastrarEndereco(enderecoData);
+        const novoEndereco = await enderecoRepository.cadastrarEndereco(enderecoData);
 
-        return enderecoData;
+        return novoEndereco;
     }
 
     //Atualiza o produto
@@ -79,7 +79,6 @@ class EnderecoService{
         if (!idCliente) {
             throw new Error("ID do cliente é obrigatório.");
         }
-    
         const enderecos = await enderecoRepository.listarPorCliente(idCliente);
     
         return enderecos;

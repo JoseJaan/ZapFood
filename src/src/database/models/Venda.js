@@ -20,15 +20,11 @@ const Venda = database.define('venda', {
             key: 'idEndereco'
         }
     },
-    data:{
-        type: Sequelize.DATE,
-        allowNull: false,
-    },
     visibilidade: {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {                 // Visibilidade 0 = invisível
-            isIn: [[0, 3]]          // Visibilidade 1 = visível para loja e cliente
+            isIn: [[0, 1,2,3]]          // Visibilidade 1 = visível para loja e cliente
         },                          // Visibilidade 2 = visível para loja
         defaultValue: 1,            // Visibilidade 3 = visível para cliente
     },          
@@ -37,6 +33,14 @@ const Venda = database.define('venda', {
         allowNull: false,
         references: {
             model: 'clientes', //referencia a tabela loja
+            key: 'id'
+        }
+    },
+    idLoja:{
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+            model: 'lojas', //referencia a tabela loja
             key: 'id'
         }
     }

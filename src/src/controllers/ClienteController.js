@@ -1,6 +1,7 @@
 const path = require("path");
 const clienteService = require(path.resolve("src", "services", "Cliente.js"));
 const produtoService = require(path.resolve("src", "services", "Produto.js"));
+const enderecoService = require(path.resolve("src", "services", "Endereco.js"));
 
 class ClienteController{
 
@@ -16,18 +17,21 @@ class ClienteController{
     }
 
     static async finalizarCompra(req,res){
-        res.render('finalizarCompra');
+        const enderecos = await enderecoService.listarEnderecos(req.user.id);
+        res.render('finalizarCompra',{enderecos:enderecos});
     }
 
     static async paginaEmpresa(req,res){
         res.render('paginaDaEmpresa');
     }
 
+
     static async verProduto(req,res){
         const produto = await produtoService.obterProduto(req.params.id);
         
         res.render('produtoVer',{produto:produto});
     }
+
 
 
 }

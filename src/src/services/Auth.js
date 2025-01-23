@@ -9,9 +9,12 @@ const fs = require('fs/promises');
 const mailTransport = require('../modules/email/mailTransport.js');
 class AuthService {
     static async cadastro(clienteData) {
-        const { email, senha, endereco, cpf, idade, nome } = clienteData;
+
+        const { email, senha, cpf, idade, nome } = clienteData;
+        console.log("entrou no services/auth cadastro cliente")
+
         // Validações básicas
-        if (!email || !senha || !endereco || !cpf || !idade || !nome) {
+        if (!email || !senha || !cpf || !idade || !nome) {
             throw new Error("Todos os campos são obrigatórios");
         }
         

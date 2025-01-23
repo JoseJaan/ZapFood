@@ -32,6 +32,16 @@ class CarrinhoRepository{
             where:{
                 idProduto:idProduto,
                 idUser: idUser
+            },
+            limit: 1
+        })
+
+    }
+
+    static async excluirProdutosUsuario(idUser){
+        await Carrinho.destroy({
+            where:{
+                idUser: idUser
             }
         })
 
