@@ -33,8 +33,6 @@ class VendaService{
         }
     }
     
-
-
     static async cadastrarVenda( idCliente,produtos,enderecoId) {
         let idLoja;
 
