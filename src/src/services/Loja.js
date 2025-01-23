@@ -13,6 +13,17 @@ class LojaService{
         }
         return loja;
     }
+    
+    static async deletarLoja(idLoja){
+        const vendas = await vendaRepository.buscarVendaPorId(idLoja);
+
+        if(vendas){
+            lojaRepository.atualizarCliente({visibilidade: 0})
+            return { status: "Cliente excluído com sucesso." };
+        }
+        lojaRepository.excluirCliente(idLoja);
+        return { status: "Cliente excluído com sucesso." };
+    }
 
 
 

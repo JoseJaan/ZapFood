@@ -38,6 +38,14 @@ class LojaController{
         res.render('paginaPrincipalLoja');
     }
 
+    static async excluirConta(req,res){
+        const idLoja = req.user.id;
+
+        lojaService.deletarLoja(idLoja);
+
+        res.render('login')
+    }
+
     //DELETAR ENDERECO === SE ESTIVER EM UMA VENDA, ALTERAR VISIBILIDADE PARA 0
 }
 

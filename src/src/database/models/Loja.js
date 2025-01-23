@@ -39,6 +39,14 @@ const Loja = database.define('loja', {
     nome:{
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    visibilidade: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+            isIn: [[0, 1]] 
+        },
+        defaultValue: 1,
     }
 
 

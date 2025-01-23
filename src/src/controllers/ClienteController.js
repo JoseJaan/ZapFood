@@ -51,7 +51,13 @@ class ClienteController{
             
     }
 
+    static async excluirConta(req,res){
+        const idCliente = req.user.id;
 
+        clienteService.deletarCliente(idCliente);
+
+        res.render('login')
+    }
 
 }
 

@@ -1,5 +1,5 @@
 const clienteRepository = require("../repository/Cliente");
-
+const vendaRepository = require("../repository/Venda");
 class ClienteService{
 
     //Cadastra o endereco
@@ -24,6 +24,15 @@ class ClienteService{
 
     }
 
+    static async deletarCliente(idCliente){
+        const vendas = await vendaRepository.buscarVendaPorId(idCliente);
+
+        if(vendas){
+            clienteRepository.atualizarCliente({visibilidade: 0})
+            return { status: "Cliente excluído com sucesso." };
+        }
+        clienteRepository.excluirCliente(idCliente);
+        return { status: "Cliente excluído com sucesso." };
     static async editarPerfil(nome,cpf,idade, userId){
         if(cpf.length != 11 ){
             throw new Error("CPF invalido");
@@ -34,7 +43,6 @@ class ClienteService{
         }
 
         await clienteRepository.editarPerfil(nome,cpf,idade, userId);
-
     }
 
 }
