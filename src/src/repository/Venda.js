@@ -4,13 +4,44 @@ const VendaProduto = require("../database/models/Venda-Produto.js");
 
 class VendaRepository{
 
-    static async obterVendas(userId){
-        const vendas = await Venda.findAll({where:{
-            idLoja:userId
-        }})
-
-        return vendas;
+    static async obterVendas(userId) {
+        // Busca as vendas pelo ID da loja
+        const vendas = await Venda.findAll({
+            where: {
+                idLoja: userId,
+            },
+        });
+    
+        // Extrai os IDs das vendas
+        const vendaIds = vendas.map((venda) => venda.id);
+    
+        // Caso não existam vendas, retorna um array vazio
+        if (vendaIds.length === 0) {
+            return [];
+        }
+    
+        // Busca os produtos relacionados a essas vendas
+        const vendaProdutos = await VendaProduto.findAll({
+            where: {
+                vendaId: vendaIds, // Busca pelos IDs das vendas
+            },
+        });
+    
+        // Mapeia os IDs dos produtos às vendas
+        const vendasComProdutos = vendas.map((venda) => {
+            const produtos = vendaProdutos
+                .filter((vp) => vp.vendaId === venda.id)
+                .map((vp) => vp.produtoId);
+    
+            return {
+                ...venda.toJSON(),
+                produtos, 
+            };
+        });
+    
+        return vendasComProdutos;
     }
+    
 
     static async buscarVenda(vendaId, transaction = null) {
         return await Venda.findOne({
@@ -131,6 +162,15 @@ class VendaRepository{
         } catch (error) {
             console.error("Erro ao buscar venda:", error);
             throw new Error("Erro ao buscar venda no banco de dados.");
+        }
+    }
+
+    static async atualizarProdutoVenda(vendaId){
+        try {
+            await VendaProduto.destroy({ where: { vendaId } });
+        } catch (error) {
+            console.error("Erro ao atualizar venda:", error);
+            throw new Error("Erro ao atualizar venda do banco de dados.");
         }
     }
 
