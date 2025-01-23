@@ -2,11 +2,14 @@ const path = require("path");
 const vendaService = require(path.resolve("src", "services", "Venda.js"));
 const carrinhoService = require(path.resolve("src", "services", "Carrinho.js"));
 const enderecoService = require(path.resolve("src", "services", "Endereco.js"));
+const lojaService = require(path.resolve("src", "services", "Loja.js"));
 
 class VendaController{
 
     static async detalharVenda(req,res){
-        return res.render('produto');
+        const loja = await lojaService.obterLoja(req.user.id);
+        const vendas = await vendaService.obterVendas(req.user.id);
+        return res.render('vendas',{loja: loja, vendas: vendas});
     }
 
     static async obterVenda(req,res){
