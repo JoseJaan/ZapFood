@@ -12,6 +12,7 @@ router.get("/paginaDaEmpresa",authMiddleware,ClienteController.paginaEmpresa);
 router.get("/produtoVer/:id",authMiddleware,ClienteController.verProduto);
 router.post("/finalizarCompra",authMiddleware,VendaController.cadastroVenda);
 router.delete("/cliente/excluir",authMiddleware,ClienteController.excluirConta);
+router.post("/editarPerfil",authMiddleware,ClienteController.editarPerfil);
 
 
 module.exports = router;
