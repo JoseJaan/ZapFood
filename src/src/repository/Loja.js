@@ -10,6 +10,29 @@ class LojaRepository{
             throw new Error("Erro ao buscar loja no banco de dados.");
         }
     }
+    
+    static async atualizarLoja(idLoja, data){
+        try {
+            const loja = await Loja.findByPk(idLoja);
+            if (!loja) {
+                return null;
+            }
+            await loja.update(data); // Atualiza qualquer campo fornecido
+            return loja;
+        } catch (error) {
+            console.error("Erro ao atualizar loja:", error);
+            throw new Error("Erro ao atualizar loja no banco de dados.");
+        }
+    }
+
+    static async excluirLoja(idLoja){
+        try {
+            await Loja.destroy({ where: { idLoja } });
+        } catch (error) {
+            console.error("Erro ao excluir loja:", error);
+            throw new Error("Erro ao excluir loja do banco de dados.");
+        }      
+    }
 
 
 }

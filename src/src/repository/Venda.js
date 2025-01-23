@@ -10,18 +10,21 @@ class VendaRepository{
             transaction,
         });
     }
+
     static async buscarVendaProdutos(vendaId, transaction = null) {
         return await vendaProd.findAll({
             where: { vendaId },
             transaction,
         });
     }
+
     static async buscarVendaLoja(vendaId, transaction = null) {
-            return await EmpresaVenda.findOne({
-                where: { vendaId },
-                transaction,
-            });
-        }
+        return await EmpresaVenda.findOne({
+            where: { vendaId },
+            transaction,
+        });
+    }
+
     static async criarVenda(idCliente,idLoja,enderecoId) {
         try {
             const novaVenda = new Venda();
@@ -47,28 +50,24 @@ class VendaRepository{
                     vendaId: vendaId,
                     produtoId: element.idProduto
                 });
-                
             });
-
         }
-            catch (error) {
-                console.error("Erro ao criar a relação produto-venda:", error)
-                throw new Error("Erro ao criar venda no banco de dados.");
-            }    
-        }
-
-
-
-
+        catch (error) {
+            console.error("Erro ao criar a relação produto-venda:", error)
+            throw new Error("Erro ao criar venda no banco de dados.");
+        }    
+    }
 
     static async criarEmpresaVenda(empresaVendaData) {
         try {
             return await VendaEmpresa.create(empresaVendaData);
-            }
-            catch (error) {
-                console.error("Erro ao criar a relação empresa-venda:", error)
-                throw new Error("Erro ao criar venda no banco de dados.");
-            }    }
+        }
+        catch (error) {
+            console.error("Erro ao criar a relação empresa-venda:", error)
+            throw new Error("Erro ao criar venda no banco de dados.");
+        }    
+    }
+
     static async excluirVenda(vendaId, transaction = null) {
         try {
             const venda = await Venda.findByPk(vendaId);
@@ -98,6 +97,7 @@ class VendaRepository{
             throw new Error("Erro ao atualizar a venda no banco de dados.");
         }
     }
+
     static async removerVendaLoja(vendaId, transaction = null) {
         try {
             const venda = await VendaEmpresa.findByPk(vendaId);
@@ -110,6 +110,19 @@ class VendaRepository{
         } catch (error) {
             console.error("Erro ao atualizar a venda:", error);
             throw new Error("Erro ao atualizar a venda no banco de dados.");
+        }
+    }
+
+    static async buscarVendaPorId(id){
+        try {
+            const venda = await Venda.findByPk(id);
+            if (!venda) {
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.error("Erro ao buscar venda:", error);
+            throw new Error("Erro ao buscar venda no banco de dados.");
         }
     }
 

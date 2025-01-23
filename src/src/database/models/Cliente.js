@@ -30,6 +30,14 @@ const Cliente = database.define('cliente', {
     nome: {
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    visibilidade: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+            isIn: [[0, 1]] 
+        },
+        defaultValue: 1,
     }
 }, {
     hooks: {

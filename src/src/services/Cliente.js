@@ -1,5 +1,5 @@
 const clienteRepository = require("../repository/Cliente");
-
+const vendaRepository = require("../repository/Venda");
 class ClienteService{
 
     //Cadastra o endereco
@@ -22,6 +22,17 @@ class ClienteService{
 
         return lojas;
 
+    }
+
+    static async deletarCliente(idCliente){
+        const vendas = await vendaRepository.buscarVendaPorId(idCliente);
+
+        if(vendas){
+            clienteRepository.atualizarCliente({visibilidade: 0})
+            return { status: "Cliente excluído com sucesso." };
+        }
+        clienteRepository.excluirCliente(idCliente);
+        return { status: "Cliente excluído com sucesso." };
     }
 
 }
