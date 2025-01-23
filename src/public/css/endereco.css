@@ -112,7 +112,35 @@ header{
     margin-bottom: 30px;
 }
 
+.botaoSalvarDadosUsuario{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    justify-self: end;
+    align-self: flex-end;
+    z-index: 2;
+    position: absolute;
+    width: 187px;
+    height: 63px;
+    border-radius: 10px;
+    background: #007e02;
+    color: #ffffff;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.opacidade{
+    opacity: 0.5;
+    
+}
+
 .campoInputNome{
+    font-family: 'Lalezar';
+    font-size: 23px;
+    padding: 10px;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #3B3B3B;
@@ -120,6 +148,9 @@ header{
 }
 
 .campoInputCPF{
+    font-family: 'Lalezar';
+    font-size: 23px;
+    padding: 10px;
     width: 70%;
     height: 48px;
     border-radius: 10px;
@@ -137,11 +168,41 @@ header{
 }
 
 .campoInputDN{
-    width: 30%;
+    font-family: 'Lalezar';
+    font-size: 23px;
+    padding: 10px;
+    text-align: center;
+    width: 10%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #3B3B3B;
     background: #FFF;
+}
+
+.botaoEditarDadosUsuario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: end;
+    align-self: flex-end;
+    z-index: 2;
+    position: absolute;
+    width: 187px;
+    height: 63px;
+    border-radius: 10px;
+    background: #3B3B3B;
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.botaoEditarDadosUsuario:hover,.botaoSalvarDadosUsuario:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+
 }
 
 .enderecos{

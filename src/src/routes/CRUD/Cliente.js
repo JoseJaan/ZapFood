@@ -11,6 +11,7 @@ router.get("/finalizarCompra",authMiddleware,ClienteController.finalizarCompra);
 router.get("/paginaDaEmpresa",authMiddleware,ClienteController.paginaEmpresa);
 router.get("/produtoVer/:id",authMiddleware,ClienteController.verProduto);
 router.post("/finalizarCompra",authMiddleware,VendaController.cadastroVenda);
+router.post("/editarPerfil",authMiddleware,ClienteController.editarPerfil);
 
 
 module.exports = router;

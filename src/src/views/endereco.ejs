@@ -161,19 +161,21 @@
 
     <div class="dadosUsuario">
         <p class="tituloDadosUsuario">DADOS PESSOAIS</p>
+        <div id="botaoEditarDadosUsuario" class="botaoEditarDadosUsuario">EDITAR</div>
+        <div id="botaoSalvarDadosUsuario" class="botaoSalvarDadosUsuario">SALVAR</div>
         <div class="primeirosDados">
             <div class="campo">
                 <label for="nome">NOME</label>
-                <input value="<%= cliente.nome %>" class="campoInputNome" type="text" id="nome">
+                <input value="<%= cliente.nome %>" class="campoInputNome opacidade" type="text" id="nomeUsuario" readonly>
             </div>
             <div class="campo">
                 <label for="cpf">CPF</label>
-                <input value="<%= cliente.cpf %>" class="campoInputCPF" type="text" id="cpf">
+                <input value="<%= cliente.cpf %>" class="campoInputCPF opacidade" type="text" id="cpf" readonly>
             </div>
         </div>
         <div class="campo">
-            <label for="cpf">DATA DE NASCIMENTO</label>
-            <input class="campoInputDN" type="date" id="cpf">
+            <label for="cpf">IDADE</label>
+            <input class="campoInputDN opacidade" value="<%= cliente.idade %>" type="number" id="idade" readonly>
         </div>
     </div>
     <script>
@@ -198,6 +200,11 @@
     </div>
 </div>
 
+<% if (error) { %>
+    <script>
+      alert("<%= error %>");
+    </script>
+  <% } %>
     
     <script src="/js/endereco.js"></script>
     
