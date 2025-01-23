@@ -10,6 +10,8 @@ class ProdutoController{
 
     //Cadastrar produto
     static async cadastro(req,res){
+
+    
         const { nomeProduto, precoProduto, desconto, descricaoProduto } = req.body;
 
         //Verifica se o usuário autenticado é uma loja
@@ -21,15 +23,18 @@ class ProdutoController{
 
         try{
             let fotoUrl = null;
-
+            let img;
+            let public_id
             if (req.file) {
                 const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-                    folder: "produtos",
+                    folder: "uploads",
                 });
-                fotoUrl = uploadResult.secure_url; 
+                
+                img = uploadResult.url;
+                public_id = uploadResult.public_id;
             }
 
-            const novoProduto = produtoService.cadastrarProduto({nomeProduto,precoProduto,desconto,descricaoProduto,Loja_idLoja,foto: fotoUrl})
+            const novoProduto = produtoService.cadastrarProduto({nomeProduto,precoProduto,desconto,descricaoProduto,Loja_idLoja,img,public_id})
 
             return res.redirect("/produto");
         }
@@ -138,6 +143,7 @@ class ProdutoController{
         }
     }
     
+
 }
 
 module.exports = ProdutoController

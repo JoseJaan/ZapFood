@@ -52,6 +52,13 @@ class ClienteRepository{
         cliente.save();
     }
 
+    static async mudarImagem(imagem, userId){
+       const cliente = await Cliente.findByPk(userId);
+        cliente.img = imagem.url;
+        cliente.save();
+
+    }
+
 
 
 }

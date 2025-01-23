@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Erro ao buscar produto');
             const produto = await response.json();
 
-            document.querySelector('.fotoVisualizar').innerHTML = produto.imagem 
-                ? `<img src="${produto.imagem}" alt="${produto.nomeProduto}">`
+            document.querySelector('.fotoVisualizar').innerHTML = produto.img
+                ? `<img class="imagemProdutoModal" src="${produto.img}" alt="${produto.nomeProduto}">`
                 : '<p>Imagem não disponível</p>';
             document.querySelector('.tituloProdutoVisualizar').textContent = produto.nomeProduto;
             document.querySelector('.precoProdutoVisualizar').textContent = `R$ ${produto.precoProduto.toFixed(2)}`;
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     botaoAdicionarProduto.addEventListener('click', (event) => {
         event.preventDefault();
 
-        const imagem = document.getElementById('imagemCadastro').files[0];
+        const imagem = document.getElementById('imagemCadastro');
         const nomeProduto = document.getElementById('nomeCadastrarAdicionar').value;
         const precoProduto = document.getElementById('precoCadastrarAdicionar').value;
         const desconto = document.getElementById('descontoCadastrarAdicionar').value;
@@ -177,14 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
         form.action = '/produto/cadastro';
         form.enctype = 'multipart/form-data';
 
-        if (imagem) {
-            const inputImagem = document.createElement('input');
-            inputImagem.type = 'hidden';
-            inputImagem.name = 'imagem';
-            inputImagem.value = imagem.name;
-            form.appendChild(inputImagem);
-        }
 
+        form.appendChild(imagem);
         form.appendChild(criarInputOculto('nomeProduto', nomeProduto));
         form.appendChild(criarInputOculto('precoProduto', precoProduto));
         form.appendChild(criarInputOculto('desconto', desconto));

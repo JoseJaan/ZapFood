@@ -312,6 +312,14 @@ header{
     line-height: normal;
 }
 
+.imagemProdutoModal{
+    width: 270px;
+    height: 230px;
+  object-fit: cover; /* Garante que a imagem se adapta sem distorções */
+  top: 0;
+  left: 0;
+}
+
 .tituloProdutoVisualizar{
     margin-top: -15px;
     color: #000;

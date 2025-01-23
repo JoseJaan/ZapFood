@@ -38,6 +38,14 @@ const Cliente = database.define('cliente', {
             isIn: [[0, 1]] 
         },
         defaultValue: 1,
+    },
+    img:{
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    public_id:{
+        type: Sequelize.STRING,
+        allowNull: true
     }
 }, {
     hooks: {

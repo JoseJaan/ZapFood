@@ -324,3 +324,29 @@ botaoSalvarDadosDoUsuario.addEventListener('click',async()=>{
     });
 
 })
+
+const fileInput = document.getElementById('file-input');
+const uploadArea = document.getElementById('fotoPerfilUsuario');
+
+uploadArea.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+fileInput.addEventListener('change', () => {
+    const formulario = document.createElement('form');
+    formulario.method = 'post';
+    formulario.action = '/mudarImagemUsuario'; // Rota para o backend
+    formulario.style.display = 'none';
+    formulario.enctype = 'multipart/form-data';
+
+    formulario.appendChild(document.getElementById("file-input"));
+
+    document.body.appendChild(formulario);
+
+    formulario.submit();
+
+    alert("Endereço cadastrado com sucesso!")
+
+    document.body.removeChild(formulario);
+  
+});

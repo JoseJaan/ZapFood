@@ -1,5 +1,8 @@
+const path = require("path");
 const clienteRepository = require("../repository/Cliente");
 const vendaRepository = require("../repository/Venda");
+const cloudinary = require(path.resolve("config", "cloudinary"));
+
 class ClienteService{
 
     //Cadastra o endereco
@@ -45,7 +48,13 @@ class ClienteService{
 
         await clienteRepository.editarPerfil(nome,cpf,idade, userId);
     }
-
+    
+    static async mudarImagem(caminho, userId){
+        const imagem = await cloudinary.uploader.upload(caminho, {
+                      folder: "uploads",
+                    });
+        await clienteRepository.mudarImagem(imagem,userId);
+    }
 }
 
 module.exports = ClienteService;

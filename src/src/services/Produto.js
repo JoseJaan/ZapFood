@@ -4,7 +4,7 @@ class produtoService{
 
     //Cadastra o produto
     static async cadastrarProduto(produtoData){
-        const { nomeProduto, precoProduto, desconto, descricaoProduto, categoria, Loja_idLoja, foto } = produtoData;
+        const { nomeProduto, precoProduto, desconto, descricaoProduto, categoria, Loja_idLoja, img, public_id } = produtoData;
 
         if (!precoProduto || !desconto || !descricaoProduto || !nomeProduto) {
             throw new Error("Todos os campos são obrigatórios");
