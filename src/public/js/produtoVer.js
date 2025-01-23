@@ -1,28 +1,25 @@
 const botao = document.getElementById("botaoAdicionaraoCarrinho");
 const id = document.getElementById("idProduto");
 
-botao.addEventListener('click',async ()=>{
+botao.addEventListener('click', async (event) => {
     event.preventDefault();
+    
+    try {
+        const response = await fetch('/adicionarAoCarrinho', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id.value }),
+        });
 
-    const formulario = document.createElement('form');
-    formulario.method = 'post';
-    formulario.action = '/adicionarAoCarrinho'; // Rota para o backend
-    formulario.style.display = 'none';
-
-    // Criação dos inputs dinâmicos
-    const inputID = document.createElement('input');
-    inputID.type = 'text';
-    inputID.name = 'id';
-    inputID.value = id.value;
-
-    formulario.appendChild(inputID);
-
-    document.body.appendChild(formulario);
-    await formulario.submit();
-
-    alert("Adicionado ao carrinho com sucesso!");
-
-    await document.body.removeChild(formulario);
-
-
-})
+        if (response.ok) {
+            const { redirectUrl } = await response.json();
+            window.location.href = redirectUrl; // Redireciona o usuário para a URL fornecida
+        } else {
+            const errorMessage = await response.text();
+            alert(`Erro: ${errorMessage}`);
+        }
+    } catch (error) {
+        alert("Ocorreu um erro ao adicionar o produto ao carrinho.");
+        console.error(error);
+    }
+});

@@ -44,7 +44,7 @@ lixeiras.forEach((element) => {
         formulario.appendChild(inputId);
         document.body.appendChild(formulario);
         
-        await formulario.submit();
+        formulario.submit();
         alert("Produto removido com sucesso!");
         
         // Remover o produto do DOM
@@ -54,6 +54,6 @@ lixeiras.forEach((element) => {
         // Recalcular o total após remover o produto
         calcularTotal();
         
-        await document.body.removeChild(formulario);
+        document.body.removeChild(formulario);
     });
 });

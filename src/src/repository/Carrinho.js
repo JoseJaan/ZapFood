@@ -7,7 +7,7 @@ const { where } = require("sequelize");
 class CarrinhoRepository{
 
     static async buscarProdutos(id){
-        const idProdutos = await Carrinho.findAll({where: {idUser: id}});
+        const idProdutos = await Carrinho.findAll({where: {idUser: id},attributes: ['idProduto'],});
         const produtos = Array();
         for (const element of idProdutos) {
             const produtoAchado = await Produto.findByPk(element.idProduto);
