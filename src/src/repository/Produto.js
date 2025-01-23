@@ -1,4 +1,7 @@
+const { Op, Sequelize } = require("sequelize");
 const Produto = require("../database/models/Produto.js");
+const VendaProd = require("../database/models/Venda-Produto.js");
+const Venda = require("../database/models/Venda.js");
 
 class produtoRepository{
     static async cadastrar(produtoData){
@@ -67,6 +70,54 @@ class produtoRepository{
         } catch (error) {
             console.error("Erro ao listar produtos:", error);
             throw new Error("Erro ao buscar produtos no banco de dados.");
+        }
+    }
+
+    static async listarMaisVendidosPorLoja(lojaId) {
+        try {
+    
+            // Buscar todas as vendas da loja especificada
+            const vendasLoja = await Venda.findAll({
+                where: { idLoja: lojaId },
+                attributes: ['id'], // Obtemos apenas os IDs das vendas
+            });
+    
+            // Extrair os IDs das vendas
+            const vendasIds = vendasLoja.map(venda => venda.id);
+    
+            // Consultar os produtos mais vendidos
+            const produtosMaisVendidos = await VendaProd.findAll({
+                where: {
+                    vendaId: vendasIds, // Filtro para vendas da loja
+                },
+                attributes: [
+                    'produtoId',
+                    [Sequelize.fn('COUNT', Sequelize.col('produtoId')), 'quantidade_vendida']
+                ],
+                group: ['produtoId'], // Agrupa pelo produto
+                order: [[Sequelize.literal('quantidade_vendida'), 'DESC']], // Ordena pela quantidade vendida
+                limit: 3 // Limita aos 3 mais vendidos
+            });
+    
+            // Buscar detalhes dos produtos mais vendidos
+            const produtosDetalhados = await Promise.all(
+                produtosMaisVendidos.map(async produto => {
+                    const detalhesProduto = await Produto.findByPk(produto.produtoId);
+                    return {
+                        produtoId: produto.produtoId,
+                        nomeProduto: detalhesProduto?.dataValues?.nomeProduto || "Nome não disponível",
+                        quantidadeVendida: produto.dataValues.quantidade_vendida,
+                        precoProduto: detalhesProduto?.dataValues?.precoProduto,
+                        foto: detalhesProduto?.dataValues?.foto,
+                    };
+                })
+            );
+    
+            return produtosDetalhados;
+    
+        } catch (error) {
+            console.error("Erro ao buscar os produtos mais vendidos:", error);
+            throw new Error("Erro ao buscar os produtos mais vendidos no banco de dados.");
         }
     }
 

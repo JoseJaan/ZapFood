@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
-    <title>Página Inicial</title>
+    <title><%= loja.nome %> - Página Inicial</title>
 </head>
 <body>
 
@@ -16,20 +16,19 @@
             <img class="icone" src="img/sair.png" alt="">
             <p class="sair">SAIR</p>
         </a>
-        </div>
         <img src="img/logo.png" alt="">
         <div class="minhaEmpresa">
-            <p class="textoEmpresa">MINHA LOJA</p>
+            <p class="textoEmpresa"><%= loja.nome %></p>
             <div class="imagemEmpresa"></div>
         </div>
     </header>
 
-    <p class="nomeDaLojaTitulo">ACERBINHO LANCHES</p>
+    <p class="nomeDaLojaTitulo"><%= loja.nome %></p>
 
     <div class="opcoes">
         <a href="/produto" class="quadrado quadradoCardapio">
             <img class="imgCardapio" src="img/cardapio.png" alt="">
-            <div class="escrito">CARDAPIO</div>
+            <div class="escrito">CARDÁPIO</div>
         </a>
         <a href="/venda" class="quadrado quadradoVendas">
             <img class="imgCrescimento" src="img/crescimento.png" alt="">
@@ -44,11 +43,17 @@
     </div>
 
     <div class="produtosMais">
-        <div class="produto">
-            <div class="imagemProduto"></div>
-            <p class="nomeProduto">Pastel de Carne</p>
-            <p class="nomeProduto">250 unidades</p>
-        </div>
+        <% if (produtos.length > 0) { %>
+            <% produtos.forEach(produto => { %>
+                <div class="produto">
+                    <div class="imagemProduto"></div>
+                    <p class="nomeProduto"><%= produto.nome %></p>
+                    <p class="nomeProduto"><%= produto.totalVendidos %> unidades</p>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p class="nenhumProduto">Nenhum produto disponível.</p>
+        <% } %>
     </div>
 
     <footer></footer>

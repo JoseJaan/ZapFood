@@ -4,7 +4,7 @@ class LojaService{
 
     static async obterLoja(lojaId) {
         if (!lojaId) {
-            throw new Error("ID do produto é obrigatório.");
+            throw new Error("ID da loja é obrigatório.");
         }
     
         const loja = await lojaRepository.buscarLoja(lojaId);

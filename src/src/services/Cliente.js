@@ -33,6 +33,7 @@ class ClienteService{
         }
         clienteRepository.excluirCliente(idCliente);
         return { status: "Cliente excluído com sucesso." };
+    }
     static async editarPerfil(nome,cpf,idade, userId){
         if(cpf.length != 11 ){
             throw new Error("CPF invalido");
