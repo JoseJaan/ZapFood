@@ -10,7 +10,6 @@ function autenticarToken(req, res, next) {
     
     try {
         const dados = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(dados)
         if(dados.tipo == 'loja'){
             return res.redirect("/paginaPrincipalLoja");
         }

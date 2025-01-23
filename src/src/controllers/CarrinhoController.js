@@ -8,9 +8,15 @@ class CarrinhoController{
         res.render('carrinho', {produtos: produtos});
     }
 
-    static async adicionarAoCarrinho(req,res){
-        carrinhoService.adicionarProdutoAoCarrinho(req.user.id,req.body.id);
-        res.redirect('/verCarrinho')
+    static async adicionarAoCarrinho(req, res) {
+        try {
+            await carrinhoService.adicionarProdutoAoCarrinho(req.user.id, req.body.id);
+            
+            res.status(200).json({ redirectUrl: '/verCarrinho' }); 
+        } catch (error) {
+            console.error(error.message);
+            res.status(400).send(error.message); // Retorna a mensagem de erro ao cliente
+        }
     }
 
     static async excluirProdutoCarrinho(req,res){

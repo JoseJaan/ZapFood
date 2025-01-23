@@ -30,8 +30,6 @@ class EnderecoService{
                 dadosFiltrados[campo] = enderecoData[campo];
             }
         });
-
-        console.log(dadosFiltrados)
     
         if (Object.keys(dadosFiltrados).length === 0) {
             throw new Error("Nenhum campo para atualizar foi enviado.");

@@ -2,11 +2,9 @@ document.getElementById('botaoLogin').addEventListener('click', (event) => {
     event.preventDefault(); // Impede o comportamento padrão do envio do formulário
 
 
-    console.log("Positivo");
     // Captura os valores dos campos de entrada
     const email = document.getElementById('usuario').value;
     const senha = document.getElementById('senha').value;
-    console.log(email, senha);
     // Verifica se os campos foram preenchidos
     if (!email || !senha) {
         alert('Por favor, preencha todos os campos!');

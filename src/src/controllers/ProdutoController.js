@@ -90,8 +90,6 @@ class ProdutoController{
         const lojaId = req.user.id; // ID da loja do usuário autenticado
     
         try {
-            console.log(id)
-            console.log(lojaId)
             const resultado = await produtoService.excluirProduto(id, lojaId);
     
             if (!resultado) {

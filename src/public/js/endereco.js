@@ -137,10 +137,8 @@ function preencherModalVisualizar(endereco) {
 // Adiciona evento a todos os botões de visualização
 botoesVisualizar.forEach((element) => {
     element.addEventListener('click', () => {
-        console.log("Entrou no log")
         const index = element.getAttribute('data-index'); // Obtém o índice do endereço
         const endereco = enderecos[index]; // Obtém o endereço correspondente
-        console.log(endereco)
         preencherModalVisualizar(endereco); // Preenche o modal com os dados
         modalVisualizar.style.display = "flex"; // Exibe o modal
     });

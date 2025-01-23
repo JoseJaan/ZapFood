@@ -35,7 +35,7 @@
             </div>
             <div class="precoProduto">
                 <p class="textoValor">VALOR</p>
-                <p class="textoValorEscrito">R$ <%= item.precoProduto %></p>
+                <p class="textoValorEscrito">R$ <%= item.precoProduto * ( 1 - (item.desconto/100)) %></p>
 
                 <img data-id="<%= item.idProduto %>" class="lixeiraIcone" src="img/Trash.png" alt="">
             </div>

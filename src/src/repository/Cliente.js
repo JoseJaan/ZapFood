@@ -11,7 +11,6 @@ class ClienteRepository{
             limit: 4,
           });
 
-          console.log(maioresDescontos)
           return maioresDescontos;
     }
 

@@ -1,5 +1,6 @@
 const path = require("path");
 const lojaService = require(path.resolve("src", "services", "Loja.js"));
+const produtoService = require(path.resolve("src", "services", "Produto.js"));
 class LojaController{
 
     static async detalharLoja(req,res){
@@ -17,6 +18,20 @@ class LojaController{
             console.error(error.message);
             return res.status(400).send("Erro ao obter loja");
         }
+    }
+
+    static async buscarLoja(req,res){
+        const lojaId = req.params.idLoja;
+
+        const loja = await lojaService.obterLoja(lojaId);
+        const produtos = await produtoService.listarProdutos(lojaId); 
+        const produtosEmPromocao = produtos.filter(produto => produto.desconto > 0);
+        res.render('paginaDaEmpresa', {
+            loja: loja,
+            produtosEmPromocao: produtosEmPromocao,
+            todosProdutos: produtos,
+        });
+
     }
 
     static async paginaPrincipal(req,res){

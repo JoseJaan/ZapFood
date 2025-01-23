@@ -9,8 +9,10 @@ const fs = require('fs/promises');
 const mailTransport = require('../modules/email/mailTransport.js');
 class AuthService {
     static async cadastro(clienteData) {
+
         const { email, senha, cpf, idade, nome } = clienteData;
         console.log("entrou no services/auth cadastro cliente")
+
         // Validações básicas
         if (!email || !senha || !cpf || !idade || !nome) {
             throw new Error("Todos os campos são obrigatórios");
@@ -51,7 +53,6 @@ class AuthService {
     static async autenticar(email, senha) {
         // Buscar o usuário no banco pelo e-mail
         const user = await userRepository.buscarPorEmail(email);
-        console.log(user);
 
         if (!user) {
             throw new Error('E-mail ou senha inválidos.');
@@ -64,8 +65,6 @@ class AuthService {
         else{
             user.tipo = 'cliente'
         }
-
-        console.log(`tipo no service autenticar: ${user.tipo}`)
 
         // Comparar a senha fornecida com o hash armazenado
         const senhaCorreta = await bcrypt.compare(senha, user.senha);

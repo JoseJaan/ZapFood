@@ -1,11 +1,9 @@
 document.getElementById('botaoLogin').addEventListener('click', async (event) => {
     event.preventDefault(); // Impede o comportamento padrão do envio do formulário
 
-    console.log("Positivo");
     
     // Captura o valor do campo de entrada
     const email = document.getElementById('usuario').value;
-    console.log(email); // Mostra o valor no console para depuração
 
     // Verifica se o campo foi preenchido
     if (!email) {
