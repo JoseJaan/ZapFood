@@ -4,6 +4,7 @@ const enderecoService = require(path.resolve("src", "services", "Endereco.js"));
 class EnderecoController{
 
     static async cadastrarEndereco(req,res){
+        
         return res.render('endereco')
     }
 
@@ -88,12 +89,13 @@ class EnderecoController{
 
     //Lista todos os enderecos do cliente
     static async listarEnderecos(req, res) {
+        const error = req.query.error;
         const idCliente = req.user.id; 
         const cliente = await enderecoService.obterUsuario(idCliente);
         try {
             const enderecos = await enderecoService.listarEnderecos(idCliente);
             
-            return res.render('endereco',{enderecos: enderecos,cliente:cliente});
+            return res.render('endereco',{enderecos: enderecos,cliente:cliente, error:error});
         } catch (error) {
             console.error(error.message);
             return res.status(500).send("Erro ao listar enderecos.");

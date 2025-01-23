@@ -4,6 +4,14 @@ const VendaProduto = require("../database/models/Venda-Produto.js");
 
 class VendaRepository{
 
+    static async obterVendas(userId){
+        const vendas = await Venda.findAll({where:{
+            idLoja:userId
+        }})
+
+        return vendas;
+    }
+
     static async buscarVenda(vendaId, transaction = null) {
         return await Venda.findOne({
             where: { id: vendaId },

@@ -264,3 +264,63 @@ botaoEditar.addEventListener("click", () => {
             });
     }
 });
+
+const botaoEditarDadosDoUsuario = document.getElementById("botaoEditarDadosUsuario");
+const botaoSalvarDadosDoUsuario = document.getElementById("botaoSalvarDadosUsuario");
+const campos = document.querySelectorAll(".opacidade");
+
+botaoEditarDadosDoUsuario.addEventListener('click',()=>{
+    botaoEditarDadosDoUsuario.style.display = 'none';
+    botaoSalvarDadosDoUsuario.style.display = 'flex';
+    campos.forEach(element => {
+        element.style.opacity = '100'
+        element.readOnly = false;
+    });
+})
+
+
+botaoSalvarDadosDoUsuario.addEventListener('click',async()=>{
+
+    const nome = document.getElementById('nomeUsuario').value;
+    const cpf = document.getElementById('cpf').value;
+    const idade = document.getElementById('idade').value;
+
+    const formulario = document.createElement('form');
+    formulario.method = 'post';
+    formulario.action = '/editarPerfil'; // Rota para o backend
+    formulario.style.display = 'none';
+
+    // Criação dos inputs dinâmicos
+    const inputNome = document.createElement('input');
+    inputNome.type = 'text';
+    inputNome.name = 'nome';
+    inputNome.value = nome;
+
+    const inputCPF = document.createElement('input');
+    inputCPF.type = 'text';
+    inputCPF.name = 'cpf';
+    inputCPF.value = cpf;
+
+    const inputIdade= document.createElement('input');
+    inputIdade.type = 'text';
+    inputIdade.name = 'idade';
+    inputIdade.value = idade;
+
+    formulario.appendChild(inputNome);
+    formulario.appendChild(inputCPF);
+    formulario.appendChild(inputIdade);
+
+    document.body.appendChild(formulario);
+    await formulario.submit();
+
+    document.body.removeChild(formulario);
+
+
+    botaoEditarDadosDoUsuario.style.display = 'flex';
+    botaoSalvarDadosDoUsuario.style.display = 'none';
+    campos.forEach(element => {
+        element.style.opacity = '0.5'
+        element.readOnly = true;
+    });
+
+})

@@ -2,43 +2,14 @@ const vendaRepository = require("../repository/Venda")
 
 class VendaService{
 
-    static async obterVenda(vendaId) {
-        if (!vendaId) {
-            throw new Error("ID da venda é obrigatório.");
-        }
-
-        // Inicia uma transação
-        const transaction = await database.transaction();
-
+    static async obterVendas(userId) {
         try {
-            // Realiza as buscas dentro da transação
-            const venda = await vendaRepository.buscarVenda(vendaId, transaction);
-            if (!venda) {
-                throw new Error("Venda não encontrada.");
-            }
+            const vendas = await vendaRepository.obterVendas(userId);
 
-            const produtos = await vendaRepository.buscarVendaProdutos(vendaId, transaction);
-            if (!produtos || produtos.length === 0) {
-                throw new Error("Nenhum produto associado a esta venda.");
-            }
-
-            const loja = await vendaRepository.buscarVendaLoja(vendaId, transaction);
-            if (!loja) {
-                throw new Error("Loja associada à venda não encontrada.");
-            }
-
-            // Confirma a transação
-            await transaction.commit();
-
-            // Retorna os dados combinados como um dicionário
-            return {
-                venda: venda.toJSON(), // Converte para objeto JS puro
-                produtos: produtos.map(produto => produto.toJSON()), // Mapeia e converte cada item
-                loja: loja.toJSON(),
-            };
+            return vendas;
+            
         } catch (error) {
             // Reverte a transação em caso de erro
-            await transaction.rollback();
             throw new Error(`Erro ao obter dados da venda: ${error.message}`);
         }
     }

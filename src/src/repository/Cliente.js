@@ -44,6 +44,14 @@ class ClienteRepository{
         }      
     }
 
+    static async editarPerfil(nome,cpf,idade,userId){
+        const cliente = await Cliente.findByPk(userId);
+        cliente.nome = nome;
+        cliente.cpf = cpf;
+        cliente.idade = idade;
+        cliente.save();
+    }
+
 
 
 }
