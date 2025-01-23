@@ -15,13 +15,6 @@
             <p class="nomePerfilModalVisualizar">GABRIEL FERREIRA DE CASTRO</p>
 
             <p class="tituloProdutosModalVisualizar">PRODUTOS</p>
-
-            <p class="produtoModalVisualizar">Porção de Batata R$ 25,00</p>
-            <p class="produtoModalVisualizar">Porção de Batata R$ 25,00</p>
-            <p class="produtoModalVisualizar">Porção de Batata R$ 25,00</p>
-            <p class="produtoModalVisualizar">Porção de Batata R$ 25,00</p>
-            <p class="produtoModalVisualizar">Porção de Batata R$ 25,00</p>
-            <p class="produtoModalVisualizar">Porção de Batata R$ 25,00</p>
             
             <p class="dataProdutoModalVisualizar">DATA: 15/10/2024 às 15:30</p>
             <p class="totalVendaModalVisualizar">TOTAL: R$ 40,00</p>
@@ -41,24 +34,34 @@
     <p class="tituloLoja"><%= loja.nome %></p>
     <div class="total">
         <p class="tituloTotal">TOTAL EM VENDAS</p>
-        <div class="totalVendas">R$ 3500,49</div>
+        <div class="totalVendas">R$ <%= totalVendas %></div>
     </div>
+    
 
     <div class="vendas">
         <div class="tituloVendas">MINHAS VENDAS</div>
         <div class="minhasVendas">
             <% vendas.forEach(item => { %>
-            <div class="venda">
-                <div class="visualizar">
-                    <img class="iconeVisualizar" src="img/Eye.png" alt="">
-                    <p class="tituloVenda"> <%= item.id %> </p>
+                <div class="venda">
+                    <div class="visualizar">
+                        <img 
+                            class="iconeVisualizar" 
+                            src="img/Eye.png" 
+                            alt="" 
+                            data-id="<%= item.id %>" 
+                            data-idcliente="<%= item.idCliente %>"
+                            data-produtos='<%= JSON.stringify(item.produtos) %>'
+                            data-createdat="<%= item.createdAt %>"
+                        >
+                        <p class="tituloVenda"> <%= item.id %> </p>
+                    </div>
+                    <div class="editarExcluir">
+                        <img class="icone" src="img/Edit.png" alt="">
+                        <img class="icone" src="img/Trash.png" alt="">
+                    </div>
                 </div>
-                <div class="editarExcluir">
-                    <img class="icone" src="img/Edit.png" alt="">
-                    <img class="icone" src="img/Trash.png" alt="">
-                </div>
-            </div>
-            <% }) %>
+                <% }) %>
+                
 
         </div>
     </div>

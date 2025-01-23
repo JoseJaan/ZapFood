@@ -1,18 +1,38 @@
 const vendaRepository = require("../repository/Venda")
+const produtoRepository = require("../repository/Produto")
 
 class VendaService{
 
     static async obterVendas(userId) {
         try {
+            // Busca as vendas e os IDs dos produtos relacionados
             const vendas = await vendaRepository.obterVendas(userId);
-
-            return vendas;
+    
+            // Adiciona os dados completos de cada produto
+            for (const venda of vendas) {
+                const produtosDetalhados = [];
+                
+                // Busca os dados de cada produto relacionado à venda
+                for (const produtoId of venda.produtos) {
+                    const produto = await produtoRepository.buscarProduto(produtoId,1);
+                    
+                    if (produto) {
+                        produtosDetalhados.push(produto);
+                    }
+                }
+    
+                // Substitui os IDs dos produtos pelos dados completos
+                venda.produtos = produtosDetalhados;
+            }
             
+            return vendas;
+    
         } catch (error) {
             // Reverte a transação em caso de erro
             throw new Error(`Erro ao obter dados da venda: ${error.message}`);
         }
     }
+    
 
 
     static async cadastrarVenda( idCliente,produtos,enderecoId) {

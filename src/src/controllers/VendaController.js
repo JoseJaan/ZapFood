@@ -6,11 +6,27 @@ const lojaService = require(path.resolve("src", "services", "Loja.js"));
 
 class VendaController{
 
-    static async detalharVenda(req,res){
-        const loja = await lojaService.obterLoja(req.user.id);
-        const vendas = await vendaService.obterVendas(req.user.id);
-        return res.render('vendas',{loja: loja, vendas: vendas});
+    static async detalharVenda(req, res) {
+        try {
+            const loja = await lojaService.obterLoja(req.user.id);
+            const vendas = await vendaService.obterVendas(req.user.id);
+    
+            // Calcula o total das vendas somando os valores dos produtos
+            const totalVendas = vendas.reduce((total, venda) => {
+                const totalVenda = venda.produtos.reduce((subtotal, produto) => {
+                    return subtotal + produto.precoProduto; 
+                }, 0);
+                return total + totalVenda;
+            }, 0);
+    
+            console.log("Vendas", vendas);
+            return res.render('vendas', { loja, vendas, totalVendas });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send(`Erro ao detalhar vendas: ${error.message}`);
+        }
     }
+    
 
     static async obterVenda(req,res){
         const vendaId = req.params;
