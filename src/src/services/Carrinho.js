@@ -23,6 +23,10 @@ class CarrinhoService{
         await carrinhoRepository.excluirProdutoCarrinho(idUser,idProduto);
     }
 
+    static async esvaziarCarrinho(userId){
+        await carrinhoRepository.excluirProdutosUsuario(userId);
+    }
+
 
 }
 

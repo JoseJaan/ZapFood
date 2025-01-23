@@ -19,10 +19,6 @@ const Cliente = database.define('cliente', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    endereco: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
     cpf: {
         type: Sequelize.STRING,
         allowNull: false,

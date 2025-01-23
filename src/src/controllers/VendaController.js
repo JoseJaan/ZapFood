@@ -1,5 +1,8 @@
 const path = require("path");
 const vendaService = require(path.resolve("src", "services", "Venda.js"));
+const carrinhoService = require(path.resolve("src", "services", "Carrinho.js"));
+const enderecoService = require(path.resolve("src", "services", "Endereco.js"));
+
 class VendaController{
 
     static async detalharVenda(req,res){
@@ -20,17 +23,27 @@ class VendaController{
     }
 
     static async cadastroVenda(req, res) {
-        const { produtos } = req.body;
-        const idCliente = req.user.id;
-
-        // Verifica se o tipo do usuário é cliente
-        if (req.user.tipo !== 'cliente') {
-            return res.status(403).send('Acesso não autorizado.');
-        }
-
         try {
-            await vendaService.cadastrarVenda({ produtos, idCliente, lojaId: req.user.lojaId });
-            return res.status(201).send('Venda cadastrada com sucesso.');
+            const produtos  = await carrinhoService.buscarProdutosCarrinho(req.user.id);
+            const idCliente = req.user.id;
+            let enderecoId;
+            if(req.body.endereco){
+                enderecoId = req.body.endereco;
+                await vendaService.cadastrarVenda(idCliente,produtos,enderecoId);
+            }
+            else{
+                const dados = {rua: req.body.rua,
+                    numero: req.body.numero,
+                    CEP: req.body.CEP,
+                    complemento: req.body.complemento,
+                    cidade: req.body.cidade,
+                    idCliente: req.user.id, // Use uma chave que faça sentido, como `userId`
+                    nome: req.body.nome}
+                    const endereco = await enderecoService.cadastrarEndereco(dados);
+                    await vendaService.cadastrarVenda(idCliente,produtos,endereco.idEndereco);
+            }
+            await carrinhoService.esvaziarCarrinho(req.user.id);
+            return res.redirect('/paginaPrincipalCliente')
         } catch (error) {
             console.error(error.message);
             return res.status(400).render('Erro ao cadastrar venda', { error: error.message });

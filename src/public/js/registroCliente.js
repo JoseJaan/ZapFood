@@ -15,7 +15,6 @@ document.getElementById('botao').addEventListener('click',()=>{
         const cpf = document.getElementById('cpf').value;
         const email = document.getElementById('email').value;
         const senha = document.getElementById('senha').value;
-        const endereco = document.getElementById('endereco').value;
 
 
         const inputNome = document.createElement('input');
@@ -38,10 +37,6 @@ document.getElementById('botao').addEventListener('click',()=>{
         inputEmail.name = 'email';
         inputEmail.value = email;
 
-        const inputEnd = document.createElement('input');
-        inputEnd.type = 'text';
-        inputEnd.name = 'endereco';
-        inputEnd.value = endereco;
 
         const inputSenha = document.createElement('input');
         inputSenha.type = 'text';
@@ -52,7 +47,6 @@ document.getElementById('botao').addEventListener('click',()=>{
         formulario.appendChild(inputCpf);
         formulario.appendChild(inputEmail);
         formulario.appendChild(inputIdade);
-        formulario.appendChild(inputEnd);
         formulario.appendChild(inputSenha);
 
         document.body.appendChild(formulario);

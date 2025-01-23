@@ -44,27 +44,17 @@ class VendaService{
     }
 
 
-    static async cadastrarVenda({ produtos, idCliente, lojaId }) {
-        // Cria a venda no banco
-        const venda = await vendaRepository.criarVenda({
-            idCliente
+    static async cadastrarVenda( idCliente,produtos,enderecoId) {
+        let idLoja;
+
+        produtos.forEach(element => {
+            idLoja = element.Loja_idLoja;
         });
 
-        // Associa os produtos à venda
-        for (const produtoId of produtos) {
-            await vendaRepository.buscarVendaProdutos({
-                vendaId: venda.id,
-                produtoId
-            });
-        }
-
-        // Associa a venda à loja
-        await vendaRepository.criarEmpresaVenda({
-            vendaId: venda.id,
-            empresaId: lojaId
-        });
-
+        const venda = await vendaRepository.criarVenda(idCliente,idLoja,enderecoId);
+        vendaRepository.criarVendaProduto(venda,produtos);
         return venda;
+
     }
 
     static async excluirVenda(vendaId, lojaId) {
@@ -76,7 +66,6 @@ class VendaService{
         const transaction = await database.transaction();
 
         try {
-            
             // Verifica se a venda pertence à loja
             const vendaLoja = await vendaRepository.buscarVendaLoja(vendaId, transaction);
             if (!vendaLoja || vendaLoja.empresaId !== lojaId) {

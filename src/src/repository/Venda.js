@@ -1,7 +1,6 @@
 const vendaProd = require("../database/models/Venda-Produto.js");
 const Venda = require("../database/models/Venda.js");
 const VendaProduto = require("../database/models/Venda-Produto.js");
-const VendaEmpresa = require("../database/models/Loja-Venda.js");
 
 class VendaRepository{
 
@@ -23,23 +22,45 @@ class VendaRepository{
                 transaction,
             });
         }
-    static async criarVenda(vendaData) {
+    static async criarVenda(idCliente,idLoja,enderecoId) {
         try {
-        return await Venda.create(vendaData);
+            const novaVenda = new Venda();
+
+            novaVenda.idEndereco = enderecoId;
+            novaVenda.idCliente = idCliente;
+            novaVenda.idLoja = idLoja;
+
+            await novaVenda.save();
+            console.log(novaVenda.id)
+            return novaVenda.id;
+
         }
         catch (error) {
             console.error("Erro ao criar a venda:", error)
             throw new Error("Erro ao criar venda no banco de dados.");
         }
     }
-    static async VendaProduto(vendaProd) {
+    static async criarVendaProduto(vendaId, produtos) {
         try {
-            return await VendaProduto.create(vendaProd);
-            }
+            produtos.forEach(element => {
+                VendaProduto.create({
+                    vendaId: vendaId,
+                    produtoId: element.idProduto
+                });
+                
+            });
+
+        }
             catch (error) {
                 console.error("Erro ao criar a relação produto-venda:", error)
                 throw new Error("Erro ao criar venda no banco de dados.");
-            }    }
+            }    
+        }
+
+
+
+
+
     static async criarEmpresaVenda(empresaVendaData) {
         try {
             return await VendaEmpresa.create(empresaVendaData);
