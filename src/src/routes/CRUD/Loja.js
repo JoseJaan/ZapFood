@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require("path");
 const router = express.Router();
+const upload = require(path.resolve("config","multer"));
 const clienteMiddleware = require(path.resolve("src","middleware","clienteMiddleware.js"));
 const lojaMiddleware = require(path.resolve("src","middleware","lojaMiddleware.js"));
 const LojaController = require(path.resolve("src","controllers","LojaController.js"));
