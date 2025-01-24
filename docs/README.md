@@ -1,4 +1,4 @@
-## :books: Descrição do produto
+## 📚 Descrição do produto
 
 ZapFood consiste em um sofwtare capaz de prover uma conexão entre clientes e lojas. Cada loja poderá se cadastrar no sistema web e administrar sua loja online. Cada cliente poderá se cadastrar no sistema e realizar pedidos por produtos nas lojas cadastradas. Cada loja poderá controlar seu horário de funcionamento, produtos e vendas.
 O sistema conta com administradores gerais que possuem permissão para visualizar e editar todos os dados existentes. O cliente, a loja e o adminstrador do sistema terão autenticação com login e senha criptografados. A aplicação seguirá um modelo de estruturação MVC, utilizando Ejs, Express, Sequelize e mysql. As imagens dos produtos ficarão armazenadas no Cloudinary.
@@ -25,7 +25,7 @@ O sistema conta com administradores gerais que possuem permissão para visualiza
 - Commits devem ser realizados em português seguindo o padrão de commits semânticos, com base nessa [documentação](https://github.com/iuricode/padroes-de-commits).
 - Adoção da "Single Responsability" para cada commit.
 - A branch `main` deve conter o código mais estável. 
-- As branches `front` e `back` deverão conter os códigos mais atualizados.
+- As branch `back` deve conter o código mais atualizado.
 - Para cada nova alteração e modificação no código, deverá ser criada uma nova branch, chamada de `branch de trabalho`, respeitando a seguinte nomenclatura:
     - **feature/**: Para novas funcionalidades.  
       Exemplo: `feature/pagina-login`.
@@ -35,8 +35,8 @@ O sistema conta com administradores gerais que possuem permissão para visualiza
       Exemplo: `hotfix/login-empresa`.
     - **refactor/**: Para refatorar uma parte do código.  
       Exemplo: `refactor/refatorado-login-cliente`.
- - Após a modificação for concluída em uma `branch de trabalho`, deve ser criado um Pull Request para uma das branches secundárias: `front` ou `back`, a depender da modificação.
- - A cada 2 dias, as branches `front` e `back` devem ser mergeadas na `main` após haver garantia de que estão funcionais e consistentes. 
+ - Após a modificação for concluída em uma `branch de trabalho`, deve ser criado um Pull Request para a branch `back`.
+ - A cada 2 dias, a branch `back` deve ser mergeada na `main` após haver garantia de que as funcionalidades estão funcionais e consistentes. 
 
 ## 🧑‍💻 Como rodar o projeto
 1. Clone o repositório: `git clone https://github.com/JoseJaan/ZapFood`
@@ -55,7 +55,7 @@ O sistema conta com administradores gerais que possuem permissão para visualiza
   - `API_KEY` = Chave do Cloudinary
   - `CLOUD_NAME` = Nome do Cloudinary
   - `EMAIL_USER` = Email utilizado para enviar emails de redefinição de senha
-  - `EMAIL_PASS` = Senha do emai
+  - `EMAIL_PASS` = Senha do email
 
 ## 📁 Estrutura de pastas
 
