@@ -14,7 +14,6 @@ class produtoRepository{
     }
 
     static async atualizar(idProduto, dadosAtualizados) {
-        console.log("Chegou no repository!")
         try {
             const produto = await Produto.findByPk(idProduto);
             if (!produto) {

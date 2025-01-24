@@ -74,9 +74,6 @@ class VendaService{
             // Remove os produtos associados à venda
             await vendaRepository.removerProdutosDaVenda(vendaId, transaction);
 
-            // Remove a associação da venda com a loja
-            await vendaRepository.removerVendaLoja(vendaId, transaction);
-
             // Remove a venda
             const resultado = await vendaRepository.excluirVenda(vendaId, transaction);
 
@@ -94,6 +91,43 @@ class VendaService{
             throw new Error(`Erro ao excluir venda: ${error.message}`);
         }
     }
+
+    static async deletarVendaPermanente(vendaId, lojaId) {
+        if (!vendaId) {
+            throw new Error("ID da venda é obrigatório.");
+        }
+
+        // Inicia uma transação
+        const transaction = await database.transaction();
+
+        try {
+            // Verifica se a venda pertence à loja
+            const vendaLoja = await vendaRepository.buscarVendaLoja(vendaId, transaction);
+            if (!vendaLoja || vendaLoja.empresaId !== lojaId) {
+               throw new Error("Venda não pertence à loja autenticada.");
+            }
+
+            // Remove os produtos associados à venda
+            await vendaRepository.removerProdutosVendaPermanente(vendaId, transaction);
+
+            // Remove a venda
+            const resultado = await vendaRepository.excluirVendaPermanente(vendaId, transaction);
+
+            if (!resultado) {
+                throw new Error("Venda não encontrada.");
+            }
+
+            // Confirma a transação
+            await transaction.commit();
+
+            return true; // Sucesso
+        } catch (error) {
+            // Reverte a transação em caso de erro
+            await transaction.rollback();
+            throw new Error(`Erro ao excluir venda: ${error.message}`);
+        }
+    }
+
 
     static async atualizarVenda(idVenda,produtoId, lojaId){
         if (!idVenda ) {

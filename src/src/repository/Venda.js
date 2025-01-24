@@ -73,7 +73,6 @@ class VendaRepository{
             novaVenda.idLoja = idLoja;
 
             await novaVenda.save();
-            console.log(novaVenda.id)
             return novaVenda.id;
 
         }
@@ -120,7 +119,17 @@ class VendaRepository{
             console.error("Erro ao atualizar a venda:", error);
             throw new Error("Erro ao atualizar a venda no banco de dados.");
         }
-    }       
+    }     
+    
+    static async excluirVendaPermanente(vendaId, transaction = null) {
+        try {
+            await VendaProduto.destroy({ where: { vendaId } });
+            return true;
+        } catch (error) {
+            console.error("Erro ao atualizar a venda:", error);
+            throw new Error("Erro ao atualizar a venda no banco de dados.");
+        }
+    } 
     
     static async removerProdutosDaVenda(vendaId, transaction = null) {
         try {
@@ -137,18 +146,13 @@ class VendaRepository{
         }
     }
 
-    static async removerVendaLoja(vendaId, transaction = null) {
+    static async removerProdutosVendaPermanente(vendaId, transaction = null) {
         try {
-            const venda = await VendaEmpresa.findByPk(vendaId);
-            if (!venda) {
-                return null;
-            }
-            const dadosAtualizados = {visibilidade:3}
-            await venda.update(dadosAtualizados); // Atualiza qualquer campo fornecido
-            return venda;
+            await VendaProduto.destroy({ where: { vendaId } });
+            return true;
         } catch (error) {
-            console.error("Erro ao atualizar a venda:", error);
-            throw new Error("Erro ao atualizar a venda no banco de dados.");
+            console.error("Erro ao excluir a venda:", error);
+            throw new Error("Erro ao excluir a venda no banco de dados.");
         }
     }
 

@@ -16,9 +16,7 @@ class CarrinhoService{
 
     static async adicionarProdutoAoCarrinho(idUser, idProduto) {
         // Busca os dados do produto
-        console.log("Id produto no momento que chega ao service", idProduto)
         const produto = await produtoRepository.buscarProduto({ id: idProduto });
-        console.log("Produto encontrado", produto)
         if (!produto) {
             throw new Error('Produto não encontrado');
         }

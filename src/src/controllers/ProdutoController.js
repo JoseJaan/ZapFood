@@ -47,7 +47,6 @@ class ProdutoController{
     //Atualizar produto
     //Nenhum campo é obrigatório
     static async atualizarProduto(req, res) {
-        console.log("Chegou no controler")
         const {id} = req.params;
         const lojaId = req.user.id;
         const { nomeProduto, precoProduto, descricaoProduto, categoria, visibilidade, desconto } = req.body;
@@ -56,11 +55,9 @@ class ProdutoController{
         }
         try {
 
-            let fotoUrl = null;
             let img;
             let public_id
             if (req.file) {
-                console.log("Uma imagem foi enviada!")
                 const uploadResult = await cloudinary.uploader.upload(req.file.path, {
                     folder: "uploads",
                 });

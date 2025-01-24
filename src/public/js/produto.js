@@ -103,9 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
             // Carregando a imagem na div `imagemVisualizarCadastrar`
             const imagemDiv = document.querySelector('.imagemVisualizarEditar');
-            console.log("Produto.img", produto.img)
             if (produto.img) {
-                console.log("entrou no if")
                 imagemDiv.innerHTML = `<img class="imagemProdutoModal" src="${produto.img}" alt="${produto.nomeProduto}">`;
             } else {
                 imagemDiv.innerHTML = '<p>Imagem não disponível</p>';
@@ -151,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //Editar produto
     botaoEditarProduto.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log("Entrou na funcao")
         const produtoId = botaoEditarProduto.getAttribute('data-id');
         
         // Obtendo os dados do formulário
@@ -183,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Adicionando o campo de arquivo, se houver imagem selecionada
         if (imagemInput.files && imagemInput.files[0]) {
-            console.log("Entrou no if da imagem")
             const fileInput = document.createElement('input');
             fileInput.type = 'file';
             fileInput.name = 'file-id';

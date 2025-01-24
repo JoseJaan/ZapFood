@@ -18,7 +18,6 @@ class produtoService{
     //Atualiza o produto
     //Nenhum campo é obrigatório
     static async atualizarProduto(id, produtoData) {
-        console.log("Chegou no service!")
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
         }
@@ -29,7 +28,6 @@ class produtoService{
         //Seleciona apenas os campos enviados
         camposValidos.forEach((campo) => {
             if (produtoData[campo] !== undefined) {
-                console.log("O seguinte campo foi enviado: ",produtoData[campo])
                 dadosFiltrados[campo] = produtoData[campo];
             }
         });

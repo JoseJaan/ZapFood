@@ -11,7 +11,6 @@ class AuthService {
     static async cadastro(clienteData) {
 
         const { email, senha, cpf, idade, nome } = clienteData;
-        console.log("entrou no services/auth cadastro cliente")
 
         // Validações básicas
         if (!email || !senha || !cpf || !idade || !nome) {
