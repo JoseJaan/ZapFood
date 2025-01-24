@@ -88,6 +88,26 @@ class VendaController{
         }
     }
 
+    static async deletarVendaPermanente(req,res){
+        const { vendaId } = req.params; 
+        const lojaId = req.user.id; 
+    
+        try {
+            const resultado = await vendaService.deletarVendaPermanente(vendaId, lojaId);
+    
+            if (!resultado) {
+                return res.status(403).send("Acesso negado ou produto não encontrado.");
+            }
+    
+            return res.status(200); 
+        } catch (error) {
+            console.error(error.message);
+            return res
+                .status(400)
+                .send("Erro ao a excluir venda");
+        }
+    }
+
     static async atualizarVenda(req, res) {
         const {idVenda, idVendaProduto} = req.params;
         const lojaId = req.user.id;
