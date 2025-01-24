@@ -345,7 +345,7 @@ fileInput.addEventListener('change', () => {
 
     formulario.submit();
 
-    alert("Endereço cadastrado com sucesso!")
+    alert("Imagem alterada com sucesso!")
 
     document.body.removeChild(formulario);
   

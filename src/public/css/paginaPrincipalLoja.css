@@ -30,20 +30,13 @@ header{
     align-items: center;
 }
 
-.minhaEmpresa:hover, .sair:hover{
+.minhaEmpresa:hover,.separarHeader:hover{
     cursor: pointer;
     transform: scale(1.05);
 
 }
 
-.sair{
-    width: 250px;
-    margin-left: 40px;
-    display: flex;
-    gap:15px;
-    align-items: center;
 
-}
 
 .textoEmpresa{
     color: #F89100;
@@ -180,4 +173,34 @@ footer{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.separarHeader{
+    text-decoration: none;
+    justify-content: center;
+    margin-left: 40px;
+    display: flex;
+    align-items: center;
+    gap:0px;
+    width: 250px;
+    justify-content: flex-start;
+}
+
+.icone{
+    height: 50px;
+    margin-right: 0px;
+}
+
+.sair{
+    margin: 0px;
+    font-family: 'Lalezar';
+    font-size: 30px;
+    text-decoration: none;
+    color: red;
+    width: auto;
+    margin-left: 10px;
+    display: flex;
+    gap:15px;
+    align-items: center;
+
 }

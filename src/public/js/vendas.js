@@ -1,5 +1,6 @@
 const botaoVisualizar = document.querySelectorAll('.iconeVisualizar');
 const modalVisualizar = document.getElementById('modalVisualizar');
+const modalEditar = document.getElementById('modalEditar');
 
 // Função para formatar o preço
 function formatarPreco(valor) {
@@ -52,4 +53,100 @@ window.addEventListener('click', (event) => {
     if (event.target === modalVisualizar) {
         modalVisualizar.style.display = 'none';
     }
+    if (event.target == modalEditar){
+        modalEditar.style.display = 'none';
+        document.getElementById("modalConteudoEditar").removeChild(document.getElementById("modalConteudoEditarInfo"));
+        document.getElementById("modalConteudoEditar").removeChild(document.getElementById("botaooo"));
+    }
 });
+
+
+const icones = document.querySelectorAll(".iconeEditar");
+
+icones.forEach(element =>{
+    element.addEventListener('click',()=>{
+        modalEditar.style.display = 'flex';
+
+       const produtos = JSON.parse(element.getAttribute('data-produtos'));
+       const container = document.createElement('div');  
+        container.id = 'modalConteudoEditarInfo';
+       produtos.forEach(element => {
+        const divNova = document.createElement('div'); 
+        divNova.style.display = 'flex';
+        const checkbox = document.createElement("input");
+        checkbox.type = "radio";
+        checkbox.name = "opcao"; // Todos os radios do mesmo grupo precisam ter o mesmo "name"
+        checkbox.id = `${element.idProduto}`;
+        checkbox.value = `${element.idProduto}`;
+
+        // Cria um label para o input
+        const label = document.createElement("div");
+        label.innerHTML = `<p>${element.nomeProduto}</p> <p class="descricaoProdutoExcluir">${element.descricaoProduto}</p>`
+        label.className="infoExcluirProdutoLabel";
+
+        // Adiciona o input e o label ao container
+        divNova.appendChild(checkbox);
+        divNova.appendChild(label);
+        container.appendChild(divNova)
+       });
+
+       
+       document.getElementById("modalConteudoEditar").appendChild(container);
+       
+
+       const botao = document.createElement('button');
+       botao.className = "botaoEditarVendaFinalizar"
+       botao.id = 'botaooo'
+       botao.setAttribute('data-id',element.getAttribute('data-id'));
+       botao.textContent = "Editar Venda";
+
+       container.appendChild(botao);
+
+       document.getElementById("modalConteudoEditar").appendChild(botao);
+
+       
+       const botaoEditarVend = document.getElementById("botaooo");
+        botaoEditarVend.addEventListener('click',()=>{
+        const opcoes = document.getElementsByName("opcao");
+        let excluir;
+        opcoes.forEach(element => {
+            if(element.checked == true){
+                excluir = element.id;
+            }
+        });
+        console.log(excluir);
+        const formulario = document.createElement('form');
+        formulario.method = 'post';
+        formulario.action = '/vendaAtualizar'; // Rota para o backend
+        formulario.style.display = 'none';
+    
+        // Criação dos inputs dinâmicos
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'idVenda';
+        input.value = document.getElementById('botaooo').getAttribute('data-id');
+    
+        const input1 = document.createElement('input');
+        input1.type = 'text';
+        input1.name = 'idProduto';
+        input1.value = excluir;
+
+        console.log(input.value)
+
+        formulario.appendChild(input);
+        formulario.appendChild(input1);
+
+        document.body.appendChild(formulario);
+        formulario.submit();
+
+        document.body.removeChild(formulario);
+    
+
+        })
+
+    })
+})
+
+
+
+

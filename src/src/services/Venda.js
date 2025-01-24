@@ -19,15 +19,18 @@ class VendaService{
                         produtosDetalhados.push(produto);
                     }
                 }
-    
+                
                 // Substitui os IDs dos produtos pelos dados completos
                 venda.produtos = produtosDetalhados;
-    
+                
                 // Busca os dados do cliente relacionado à venda
                 const cliente = await clienteRepository.buscarCliente(venda.idCliente);
+                
                 if (cliente) {
+                    
                     venda.cliente = cliente; // Adiciona os dados do cliente à venda
                 } else {
+                    console.log("\n\nGabriel\n\n")
                     venda.cliente = null; // Caso o cliente não seja encontrado
                 }
             }
@@ -125,18 +128,25 @@ class VendaService{
         }
     }
 
-    static async atualizarVenda(idVenda,idVendaProduto,lojaId){
-        if (!idVenda || !idVendaProduto ) {
+
+    static async atualizarVenda(idVenda,produtoId, lojaId){
+        if (!idVenda ) {
             throw new Error("IDs são obrigatórios");
         }
     
         const venda = await vendaRepository.buscarVenda(idVenda);
+        
+        const produtosVenda = await vendaRepository.buscarVendaProdutos(venda.id);
+
+        if(produtosVenda.length <= 1){
+            throw new Error("Não é possível deixar a venda sem produtos")
+        }
 
         if (!venda || venda.idLoja !== lojaId) {
             return null; // Produto não encontrado ou não pertence à loja
         }
     
-        await vendaRepository.atualizar(idVendaProduto);
+        await vendaRepository.atualizarProdutoVenda(idVenda,produtoId);
     
         return true;
     }

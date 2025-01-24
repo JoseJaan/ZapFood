@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/endereco.css">
+    <link rel="stylesheet" href="css/perfilEmpresa.css">
+    <title>PerfilEmpresa</title>
+</head>
+<body>
+    <header>
+        <img src="img/Logo.png" alt="">
+        <a href="paginaPrincipalLoja" class="sair">
+            <p class="voltar">VOLTAR AO MENU</p>
+            <img src="img/Logout.png" alt="">
+        </a>
+    </header>
+    
+    <div id="fotoPerfilUsuario" class="fotoPerfilUsuario">
+        <p class="textoEscolherImagem">Escolher Imagem</p>
+        <input type="file" id="file-input" name="image" accept="image/*">
+    </div>
+    <p class="tituloLoja">ACERBINHO LANCHES</p>
+
+    <div class="dadosUsuario altura">
+        <p class="tituloDadosUsuario">DADOS DA LOJA</p>
+        <div id="botaoEditarDadosUsuario" class="botaoEditarDadosUsuario">EDITAR</div>
+        <div id="botaoSalvarDadosUsuario" class="botaoSalvarDadosUsuario">SALVAR</div>
+        <div class="primeirosDados">
+            <div class="campo">
+                <label for="nome">NOME</label>
+                <input value="" class="campoInputNome opacidade" name="nome" type="text" id="nomeEmpresa" readonly>
+            </div>
+            <div class="campo">
+                <label for="cnpj">CNPJ</label>
+                <input value="" class="campoInputCPF opacidade" name="cnpj" type="text" id="cnpj" readonly>
+            </div>
+        </div>
+        <div class="campo">
+            <label for="hf">HORARIO DE FUNCIONAMENTO</label>
+            <input name="hf" class="campoInputHF campoInputDN opacidade" value="" type="text" id="hf" readonly>
+        </div>
+
+        <div class="campo bd">
+            <label for="hf">BREVE DESCRIÇÃO</label>
+            <input name="hf" class="campoInputBD campoInputDN opacidade" value="" type="text" id="bd" readonly>
+        </div>
+    </div>
+
+    <script src="js/perfilLoja.js"></script>
+    
+</body>
+</html>
+
+

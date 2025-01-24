@@ -28,14 +28,14 @@
 
         <% produtos.forEach(item => { %>
         <div class="produto">
-            <div class="imagemProduto"></div>
+            <div class="imagemProduto" style="background: url(<%= item.img %>);"></div>
             <div class="textoProduto">
                 <p class="tituloProduto"><%= item.nomeProduto %></p>
                 <p class="descricaoProduto"><%= item.descricaoProduto %></p>
             </div>
             <div class="precoProduto">
                 <p class="textoValor">VALOR</p>
-                <p class="textoValorEscrito">R$ <%= item.precoProduto * ( 1 - (item.desconto/100)) %></p>
+                <p class="textoValorEscrito">R$ <%= (item.precoProduto * ( 1 - (item.desconto/100))).toFixed(2) %></p>
 
                 <img data-id="<%= item.idProduto %>" class="lixeiraIcone" src="img/Trash.png" alt="">
             </div>
