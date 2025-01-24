@@ -1,5 +1,6 @@
 const lojaRepository = require("../repository/Loja")
-
+const path = require("path");
+const cloudinary = require(path.resolve("config", "cloudinary"));
 class LojaService{
 
     static async obterLoja(lojaId) {

@@ -30,7 +30,6 @@ class VendaService{
                     
                     venda.cliente = cliente; // Adiciona os dados do cliente à venda
                 } else {
-                    console.log("\n\nGabriel\n\n")
                     venda.cliente = null; // Caso o cliente não seja encontrado
                 }
             }

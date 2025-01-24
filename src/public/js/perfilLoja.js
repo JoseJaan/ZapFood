@@ -54,7 +54,6 @@ botaoSalvarDadosDoUsuario.addEventListener('click',async()=>{
     //await formulario.submit();
 
     document.body.removeChild(formulario);
-    console.log(bd);
 
     botaoEditarDadosDoUsuario.style.display = 'flex';
     botaoSalvarDadosDoUsuario.style.display = 'none';
@@ -75,7 +74,7 @@ uploadArea.addEventListener('click', () => {
 fileInput.addEventListener('change', () => {
     const formulario = document.createElement('form');
     formulario.method = 'post';
-    formulario.action = '/mudarImagemEmpresa'; // Rota para o backend
+    formulario.action = '/mudarImagemLoja'; // Rota para o backend
     formulario.style.display = 'none';
     formulario.enctype = 'multipart/form-data';
 
@@ -83,7 +82,7 @@ fileInput.addEventListener('change', () => {
 
     document.body.appendChild(formulario);
 
-    //formulario.submit();
+    formulario.submit();
 
     alert("Imagem alterada com sucesso!")
 
