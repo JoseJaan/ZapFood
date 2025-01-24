@@ -5,7 +5,7 @@
   "main": "App.js",
   "scripts": {
     "start": "nodemon App.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage"
   },
   "author": "José Neto, Gabriel Ferreira e Rafael Rezende",
   "license": "ISC",
@@ -26,5 +26,8 @@
     "nodemon": "^3.1.9",
     "path": "^0.12.7",
     "sequelize": "^6.37.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

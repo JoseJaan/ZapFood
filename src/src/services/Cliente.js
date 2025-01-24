@@ -55,6 +55,18 @@ class ClienteService{
                     });
         await clienteRepository.mudarImagem(imagem,userId);
     }
+
+    static async obterCliente(clienteID) {
+        if (!clienteID) {
+            throw new Error("ID do cliente é obrigatório.");
+        }
+    
+        const cliente = await clienteRepository.buscarCliente(clienteID);
+        if (!cliente) {
+            return null; 
+        }
+        return cliente;
+    }
 }
 
 module.exports = ClienteService;
