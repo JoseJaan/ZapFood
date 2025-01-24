@@ -28,7 +28,7 @@
 
         <% produtos.forEach(item => { %>
         <div class="produto">
-            <div class="imagemProduto"></div>
+            <div class="imagemProduto" style="background: url(<%= item.img %>);"></div>
             <div class="textoProduto">
                 <p class="tituloProduto"><%= item.nomeProduto %></p>
                 <p class="descricaoProduto"><%= item.descricaoProduto %></p>

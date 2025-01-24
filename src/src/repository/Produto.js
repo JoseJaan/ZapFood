@@ -108,7 +108,7 @@ class produtoRepository{
                         nomeProduto: detalhesProduto?.dataValues?.nomeProduto || "Nome não disponível",
                         quantidadeVendida: produto.dataValues.quantidade_vendida,
                         precoProduto: detalhesProduto?.dataValues?.precoProduto,
-                        foto: detalhesProduto?.dataValues?.foto,
+                        img: detalhesProduto?.dataValues?.img,
                     };
                 })
             );
