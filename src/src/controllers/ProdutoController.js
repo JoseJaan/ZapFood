@@ -47,6 +47,7 @@ class ProdutoController{
     //Atualizar produto
     //Nenhum campo é obrigatório
     static async atualizarProduto(req, res) {
+        console.log("Chegou no controler")
         const {id} = req.params;
         const lojaId = req.user.id;
         const { nomeProduto, precoProduto, descricaoProduto, categoria, visibilidade, desconto } = req.body;
@@ -59,6 +60,7 @@ class ProdutoController{
             let img;
             let public_id
             if (req.file) {
+                console.log("Uma imagem foi enviada!")
                 const uploadResult = await cloudinary.uploader.upload(req.file.path, {
                     folder: "uploads",
                 });
@@ -83,7 +85,7 @@ class ProdutoController{
                 return res.status(204).send("Produto não encontrado.");
             }
     
-            return res.status(200).json({ success: true, message: "Produto atualizado com sucesso.", produto: produtoAtualizado });
+            return res.redirect("/produto");
         } catch (error) {
             console.log(error.message);
             return res

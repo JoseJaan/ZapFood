@@ -88,7 +88,7 @@ document.querySelector('.botaoAdicionarModal').addEventListener('click', async (
     document.getElementById('numero').value = '';
     document.getElementById('complementoAdicionar').value = '';
 
-    alert("Endereço cadastrado com sucesso!")
+    alert("Alteração feita com sucesso!")
 
     document.getElementById('modalAdicionar').style.display = 'none';
 
