@@ -34,6 +34,13 @@ class LojaRepository{
         }      
     }
 
+    static async mudarImagem(imagem, userId){
+        const loja = await Loja.findByPk(userId);
+        loja.img = imagem.url;
+        loja.save();
+ 
+     }
+
 
 }
 

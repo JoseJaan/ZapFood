@@ -10,6 +10,8 @@ class ProdutoController{
 
     //Cadastrar produto
     static async cadastro(req,res){
+
+    
         const { nomeProduto, precoProduto, desconto, descricaoProduto } = req.body;
 
         //Verifica se o usuário autenticado é uma loja
@@ -21,15 +23,18 @@ class ProdutoController{
 
         try{
             let fotoUrl = null;
-
+            let img;
+            let public_id
             if (req.file) {
                 const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-                    folder: "produtos",
+                    folder: "uploads",
                 });
-                fotoUrl = uploadResult.secure_url; 
+                
+                img = uploadResult.url;
+                public_id = uploadResult.public_id;
             }
 
-            const novoProduto = produtoService.cadastrarProduto({nomeProduto,precoProduto,desconto,descricaoProduto,Loja_idLoja,foto: fotoUrl})
+            const novoProduto = produtoService.cadastrarProduto({nomeProduto,precoProduto,desconto,descricaoProduto,Loja_idLoja,img,public_id})
 
             return res.redirect("/produto");
         }
@@ -42,6 +47,7 @@ class ProdutoController{
     //Atualizar produto
     //Nenhum campo é obrigatório
     static async atualizarProduto(req, res) {
+        console.log("Chegou no controler")
         const {id} = req.params;
         const lojaId = req.user.id;
         const { nomeProduto, precoProduto, descricaoProduto, categoria, visibilidade, desconto } = req.body;
@@ -51,12 +57,16 @@ class ProdutoController{
         try {
 
             let fotoUrl = null;
-
+            let img;
+            let public_id
             if (req.file) {
+                console.log("Uma imagem foi enviada!")
                 const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-                    folder: "produtos",
+                    folder: "uploads",
                 });
-                fotoUrl = uploadResult.secure_url; 
+                
+                img = uploadResult.url;
+                public_id = uploadResult.public_id;
             }
 
             const produtoAtualizado = await produtoService.atualizarProduto(id, {
@@ -67,14 +77,15 @@ class ProdutoController{
                 categoria,
                 visibilidade,
                 lojaId,
-                foto: fotoUrl
+                img,
+                public_id
             });
     
             if (!produtoAtualizado) {
                 return res.status(204).send("Produto não encontrado.");
             }
     
-            return res.status(200).json({ success: true, message: "Produto atualizado com sucesso.", produto: produtoAtualizado });
+            return res.redirect("/produto");
         } catch (error) {
             console.log(error.message);
             return res
@@ -138,6 +149,7 @@ class ProdutoController{
         }
     }
     
+
 }
 
 module.exports = ProdutoController

@@ -56,14 +56,14 @@ const Produto = database.define('produto', {
         type: Sequelize.MEDIUMINT,
         allowNull: true,
     },
-    foto: {
-        type: Sequelize.STRING(300),
-        allowNull: true,
-        validate: {
-            len: [15, 300]
-        },
-        defaultValue: "12345678901234567878",
+    img:{
+        type: Sequelize.STRING,
+        allowNull: true
     },
+    public_id:{
+        type: Sequelize.STRING,
+        allowNull: true
+    }
 });
 
 module.exports = Produto;

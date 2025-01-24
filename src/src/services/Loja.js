@@ -18,15 +18,19 @@ class LojaService{
         const vendas = await vendaRepository.buscarVendaPorId(idLoja);
 
         if(vendas){
-            lojaRepository.atualizarCliente({visibilidade: 0})
-            return { status: "Cliente excluído com sucesso." };
+            lojaRepository.atualizarLoja({visibilidade: 0})
+            return { status: "Loja excluído com sucesso." };
         }
-        lojaRepository.excluirCliente(idLoja);
-        return { status: "Cliente excluído com sucesso." };
+        lojaRepository.excluirLoja(idLoja);
+        return { status: "Loja excluído com sucesso." };
     }
 
-
-
+    static async mudarImagem(caminho, userId){
+        const imagem = await cloudinary.uploader.upload(caminho, {
+                      folder: "uploads",
+                    });
+        await lojaRepository.mudarImagem(imagem,userId);
+    }
 }
 
 module.exports = LojaService

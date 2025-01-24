@@ -50,7 +50,15 @@ header{
     justify-content: center;
 }
 
+.textoEscolherImagem{
+    opacity: 0;
+}
+
 .fotoPerfilUsuario{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     align-self: center;
     width: 197px;
     height: 189px;
@@ -59,6 +67,21 @@ header{
     background: url(/img/user.png) lightgray 50% / cover no-repeat;
     margin-top: 70px;
 }
+
+.fotoPerfilUsuario:hover{
+    cursor: pointer;;
+    background-color: #353535;
+    background: #000;
+}
+
+.fotoPerfilUsuario:hover .textoEscolherImagem{
+    opacity: 0.99;
+}
+
+#file-input{
+    display: none;
+}
+
 
 .tituloPerfilUsuario{
     color: #303030;
@@ -454,4 +477,10 @@ header{
 .persistir:hover,.desistir:hover{
     transform: scale(1.1);
     cursor: pointer;
+}
+
+.textoEscolherImagem{
+    font-family: 'Lalezar';
+    color: #ffffff;
+    text-align: center;
 }
