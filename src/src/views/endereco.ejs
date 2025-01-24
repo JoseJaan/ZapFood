@@ -155,7 +155,10 @@
         </div>
     </header>
 
-    <div class="fotoPerfilUsuario"></div>
+    <div id="fotoPerfilUsuario" style="background: url(<%= cliente.img %>) lightgray 50% / cover no-repeat;" class="fotoPerfilUsuario">
+        <p class="textoEscolherImagem">Escolher Imagem</p>
+        <input type="file" id="file-input" name="image" accept="image/*">
+    </div>
 
     <p class="tituloPerfilUsuario"><%= cliente.nome %></p>
 

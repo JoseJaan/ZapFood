@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Erro ao buscar produto');
             const produto = await response.json();
 
-            document.querySelector('.fotoVisualizar').innerHTML = produto.imagem 
-                ? `<img src="${produto.imagem}" alt="${produto.nomeProduto}">`
+            document.querySelector('.fotoVisualizar').innerHTML = produto.img
+                ? `<img class="imagemProdutoModal" src="${produto.img}" alt="${produto.nomeProduto}">`
                 : '<p>Imagem não disponível</p>';
             document.querySelector('.tituloProdutoVisualizar').textContent = produto.nomeProduto;
             document.querySelector('.precoProdutoVisualizar').textContent = `R$ ${produto.precoProduto.toFixed(2)}`;
@@ -93,18 +93,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/produto/detalhar/${idProduto}`);
             if (!response.ok) throw new Error('Erro ao buscar detalhes do produto');
             const produto = await response.json();
-
+        
+            // Preenchendo os campos do formulário
             document.getElementById('nomeCadastrarEditar').value = produto.nomeProduto;
             document.getElementById('precoCadastrarEditar').value = produto.precoProduto;
             document.getElementById('descontoCadastrarEditar').value = produto.desconto || 0;
             document.getElementById('disponivelEditarEditar').checked = produto.visibilidade || 0;
             document.getElementById('descricaoCadastrarEditar').value = produto.descricaoProduto;
-
+        
+            // Carregando a imagem na div `imagemVisualizarCadastrar`
+            const imagemDiv = document.querySelector('.imagemVisualizarEditar');
+            console.log("Produto.img", produto.img)
+            if (produto.img) {
+                console.log("entrou no if")
+                imagemDiv.innerHTML = `<img class="imagemProdutoModal" src="${produto.img}" alt="${produto.nomeProduto}">`;
+            } else {
+                imagemDiv.innerHTML = '<p>Imagem não disponível</p>';
+            }
+        
+            // Definindo o ID do produto no botão de edição
             botaoEditarProduto.setAttribute('data-id', idProduto);
+        
+            // Exibe o modal de edição
             exibirModal(modalEditar);
         } catch (error) {
             console.error('Erro ao carregar informações do produto para edição:', error);
         }
+        
     };
 
     const abrirModalExcluir = (idProduto) => {
@@ -133,35 +148,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    botaoEditarProduto.addEventListener('click', async () => {
+    //Editar produto
+    botaoEditarProduto.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log("Entrou na funcao")
         const produtoId = botaoEditarProduto.getAttribute('data-id');
-        const payload = {
-            nomeProduto: document.getElementById('nomeCadastrarEditar').value,
-            precoProduto: parseFloat(document.getElementById('precoCadastrarEditar').value),
-            desconto: parseFloat(document.getElementById('descontoCadastrarEditar').value) || 0,
-            disponivel: document.getElementById('disponivelEditarEditar').checked,
-            descricaoProduto: document.getElementById('descricaoCadastrarEditar').value,
-        };
-        try {
-            const response = await fetch(`/produto/atualizar/${produtoId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
-            if (!response.ok) throw new Error('Erro ao atualizar produto');
-            alert('Produto atualizado com sucesso!');
-            fecharModal(modalEditar);
-            carregarProdutos();
-        } catch (error) {
-            console.error('Erro ao atualizar produto:', error);
+        
+        // Obtendo os dados do formulário
+        const nomeProduto = document.getElementById('nomeCadastrarEditar').value;
+        const precoProduto = (document.getElementById('precoCadastrarEditar').value);
+        const desconto = (document.getElementById('descontoCadastrarEditar').value) || 0;
+        const disponivel = document.getElementById('disponivelEditarEditar').checked;
+        const descricaoProduto = document.getElementById('descricaoCadastrarEditar').value;
+        const imagemInput = document.getElementById('imagemCadastroEditar');
+    
+        // Validação básica
+        if (!nomeProduto || !precoProduto || !descricaoProduto) {
+            alert('Por favor, preencha todos os campos obrigatórios!');
+            return;
         }
-    });
+    
+        // Criando o formulário para envio
+        const form = document.createElement('form');
+        form.method = 'POST'; // Métodos PUT não são suportados diretamente por formulários HTML
+        form.action = `/produto/atualizar/${produtoId}`;
+        form.enctype = 'multipart/form-data';
+    
+        // Criando os campos do formulário
+        form.appendChild(criarInputOculto('nomeProduto', nomeProduto));
+        form.appendChild(criarInputOculto('precoProduto', precoProduto));
+        form.appendChild(criarInputOculto('desconto', desconto));
+        form.appendChild(criarInputOculto('disponivel', disponivel));
+        form.appendChild(criarInputOculto('descricaoProduto', descricaoProduto));
 
+        // Adicionando o campo de arquivo, se houver imagem selecionada
+        if (imagemInput.files && imagemInput.files[0]) {
+            console.log("Entrou no if da imagem")
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.name = 'file-id';
+            fileInput.files = imagemInput.files; // Atribui os arquivos selecionados
+            form.appendChild(fileInput);
+        }
+        // Adicionando o formulário ao corpo do documento e enviando-o
+        document.body.appendChild(form);
+        form.submit();
+        alert("Produto atualizado com sucesso!")
+        document.body.removeChild(form);
+    });
+    
     // Adicionar produto
     botaoAdicionarProduto.addEventListener('click', (event) => {
         event.preventDefault();
 
-        const imagem = document.getElementById('imagemCadastro').files[0];
+        const imagem = document.getElementById('imagemCadastro');
         const nomeProduto = document.getElementById('nomeCadastrarAdicionar').value;
         const precoProduto = document.getElementById('precoCadastrarAdicionar').value;
         const desconto = document.getElementById('descontoCadastrarAdicionar').value;
@@ -177,14 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
         form.action = '/produto/cadastro';
         form.enctype = 'multipart/form-data';
 
-        if (imagem) {
-            const inputImagem = document.createElement('input');
-            inputImagem.type = 'hidden';
-            inputImagem.name = 'imagem';
-            inputImagem.value = imagem.name;
-            form.appendChild(inputImagem);
-        }
 
+        form.appendChild(imagem);
         form.appendChild(criarInputOculto('nomeProduto', nomeProduto));
         form.appendChild(criarInputOculto('precoProduto', precoProduto));
         form.appendChild(criarInputOculto('desconto', desconto));

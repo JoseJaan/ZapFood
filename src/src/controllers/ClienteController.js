@@ -4,6 +4,7 @@ const produtoService = require(path.resolve("src", "services", "Produto.js"));
 const lojaService = require(path.resolve("src", "services", "Loja.js"));
 const enderecoService = require(path.resolve("src", "services", "Endereco.js"));
 
+
 class ClienteController{
 
     static async paginaPrincipal(req,res){
@@ -57,6 +58,17 @@ class ClienteController{
         clienteService.deletarCliente(idCliente);
 
         res.render('login')
+    }
+
+    static async mudarImagem(req,res){
+        try {
+            await clienteService.mudarImagem(req.file.path,req.user.id);
+    }
+    catch (erro) {
+        res
+          .status(500)
+          .json({ message: `${erro.message} - Falha ao mudar`});
+      }
     }
 
 }

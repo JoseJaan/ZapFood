@@ -63,6 +63,17 @@ class LojaController{
         res.render('login')
     }
 
+    static async mudarImagem(req,res){
+        try {
+            await lojaService.mudarImagem(req.file.path,req.user.id);
+    }
+    catch (erro) {
+        res
+          .status(500)
+          .json({ message: `${erro.message} - Falha ao mudar`});
+      }
+    }
+
     //DELETAR ENDERECO === SE ESTIVER EM UMA VENDA, ALTERAR VISIBILIDADE PARA 0
 }
 

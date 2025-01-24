@@ -52,7 +52,16 @@ class ClienteRepository{
         cliente.save();
     }
 
+    static async mudarImagem(imagem, userId){
+        const cliente = await Cliente.findByPk(userId);
+         cliente.img = imagem.url;
+         cliente.save();
+     }
+ 
+     
+
     static async buscarCliente( id, visibilidade ) {
+
         const whereClause = {};
         if (id) whereClause.id = id;
         if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;

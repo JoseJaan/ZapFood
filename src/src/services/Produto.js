@@ -4,7 +4,7 @@ class produtoService{
 
     //Cadastra o produto
     static async cadastrarProduto(produtoData){
-        const { nomeProduto, precoProduto, desconto, descricaoProduto, categoria, Loja_idLoja, foto } = produtoData;
+        const { nomeProduto, precoProduto, desconto, descricaoProduto, categoria, Loja_idLoja, img, public_id } = produtoData;
 
         if (!precoProduto || !desconto || !descricaoProduto || !nomeProduto) {
             throw new Error("Todos os campos são obrigatórios");
@@ -18,16 +18,18 @@ class produtoService{
     //Atualiza o produto
     //Nenhum campo é obrigatório
     static async atualizarProduto(id, produtoData) {
+        console.log("Chegou no service!")
         if (!id) {
             throw new Error("ID do produto é obrigatório.");
         }
     
-        const camposValidos = ["nomeProduto", "precoProduto", "desconto", "descricaoProduto", "categoria","visibilidade","foto"];
+        const camposValidos = ["nomeProduto", "precoProduto", "desconto", "descricaoProduto", "categoria","visibilidade","img","public_id"];
         const dadosFiltrados = {};
     
         //Seleciona apenas os campos enviados
         camposValidos.forEach((campo) => {
             if (produtoData[campo] !== undefined) {
+                console.log("O seguinte campo foi enviado: ",produtoData[campo])
                 dadosFiltrados[campo] = produtoData[campo];
             }
         });
