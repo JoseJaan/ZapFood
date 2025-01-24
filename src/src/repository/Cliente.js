@@ -57,6 +57,18 @@ class ClienteRepository{
         cliente.img = imagem.url;
         cliente.save();
 
+
+    static async buscarCliente({ id, visibilidade } = {}) {
+        const whereClause = {};
+        if (id) whereClause.id = id;
+        if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;
+    
+        try {
+            return await Cliente.findOne({ where: whereClause });
+        } catch (error) {
+            console.error("Erro ao buscar Cliente:", error);
+            throw new Error("Erro ao buscar Cliente no banco de dados.");
+        }
     }
 
 
