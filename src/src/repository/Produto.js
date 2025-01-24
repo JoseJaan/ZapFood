@@ -14,7 +14,6 @@ class produtoRepository{
     }
 
     static async atualizar(idProduto, dadosAtualizados) {
-        console.log("Chegou no repository!")
         try {
             const produto = await Produto.findByPk(idProduto);
             if (!produto) {
@@ -108,7 +107,7 @@ class produtoRepository{
                         nomeProduto: detalhesProduto?.dataValues?.nomeProduto || "Nome não disponível",
                         quantidadeVendida: produto.dataValues.quantidade_vendida,
                         precoProduto: detalhesProduto?.dataValues?.precoProduto,
-                        foto: detalhesProduto?.dataValues?.foto,
+                        img: detalhesProduto?.dataValues?.img,
                     };
                 })
             );

@@ -73,7 +73,6 @@ class VendaRepository{
             novaVenda.idLoja = idLoja;
 
             await novaVenda.save();
-            console.log(novaVenda.id)
             return novaVenda.id;
 
         }

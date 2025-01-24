@@ -59,16 +59,14 @@
                         <p class="textoDesconto"><%= item.desconto %>%</p>
                     </div>
                 <% } %>
-                <div class="fotoProduto"></div>
+                <img src="<%= item.img %>" alt="<%= item.nomeProduto %>" class="fotoProduto">
                 <p class="nomeProduto"><%= item.nomeProduto %></p>
                 <p class="precoProduto">R$ <%= item.precoProduto %></p>
             </a>
             <% }) %>
-            
-
-
         </div>
     </div>
+    
 
     <footer></footer>
 </body>

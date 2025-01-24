@@ -45,7 +45,7 @@ class LojaController{
                     nome: produto.nomeProduto,
                     totalVendidos: produto.quantidadeVendida,
                     preco: produto.precoProduto,
-                    foto: produto.foto,
+                    img: produto.img,
                 })),
             });
         } catch (error) {

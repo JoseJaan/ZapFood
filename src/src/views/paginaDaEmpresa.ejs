@@ -44,7 +44,7 @@
                         <img src="/img/Discount.png" alt="">
                         <p class="textoDesconto">-<%= produto.desconto %>%</p>
                     </div>
-                    <div class="fotoProduto"></div>
+                    <img src="<%= produto.img %>" alt="<%= produto.nomeProduto %>" class="fotoProduto">
                     <p class="nomeProduto"><%= produto.nome %></p>
                     <p class="precoProduto">R$ <%= produto.precoProduto %></p>
                 </a>
@@ -63,7 +63,7 @@
                             <p class="textoDesconto">-<%= produto.desconto %>%</p>
                         </div>
                     <% } %>
-                    <div class="fotoProduto"></div>
+                    <img src="<%= produto.img %>" alt="<%= produto.nomeProduto %>" class="fotoProduto">
                     <p class="nomeProduto"><%= produto.nome %></p>
                     <p class="precoProduto">R$ <%= produto.precoProduto %></p>
                     </a>
