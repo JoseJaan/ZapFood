@@ -56,7 +56,7 @@ class ClienteRepository{
        const cliente = await Cliente.findByPk(userId);
         cliente.img = imagem.url;
         cliente.save();
-
+    }
 
     static async buscarCliente({ id, visibilidade } = {}) {
         const whereClause = {};
