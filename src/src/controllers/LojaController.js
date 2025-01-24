@@ -4,7 +4,9 @@ const produtoService = require(path.resolve("src", "services", "Produto.js"));
 class LojaController{
 
     static async detalharLoja(req,res){
-        return res.render('perfilEmpresa')
+        const idLoja = req.user.id;
+        const loja = await lojaService.obterLoja(idLoja)
+        return res.render('perfilEmpresa',{loja: loja})
     }
 
     static async obterLoja(req,res){
@@ -39,7 +41,6 @@ class LojaController{
         try {
             const loja = await lojaService.obterLoja(lojaId);
             const produtos = await produtoService.listarProdutosMaisVendidos(lojaId); 
-            console.log(produtos)// Usa o método atualizado
             res.render("paginaPrincipalLoja", {
                 loja: loja,
                 produtos: produtos.map(produto => ({

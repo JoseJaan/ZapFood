@@ -114,7 +114,6 @@ icones.forEach(element =>{
                 excluir = element.id;
             }
         });
-        console.log(excluir);
         const formulario = document.createElement('form');
         formulario.method = 'post';
         formulario.action = '/vendaAtualizar'; // Rota para o backend
@@ -131,7 +130,6 @@ icones.forEach(element =>{
         input1.name = 'idProduto';
         input1.value = excluir;
 
-        console.log(input.value)
 
         formulario.appendChild(input);
         formulario.appendChild(input1);

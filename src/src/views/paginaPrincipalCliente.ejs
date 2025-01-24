@@ -41,7 +41,7 @@
         <div class="restaurantesQuadradoPopulares">
             <% lojas.forEach(item => { %>
                 <a href="/empresa/<%=item.id%>" class="restaurante">
-                    <div class="fotoRestaurante" style="background: url(<%= item.img %>);"></div>
+                    <img src="<%= item.img %>" alt="<%= item.nomeProduto %>" class="fotoRestaurante" >
                     <p class="nomeRestaurante"><%= item.nome %></p>
                 </a>
             <% }) %>
