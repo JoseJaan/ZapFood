@@ -52,7 +52,7 @@ class ClienteRepository{
         cliente.save();
     }
 
-    static async buscarCliente({ id, visibilidade } = {}) {
+    static async buscarCliente( id, visibilidade ) {
         const whereClause = {};
         if (id) whereClause.id = id;
         if (visibilidade !== undefined) whereClause.visibilidade = visibilidade;

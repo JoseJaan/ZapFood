@@ -18,6 +18,7 @@ class VendaController{
                 }, 0);
                 return total + totalVenda;
             }, 0);
+
     
             return res.render('vendas', { loja, vendas, totalVendas });
         } catch (error) {
@@ -89,14 +90,14 @@ class VendaController{
     }
 
     static async atualizarVenda(req, res) {
-        const {idVenda, idVendaProduto} = req.params;
+        const {idVenda, idProduto} = req.body;
         const lojaId = req.user.id;
         if (req.user.tipo !== "loja") {
             return res.status(403).send("Acesso não autorizado.");
         }
         try {
 
-            const vendaAtualizada = await vendaService.atualizarVenda(idVenda,idVendaProduto,lojaId);
+            const vendaAtualizada = await vendaService.atualizarVenda(idVenda,idProduto,lojaId);
     
             if (!vendaAtualizada) {
                 return res.status(204).send("Venda não encontrado.");
@@ -104,8 +105,7 @@ class VendaController{
     
             return res.status(200).json({ success: true, message: "Venda atualizado com sucesso.", venda: vendaAtualizada });
         } catch (error) {
-            console.log(error.message);
-            return res.status(400).send("Erro ao atualizar venda");
+            return res.status(400).send("Erro ao atualizar venda! " + error.message);
         }
     }
     

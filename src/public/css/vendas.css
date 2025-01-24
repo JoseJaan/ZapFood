@@ -135,6 +135,7 @@ footer{
 }
 
 .tituloVenda{
+    width: 600px;
     color: #3E3E3E;
     font-family: Lalezar;
     font-size: 28px;
@@ -148,7 +149,7 @@ footer{
     gap: 15px;
     align-items: center;
     display: flex;
-    width: 400px;
+    width: 800px;
 }
 
 .editarExcluir{
@@ -156,12 +157,20 @@ footer{
     align-self: center;
 }
 
+#botaooo{
+    border-radius: 10px;
+}
+
+#botaooo:hover{
+    transform: scale(1.1);
+}
+
 .icone,.iconeVisualizar{
     margin-left: 10px;
 }
 
 .icone:hover,.iconeVisualizar:hover{
-    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .modal{
@@ -267,4 +276,57 @@ footer{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.modalConteudoEditar{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 700px;
+    word-wrap: break-word;
+}
+
+.tituloExcluirProdutos{
+    font-size: 30px;
+    font-family: 'Lalezar';
+    text-align: center;
+    color: black;
+}
+
+#modalConteudoEditarInfo{
+    font-family: 'Lalezar';
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-left: 30px;
+    justify-content: flex-start;
+    font-size: 25px;
+}
+
+.infoExcluirProdutoLabel{
+    width: 500px;
+    margin-left: 10px;
+    padding: 10px;
+    border: 3px solid orange;
+    border-radius: 10px;
+}
+
+.infoExcluirProdutoLabel p{
+    margin: 0px;
+}
+
+.descricaoProdutoExcluir{
+    color: #585858;
+    font-size: 20px;
+}
+
+.botaoEditarVendaFinalizar{
+    margin-top: 50px;
+    align-self: center;
+    background-color: green;
+    color: white;
+    font-family: 'Lalezar';
+    font-size: 25px;
+    width: 200px;
+    height: 80px;
 }
