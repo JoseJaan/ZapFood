@@ -145,6 +145,39 @@ icones.forEach(element =>{
     })
 })
 
+const botoesExcluir = document.querySelectorAll('.iconeExcluir');
+
+botoesExcluir.forEach((botao) => {
+    botao.addEventListener('click', () => {
+        const vendaId = botao.previousElementSibling.getAttribute('data-id'); // Obtém o ID da venda
+        const confirmacao = confirm('Tem certeza que deseja excluir esta venda?');
+
+        if (confirmacao) {
+            fetch(`/vendas/deletar/${vendaId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert('Venda excluída com sucesso!');
+                        location.reload(); // Atualiza a página para refletir a exclusão
+                    } else if (response.status === 403) {
+                        alert('Acesso negado ou venda não encontrada.');
+                    } else {
+                        throw new Error('Erro ao excluir a venda.');
+                    }
+                })
+                .catch((error) => {
+                    console.error(error.message);
+                    alert('Ocorreu um erro ao tentar excluir a venda.');
+                });
+        }
+    });
+});
+
+
 
 
 

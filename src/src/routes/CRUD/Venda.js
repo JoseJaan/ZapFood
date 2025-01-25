@@ -9,6 +9,7 @@ router.get("/venda/:vendaId", authMiddleware); //check
 router.get("/venda/listar", authMiddleware)
 router.post("/venda/cadastrar", authMiddleware)  //check
 router.post("/vendaAtualizar", authMiddleware, VendaController.atualizarVenda)
-router.delete("vendas/deletar/:vendaId", authMiddleware)
+//router.delete("vendas/deletar/:vendaId", authMiddleware)
+router.delete("/vendas/deletar/:vendaId", authMiddleware, VendaController.deletarVendaPermanente)
 
 module.exports = router;

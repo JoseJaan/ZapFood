@@ -95,34 +95,21 @@ class VendaService{
         if (!vendaId) {
             throw new Error("ID da venda é obrigatório.");
         }
-
-        // Inicia uma transação
-        const transaction = await database.transaction();
-
         try {
             // Verifica se a venda pertence à loja
-            const vendaLoja = await vendaRepository.buscarVendaLoja(vendaId, transaction);
-            if (!vendaLoja || vendaLoja.empresaId !== lojaId) {
+            const vendaLoja = await vendaRepository.buscarVenda(vendaId);
+            if (!vendaLoja || vendaLoja.idLoja !== lojaId) {
                throw new Error("Venda não pertence à loja autenticada.");
             }
 
             // Remove os produtos associados à venda
-            await vendaRepository.removerProdutosVendaPermanente(vendaId, transaction);
+            await vendaRepository.removerProdutosVendaPermanente(vendaId);
 
             // Remove a venda
-            const resultado = await vendaRepository.excluirVendaPermanente(vendaId, transaction);
-
-            if (!resultado) {
-                throw new Error("Venda não encontrada.");
-            }
-
-            // Confirma a transação
-            await transaction.commit();
+            await vendaRepository.excluirVendaPermanente(vendaId);
 
             return true; // Sucesso
         } catch (error) {
-            // Reverte a transação em caso de erro
-            await transaction.rollback();
             throw new Error(`Erro ao excluir venda: ${error.message}`);
         }
     }

@@ -121,9 +121,9 @@ class VendaRepository{
         }
     }     
     
-    static async excluirVendaPermanente(vendaId, transaction = null) {
+    static async excluirVendaPermanente(id, transaction = null) {
         try {
-            await VendaProduto.destroy({ where: { vendaId } });
+            await Venda.destroy({ where: { id } });
             return true;
         } catch (error) {
             console.error("Erro ao atualizar a venda:", error);
