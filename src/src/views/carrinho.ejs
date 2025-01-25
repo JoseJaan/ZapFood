@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/carrinho.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <title>Meu Carrinho</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/logo.png" alt="">
+        
+        <a href="/paginaPrincipalCliente" class="voltarAoMenu">
+            <p>VOLTAR AO MENU</p>
+            <img src="img/Logout.png" alt="">
+        </a>
+    </header>
+
+    <img class="imagemCarrinho" src="img/carrinho.png" alt="">
+
+    <p class="tituloMeuCarrinho">MEU CARRINHO</p>
+
+
+    <div class="produtos">
+
+        <% produtos.forEach(item => { %>
+        <div class="produto">
+            <div class="imagemProduto" style="background: url(<%= item.img %>);"></div>
+            <div class="textoProduto">
+                <p class="tituloProduto"><%= item.nomeProduto %></p>
+                <p class="descricaoProduto"><%= item.descricaoProduto %></p>
+            </div>
+            <div class="precoProduto">
+                <p class="textoValor">VALOR</p>
+                <p class="textoValorEscrito">R$ <%= (item.precoProduto * ( 1 - (item.desconto/100))).toFixed(2) %></p>
+
+                <img data-id="<%= item.idProduto %>" class="lixeiraIcone" src="img/Trash.png" alt="">
+            </div>
+        </div>
+        <% }) %>
+
+        
+    </div>
+
+    <p class="valorTotalCarrinho">TOTAL: R$ 71,97</p>
+
+    <div class="botoesOpcoesSair">
+        <a href="/finalizarCompra" class="botaoFinalizarCompra">FINALIZAR COMPRA</a>
+        <a href="/paginaPrincipalCliente" class="botaoContinuarComprando">CONTINUAR COMPRANDO</a>
+    </div>
+
+    <footer></footer>
+
+    <script src="/js/carrinho.js"></script>
+</body>
+</html>

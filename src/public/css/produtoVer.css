@@ -1,0 +1,136 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    border-bottom: 10px solid orange;
+}
+
+.imagemCarrinho{
+    margin-top: 50px;
+    align-self: center;
+}
+
+.voltarAoMenu{
+    text-decoration: none;
+    margin-right: 15px;
+    color: #F89100;
+    font-family: Lalezar;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    height: 150px;
+}
+
+.voltarAoMenu:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.logo{
+    margin-left: 15px;
+    height: 150px;
+}
+
+.fotoProduto{
+    align-self: center;
+    margin-top: 80px;
+    width: 303px;
+    height: 262px;
+    border-radius: 3px;
+    border: 4px solid #F89100;
+    background: url(/img/lanche.png) lightgray 50% / cover no-repeat;
+}
+
+.nomeLoja{
+    margin-top: 0px;
+    color: #F89100;
+    text-align: center;
+    font-family: Lalezar;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.nomeLanche{
+    margin-top: 0px;
+    align-self: center;
+    color: #000;
+    font-family: Lalezar;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.precoProduto{
+    text-align: center;
+    margin-top: -50px;
+    align-self: center;
+    width: 190px;
+    color: #359800;
+    font-family: Lalezar;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.descricaoProduto{
+    word-break: break-all;
+    word-wrap: break-word;
+    padding: 5px;
+    margin-top: -25px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    width: 448px;
+    height: auto;
+    border-radius: 15px;
+    border: 5px solid #F89100;
+    background: rgba(255, 255, 255, 0.00);
+    color: #343434;
+    text-align: start;
+    font-family: Lalezar;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.botaoAdicionarAoCarrinho{
+    margin-top: 50px;
+    align-self: center;
+    width: 324px;
+    height: 60px;
+    border-radius: 15px;
+    background: #009A1C;
+    color: #FFF;
+    font-family: Lalezar;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.botaoAdicionarAoCarrinho:hover{
+    cursor:pointer;
+    transform: scale(1.05);
+}
+
+footer{
+    margin-top: 80px;
+    width: 100%;
+    height: 100px;
+    background-color: orange;
+}

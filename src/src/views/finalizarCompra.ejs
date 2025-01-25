@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/finalizarCompra.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <title>Meu Carrinho</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="img/logo.png" alt="">
+        
+        <a href="/paginaPrincipalCliente" class="voltarAoMenu">
+            <p>VOLTAR AO MENU</p>
+            <img src="img/Logout.png" alt="">
+        </a>
+    </header>
+
+    <p class="tituloFinalizarCompra">FINALIZAR COMPRA</p>
+
+    <div class="corpo">
+        <div class="primeiraParte">
+            <label class="enderecoExiste" for="enderecoExiste">ESCOLHER ENDEREÇO</label>
+            <input type="radio" name="endereco" id="enderecoExiste">    
+            <div class="enderecos">
+
+                <% enderecos.forEach(item => { %>
+                    <label class="checkboxEndereco" for="<%= item.idEndereco %>" > <%= item.nome %> (<%= item.rua %>)</label>
+                    <input class="checkbox" type="radio" value="<%= item.idEndereco %>" id= "<%= item.idEndereco %>"  name="enderecoExiste">
+                <% }) %>
+
+            </div>
+        </div>
+
+        <div>
+            <label class="enderecoExiste" for="enderecoNaoExiste">ADICIONAR ENDEREÇO</label>
+            <input type="radio" name="endereco" id="enderecoNaoExiste">
+
+            <div class="novoEndereco">
+
+                <div class="campoNome campo">
+                    <label for="nome">NOME</label>
+                    <input class="campos" id="nome" type="text">
+                </div>
+
+                <div class="campoNome campo">
+                    <label for="cidade">CIDADE</label>
+                    <input class="campos" id="cidade" type="text">
+                </div>
+
+                <div class="campoCEP campo">
+                    <label for="cep">CEP</label>
+                    <input class="campos" id="cep" type="text">
+                </div>
+
+                <div class="campoRua campo">
+                    <label for="rua">RUA</label>
+                    <input class="campos" id='rua' type="text">
+                </div>
+
+                <div class="campoNumero campo">
+                    <label for="numero">Nº</label>
+                    <input class="campos" id="numero" type="text">
+                </div>
+
+                <div class="campoComplemento campo">
+                    <label for="complemento">COMPLEMENTO</label>
+                    <input class="campos" id="complemento" type="text">
+                </div>
+
+            </div>
+        </div>
+
+        <p class="enderecoExiste">FORMA DE PAGAMENTO</p>
+
+        <div class="enderecos">
+            <label class="checkboxEndereco" for="credito">CREDITO</label>
+            <input class="checkboxx" value="credito" name="formaPagamento" type="radio">
+
+            <label class="checkboxEndereco" for="debito">DEBITO</label>
+            <input class="checkboxx" value="debito" name="formaPagamento" type="radio" >
+
+            <label class="checkboxEndereco" for="dinheiro">DINHEIRO</label>
+            <input class="checkboxx" value="dinheiro" name="formaPagamento" type="radio">
+        </div>
+
+    </div>
+
+    <button id="botaoFinalizarPedido" class="botaoFinalizarPedido">FINALIZAR COMPRA</button>
+    
+    <footer></footer>
+
+    <script src="js/finalizarCompra.js"></script>
+</body>
+</html>

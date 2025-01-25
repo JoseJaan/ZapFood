@@ -1,0 +1,185 @@
+const vendaProd = require("../database/models/Venda-Produto.js");
+const Venda = require("../database/models/Venda.js");
+const VendaProduto = require("../database/models/Venda-Produto.js");
+
+class VendaRepository{
+
+    static async obterVendas(userId) {
+        // Busca as vendas pelo ID da loja
+        const vendas = await Venda.findAll({
+            where: {
+                idLoja: userId,
+            },
+        });
+    
+        // Extrai os IDs das vendas
+        const vendaIds = vendas.map((venda) => venda.id);
+    
+        // Caso não existam vendas, retorna um array vazio
+        if (vendaIds.length === 0) {
+            return [];
+        }
+    
+        // Busca os produtos relacionados a essas vendas
+        const vendaProdutos = await VendaProduto.findAll({
+            where: {
+                vendaId: vendaIds, // Busca pelos IDs das vendas
+            },
+        });
+    
+        // Mapeia os IDs dos produtos às vendas
+        const vendasComProdutos = vendas.map((venda) => {
+            const produtos = vendaProdutos
+                .filter((vp) => vp.vendaId === venda.id)
+                .map((vp) => vp.produtoId);
+    
+            return {
+                ...venda.toJSON(),
+                produtos, 
+            };
+        });
+    
+        return vendasComProdutos;
+    }
+    
+
+    static async buscarVenda(vendaId, transaction = null) {
+        return await Venda.findOne({
+            where: { id: vendaId },
+            transaction,
+        });
+    }
+
+    static async buscarVendaProdutos(vendaId, transaction = null) {
+        return await vendaProd.findAll({
+            where: { vendaId },
+            transaction,
+        });
+    }
+
+    static async buscarVendaLoja(vendaId, transaction = null) {
+        return await EmpresaVenda.findOne({
+            where: { vendaId },
+            transaction,
+        });
+    }
+
+    static async criarVenda(idCliente,idLoja,enderecoId) {
+        try {
+            const novaVenda = new Venda();
+
+            novaVenda.idEndereco = enderecoId;
+            novaVenda.idCliente = idCliente;
+            novaVenda.idLoja = idLoja;
+
+            await novaVenda.save();
+            return novaVenda.id;
+
+        }
+        catch (error) {
+            console.error("Erro ao criar a venda:", error)
+            throw new Error("Erro ao criar venda no banco de dados.");
+        }
+    }
+    static async criarVendaProduto(vendaId, produtos) {
+        try {
+            produtos.forEach(element => {
+                VendaProduto.create({
+                    vendaId: vendaId,
+                    produtoId: element.idProduto
+                });
+            });
+        }
+        catch (error) {
+            console.error("Erro ao criar a relação produto-venda:", error)
+            throw new Error("Erro ao criar venda no banco de dados.");
+        }    
+    }
+
+    static async criarEmpresaVenda(empresaVendaData) {
+        try {
+            return await VendaEmpresa.create(empresaVendaData);
+        }
+        catch (error) {
+            console.error("Erro ao criar a relação empresa-venda:", error)
+            throw new Error("Erro ao criar venda no banco de dados.");
+        }    
+    }
+
+    static async excluirVenda(vendaId, transaction = null) {
+        try {
+            const venda = await Venda.findByPk(vendaId);
+            if (!venda) {
+                return null;
+            }
+            const dadosAtualizados = {visibilidade:3}
+            await venda.update(dadosAtualizados); // Atualiza qualquer campo fornecido
+            return venda;
+        } catch (error) {
+            console.error("Erro ao atualizar a venda:", error);
+            throw new Error("Erro ao atualizar a venda no banco de dados.");
+        }
+    }     
+    
+    static async excluirVendaPermanente(id, transaction = null) {
+        try {
+            await Venda.destroy({ where: { id } });
+            return true;
+        } catch (error) {
+            console.error("Erro ao atualizar a venda:", error);
+            throw new Error("Erro ao atualizar a venda no banco de dados.");
+        }
+    } 
+    
+    static async removerProdutosDaVenda(vendaId, transaction = null) {
+        try {
+            const venda = await VendaProduto.findByPk(vendaId);
+            if (!venda) {
+                return null;
+            }
+            const dadosAtualizados = {visibilidade:3}
+            await venda.update(dadosAtualizados); // Atualiza qualquer campo fornecido
+            return venda;
+        } catch (error) {
+            console.error("Erro ao atualizar a venda:", error);
+            throw new Error("Erro ao atualizar a venda no banco de dados.");
+        }
+    }
+
+    static async removerProdutosVendaPermanente(vendaId, transaction = null) {
+        try {
+            await VendaProduto.destroy({ where: { vendaId } });
+            return true;
+        } catch (error) {
+            console.error("Erro ao excluir a venda:", error);
+            throw new Error("Erro ao excluir a venda no banco de dados.");
+        }
+    }
+
+    static async buscarVendaPorId(id){
+        try {
+            const venda = await Venda.findByPk(id);
+            if (!venda) {
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.error("Erro ao buscar venda:", error);
+            throw new Error("Erro ao buscar venda no banco de dados.");
+        }
+    }
+
+    static async atualizarProdutoVenda(vendaId, produtoId){
+        try {
+            await VendaProduto.destroy({ where: { vendaId: vendaId, produtoId: produtoId }, limit:1 });
+        } catch (error) {
+            console.error("Erro ao atualizar venda:", error);
+            throw new Error("Erro ao atualizar venda do banco de dados.");
+        }
+    }
+
+}
+    
+
+
+module.exports = VendaRepository;

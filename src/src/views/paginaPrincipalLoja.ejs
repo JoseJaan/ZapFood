@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/paginaPrincipalLoja.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <title><%= loja.nome %> - Página Inicial</title>
+</head>
+<body>
+
+    <header>
+        <a href="/logout" class="separarHeader">
+            <img class="icone" src="img/sair.png" alt="">
+            <p class="sair">SAIR</p>
+        </a>
+        <img src="img/logo.png" alt="">
+        <div id="minhaEmpresa" class="minhaEmpresa" data-href="/loja">
+            <p class="textoEmpresa"><%= loja.nome %></p>
+            <div class="imagemEmpresa"></div>
+        </div>
+    </header>    
+
+    <p class="nomeDaLojaTitulo"><%= loja.nome %></p>
+
+    <div class="opcoes">
+        <a href="/produto" class="quadrado quadradoCardapio">
+            <img class="imgCardapio" src="img/cardapio.png" alt="">
+            <div class="escrito">CARDÁPIO</div>
+        </a>
+        <a href="/venda" class="quadrado quadradoVendas">
+            <img class="imgCrescimento" src="img/crescimento.png" alt="">
+            <div class="escrito">VENDAS</div>
+        </a>
+    </div>
+    
+    <div class="tituloProdutosMais">
+        <img src="img/trofeu.png" alt="">
+        <p class="tituloProdutosTitulo">PRODUTOS MAIS VENDIDOS</p>
+        <img src="img/trofeu.png" alt="">
+    </div>
+
+    <div class="produtosMais">
+        <% if (produtos.length > 0) { %>
+            <% produtos.forEach(produto => { %>
+                <div class="produto">
+                    <img src="<%= produto.img %>" alt="<%= produto.nome %>" class="imagemProduto">
+
+                    <p class="nomeProduto"><%= produto.nome %></p>
+                    <p class="nomeProduto"><%= produto.totalVendidos %> unidades</p>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p class="nenhumProduto">Nenhum produto disponível.</p>
+        <% } %>
+    </div>
+
+    <footer></footer>
+
+    <script src="/js/principalLoja.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/endereco.css">
+    <link rel="stylesheet" href="css/perfilEmpresa.css">
+    <title>PerfilEmpresa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="img/Logo.png" alt="">
+        <a href="/paginaPrincipalLoja" class="sair">
+            <p class="voltar">VOLTAR AO MENU</p>
+            <img src="img/Logout.png" alt="">
+        </a>
+    </header>
+    
+    <img src="<%= loja.img %>" class="fotoPerfilUsuario" id="fotoPerfilUsuario">
+        <p class="textoEscolherImagem">Escolher Imagem</p>
+        <input type="file" id="file-input" name="image" accept="image/*">
+    </div>
+    <p class="tituloLoja"><%= loja.nome %></p>
+
+    <div class="dadosUsuario altura">
+        <p class="tituloDadosUsuario">DADOS DA LOJA</p>
+        <div id="botaoEditarDadosUsuario" class="botaoEditarDadosUsuario">EDITAR</div>
+        <div id="botaoSalvarDadosUsuario" class="botaoSalvarDadosUsuario">SALVAR</div>
+        <div class="primeirosDados">
+            <div class="campo">
+                <label for="nome">NOME</label>
+                <input value="<%= loja.nome %>" class="campoInputNome opacidade" name="nome" type="text" id="nomeEmpresa" readonly>
+            </div>
+            <div class="campo">
+                <label for="cnpj">CNPJ</label>
+                <input value="<%= loja.cnpj %>" class="campoInputCPF opacidade" name="cnpj" type="text" id="cnpj" readonly>
+            </div>
+        </div>
+        <div class="campo">
+            <label for="hf">HORÁRIO DE FUNCIONAMENTO</label>
+            <input name="hf" class="campoInputHF campoInputDN opacidade" value="<%= loja.horarioFuncionamento %>" type="text" id="hf" readonly>
+        </div>
+
+        <div class="campo bd">
+            <label for="bd">BREVE DESCRIÇÃO</label>
+            <input name="bd" class="campoInputBD campoInputDN opacidade" value="<%= loja.descricao %>" type="text" id="bd" readonly>
+        </div>
+    </div>
+
+    <script src="js/perfilLoja.js"></script>
+</body>
+</html>

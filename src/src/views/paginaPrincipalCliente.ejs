@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/paginaPrincipalCliente.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <title>Página Inicial</title>
+</head>
+<body>
+    <header>
+        <div class="sairEperfil">
+            <div class="separarHeader">
+                <a href="/logout" class="separarHeader">
+                <img class="icone" src="img/sair.png" alt="">
+                <p class="sair">SAIR</p>
+            </a>
+            </div>
+            <a href="/enderecos" class="separarHeader">
+                <img class="icone" src="img/usuario.png" alt="">
+                <p class="meuPerfil">MEU PERFIL</p>
+            </a>
+        </div>
+        <img class="logo" src="img/Logo.png" alt="logo">
+        <div class="sairEperfil carrinho">
+            <a href="/verCarrinho" class="separarHeader">
+                <img class="icone" src="img/carrinho.png" alt="">
+                <p class="meuPerfil">MEU CARRINHO</p>
+            </a>
+        </div>
+    </header>
+    <div class="borda">
+    </div>
+
+    <input class="pesquisar" placeholder="PESQUISAR" type="text">
+
+    <div class="restaurantesPopulares">
+        <p class="tituloRestaurantesPopulares">RESTAURANTES POPULARES</p>
+        <div class="restaurantesQuadradoPopulares">
+            <% lojas.forEach(item => { %>
+                <a href="/empresa/<%=item.id%>" class="restaurante">
+                    <img src="<%= item.img %>" alt="<%= item.nomeProduto %>" class="fotoRestaurante" >
+                    <p class="nomeRestaurante"><%= item.nome %></p>
+                </a>
+            <% }) %>
+        </div>
+    </div>
+
+    <div class="produtosEmPromocao">
+        <p class="tituloRestaurantesPopulares">PROMOÇÃO</p>
+        <div class="produtosQuadradoPromocao">
+            <% produtos.forEach(item => { %>
+            <a href="/produtoVer/<%= item.idProduto %>" class="produto">
+                <% if (item.desconto > 0) { %>
+                    <div class="promocaoIcone">
+                        <img src="img/Discount.png" alt="">
+                        <p class="textoDesconto"><%= item.desconto %>%</p>
+                    </div>
+                <% } %>
+                <img src="<%= item.img %>" alt="<%= item.nomeProduto %>" class="fotoProduto">
+
+                <p class="nomeProduto"><%= item.nomeProduto %></p>
+                <p class="precoProduto">R$ <%= item.precoProduto %></p>
+            </a>
+            <% }) %>
+        </div>
+    </div>
+    
+
+    <footer></footer>
+</body>
+</html>
