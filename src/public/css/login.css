@@ -130,5 +130,11 @@ a{
 }
 
 .registros a{
-    width: 140px;
+    width: 200px;
+}
+
+.esqueceuSenha{
+    width: 170px;
+    margin-right: 100px;
+    align-self: flex-end;
 }

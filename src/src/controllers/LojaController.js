@@ -76,7 +76,6 @@ class LojaController{
       }
     }
 
-    //DELETAR ENDERECO === SE ESTIVER EM UMA VENDA, ALTERAR VISIBILIDADE PARA 0
 }
 
 module.exports = LojaController
