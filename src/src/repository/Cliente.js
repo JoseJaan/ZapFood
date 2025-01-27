@@ -7,6 +7,9 @@ class ClienteRepository{
 
     static async buscarProdutosPromocao(){
         const maioresDescontos = await Produto.findAll({
+            where: {
+                visibilidade: 1 // Filtra produtos com visibilidade igual a 1
+            },
             order: [['desconto', 'DESC']],
             limit: 4,
           });
