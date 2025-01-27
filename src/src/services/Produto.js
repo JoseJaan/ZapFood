@@ -61,17 +61,17 @@ class produtoService{
         }
     
         // Verifica se o produto está associado a uma venda
-        //const produtoEmVenda = await produtoRepository.verificarProdutoEmVenda(id);
+        const produtoEmVenda = await produtoRepository.verificarProdutoEmVenda(id);
     
-        //if (produtoEmVenda) {
+        if (produtoEmVenda) {
             // Se estiver em uma venda, altera a visibilidade
-            //await produtoRepository.alterarVisibilidade(id, { visibilidade: 0 });
-            //return { status: "Produto encontrado em vendas, exclusão não permitida. Visibilidade alterada." };
-        //} else {
+            await produtoRepository.atualizar(id, { visibilidade: 0 });
+            return { status: "Produto encontrado em vendas, exclusão não permitida. Visibilidade alterada." };
+        } else {
             // Se não estiver, exclui o produto
             await produtoRepository.excluir(id);
             return { status: "Produto excluído com sucesso." };
-        //}
+        }
     }
 
     //Lista todos os produtos de uma loja
