@@ -42,8 +42,8 @@ class produtoRepository{
 
     static async verificarProdutoEmVenda(produtoId) {
         try {
-            return await VendaHasProduto.findOne({
-                where: { Produto_idProduto: produtoId },
+            return await VendaProd.findOne({
+                where: { produtoId: produtoId },
             }) !== null; // Retorna true se encontrado, false caso contrário
         } catch (error) {
             console.error("Erro ao verificar produto em venda:", error);
